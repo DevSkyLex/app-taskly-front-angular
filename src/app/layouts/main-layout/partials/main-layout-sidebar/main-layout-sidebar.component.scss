@@ -4,9 +4,10 @@
   position: relative;
 
   .sidebar {
-    --background-color: #{fn.get-color('neutral', '050')};
-    --text-color: #{fn.get-color('neutral', '950')};
+    --background-color: #{fn.get-color('neutral', '000')};
+    --text-color: #{fn.get-color('neutral', '700')};
     --border-color: #{fn.get-color('neutral', '200')};
+    --gap: #{fn.get-spacing('xl')};
 
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -17,10 +18,166 @@
     background-color: var(--background-color);
     color: var(--text-color);
     border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    gap: var(--gap);
 
-    &__section {
-      --padding: #{fn.get-spacing('xs')};
+    & > * {
+      --padding: #{fn.get-spacing('sm')};
+      --border-color:#{fn.get-color('neutral', '200')};
+
       padding: var(--padding);
+
+      &:first-child {
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      &:last-child {
+        border-top: 1px solid var(--border-color);
+      }
+    }
+
+    &__navigation {
+      --gap: #{fn.get-spacing('xl')};
+
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    &__group {
+      display: flex;
+      flex-direction: column;
+
+      &-title {
+        --padding-inline: #{fn.get-spacing('xs')};
+        --margin-bottom: #{fn.get-spacing('xs')};
+        --font-size: #{fn.get-font-size('sm')};
+        --text-color:#{fn.get-color('neutral', '500')};
+        --font-weight: #{fn.get-font-weight('medium')};
+
+        font-size: var(--font-size);
+        margin-bottom: var(--margin-bottom);
+        padding-inline: var(--padding-inline);
+        font-weight: var(--font-weight);
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+      }
+
+      &__accordion {
+        --gap: #{fn.get-spacing('2xs')};
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap);
+      }
+    }
+
+    &__collapsible {
+      display: flex;
+      flex-direction: column;
+
+      &[data-sidebar-collapsible-expanded='true'] {
+        .sidebar__collapsible {
+          &-indicator {
+            transform: rotate(90deg);
+          }
+        }
+      }
+
+      &__label {
+        --gap: #{fn.get-spacing('sm')};
+        --font-size: #{fn.get-font-size('md')};
+
+        display: flex;
+        align-items: center;
+        gap: var(--gap);
+        font-size: var(--font-size);
+      }
+
+      &__trigger {
+        --gap: #{fn.get-spacing('2xs')};
+        --padding: #{fn.get-spacing('xs')};
+        --border-radius: #{fn.get-border-radius('md')};
+        --animation-duration: #{fn.get-animation-timing('fast')};
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: var(--border-radius);
+        padding: var(--padding);
+        gap: var(--gap);
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: background-color var(--animation-duration);
+
+        &:is(:hover, :focus-visible) {
+          --background-color:#{fn.get-color('neutral', '050')};
+          background-color: var(--background-color);
+        }
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &-indicator {
+        --text-color:#{fn.get-color('neutral', '500')};
+        --animation-duration: #{fn.get-animation-timing('fast')};
+
+        color: var(--text-color);
+        transform: rotate(0deg);
+        transition: transform var(--animation-duration);
+      }
+
+      &-list {
+        --padding-block: #{fn.get-spacing('2xs')};
+        --padding-inline: #{fn.get-spacing('xs')};
+        --margin-inline: #{fn.get-spacing('md')};
+        --border-color: #{fn.get-color('neutral', '200')};
+        --gap: #{fn.get-spacing('2xs')};
+
+        padding-block: var(--padding-block);
+        padding-inline: var(--padding-inline);
+        margin-inline: var(--margin-inline);
+        border-left: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap);
+        list-style: none;
+
+        &-link {
+          --padding: #{fn.get-spacing('xs')} #{fn.get-spacing('sm')};
+          --border-radius: #{fn.get-border-radius('md')};
+          --font-size: #{fn.get-font-size('sm')};
+          --animation-duration: #{fn.get-animation-timing('fast')};
+
+          padding: var(--padding);
+          border-radius: var(--border-radius);
+          font-size: var(--font-size);
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          text-decoration: none;
+          color: inherit;
+          animation-duration: var(--animation-duration);
+
+          &:is(:hover, :focus-visible) {
+            --background-color:#{fn.get-color('neutral', '050')};
+            background-color: var(--background-color);
+          }
+
+          &:focus-visible {
+            outline: none;
+          }
+        }
+      }
     }
   }
 }

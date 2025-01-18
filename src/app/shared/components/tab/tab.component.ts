@@ -1,5 +1,5 @@
 import { Component, contentChild, input, InputSignal, Signal, signal, TemplateRef, viewChild, WritableSignal } from '@angular/core';
-import { TabLabelDirective } from '@app/shared/directives/tab/tab-label.directive';
+import { TabLabelDirective } from '@app/shared/directives/tab-label.directive';
 
 @Component({
   selector: 'app-tab',

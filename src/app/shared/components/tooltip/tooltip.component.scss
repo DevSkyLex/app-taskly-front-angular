@@ -1,0 +1,19 @@
+@use 'abstracts/functions' as fn;
+
+.tooltip {
+  --gap: #{fn.get-spacing('xs')};
+  --font-size: #{fn.get-font-size('xs')};
+  --background-color: #{fn.get-color('neutral', '950')};
+  --text-color: #{fn.get-color('neutral', '000')};
+  --padding: #{fn.get-spacing('2xs')} #{fn.get-spacing('sm')};
+  --border-radius: #{fn.get-border-radius('lg')};
+
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  font-size: var(--font-size);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+}

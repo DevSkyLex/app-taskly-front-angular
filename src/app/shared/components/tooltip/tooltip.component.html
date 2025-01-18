@@ -1,0 +1,10 @@
+<div class="tooltip" @appearAnimation>
+  @let tooltipContent = content();
+
+  @if (isTemplate(tooltipContent)) {
+    <ng-container [ngTemplateOutlet]="tooltipContent"/>
+  }
+  @else {
+    <span>{{ tooltipContent }}</span>
+  }
+</div>

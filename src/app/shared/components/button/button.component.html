@@ -1,0 +1,18 @@
+<button 
+  [type]="type()"
+  [disabled]="disabled()"
+  [class]="classes()"
+  (click)="onClick($event)"
+  (mouseenter)="onMouseEnter($event)"
+  (mouseleave)="onMouseLeave($event)"
+>
+  <!-- Contenu -->
+  <div class="btn__content">
+    <ng-content/>
+  </div>
+
+  <!-- Loader -->
+  <div class="btn__loader">
+
+  </div>
+</button>

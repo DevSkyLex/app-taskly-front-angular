@@ -28,6 +28,7 @@ import {
   EyeClosed,
   FileVideo,
   FlaskConical,
+  Gauge,
   Headset,
   Home,
   Info,
@@ -57,6 +58,7 @@ import {
   Send,
   Server,
   Settings,
+  ShieldCheck,
   Table,
   Tag,
   Text,
@@ -70,10 +72,16 @@ import {
 } from 'lucide-angular';
 import { TabComponent } from './components/tab/tab.component';
 import { TabGroupComponent } from './components/tab/tab-group/tab-group.component';
-import { TabLabelDirective } from './directives/tab/tab-label.directive';
+import { TabLabelDirective } from './directives/tab-label.directive';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { RouterModule } from '@angular/router';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
+import { TooltipDirective } from './directives/tooltip.directive';
+import { ButtonComponent } from './components/button/button.component';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
+  TooltipDirective
 ];
 
 const Pipes: Type<any>[] = [
@@ -82,7 +90,9 @@ const Pipes: Type<any>[] = [
 
 const Components: Type<any>[] = [
   TabComponent,
-  TabGroupComponent
+  TabGroupComponent,
+  TooltipComponent,
+  ButtonComponent
 ];
 
 @NgModule({
@@ -93,8 +103,10 @@ const Components: Type<any>[] = [
   ],
   imports: [
     CommonModule,
+    RouterModule,
     OverlayModule,
     CdkTableModule,
+    CdkAccordionModule,
     ReactiveFormsModule,
     LucideAngularModule.pick({
       Bell,
@@ -150,6 +162,8 @@ const Components: Type<any>[] = [
       Server,
       Settings,
       Table,
+      Gauge,
+      ShieldCheck,
       Tag,
       Text,
       Trash2,
@@ -164,7 +178,8 @@ const Components: Type<any>[] = [
   exports: [
     ...Components,
     ...Directives,
-    ...Pipes
+    ...Pipes,
+    LucideAngularModule
   ]
 })
 export class SharedModule { }

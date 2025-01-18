@@ -20,3 +20,9 @@ body {
 
 router-outlet { display: none; }
 
+i-lucide, lucide-icon, span-lucide, lucide-angular {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

@@ -1,52 +1,89 @@
 <aside class="sidebar">
-  <section class="sidebar__section">
+  <section class="sidebar__header">
 
   </section>
 
-  <section class="sidebar__section">
-    <nav class="sidebar__nav">
-      <cdk-accordion class="sidebar__nav__accordion">
-        @for (category of navigation(); track $index) {
-          <ng-container
-            [ngTemplateOutlet]="categoryTemplate"
-            [ngTemplateOutletContext]="{ $implicit: category }"
-          />
-        }
-      </cdk-accordion>
+  <section class="sidebar__body">
+    <nav class="sidebar__navigation">
+      @for (group of navigation(); track $index) {
+        <ng-container
+          [ngTemplateOutlet]="groupTemplate"
+          [ngTemplateOutletContext]="{ $implicit: group }"
+        />
+      }
     </nav>
   </section>
 
-  <section class="sidebar__section">
-    
+  <section class="sidebar__footer">
   </section>
 </aside>
 
-<ng-template #categoryTemplate let-category>
-  <div class="sidebar__category">
-    <span class="sidebar__category-title">
-      {{ category.label }}
+<ng-template #groupTemplate let-group>
+  <div class="sidebar__group">
+    <span class="sidebar__group-title">
+      {{ group.title }}
     </span>
 
-    <ul class="sidebar__category__list">
+    <cdk-accordion class="sidebar__group__accordion">
+      @for (item of group.items; track $index) {
+        @let hasChildren = item.items && item.items.length > 0;
 
-      @for (item of category.items; track $index) {
-        <li class="sidebar__category__list-item">
-          @let hasChildren = item.children && item.children.length > 0;
-
-          @if (hasChildren) {
-          }
-        </li>
+        @if (hasChildren) {
+          <cdk-accordion-item 
+            class="sidebar__collapsible" 
+            #accordionItem="cdkAccordionItem" 
+            [attr.data-sidebar-collapsible-expanded]="accordionItem.expanded"
+          >
+            <button 
+              class="sidebar__collapsible__trigger" 
+              (click)="accordionItem.toggle()" 
+              [app-tooltip]="item.label"
+              placement="right"
+            >
+              <div class="sidebar__collapsible__label">
+                @if (item.icon) {
+                  <i-lucide [name]="item.icon" [size]="16"/>
+                }
+                <span>{{ item.label }}</span>
+              </div>
+        
+              <div class="sidebar__collapsible-indicator">
+                <i-lucide name="chevron-right" [size]="16"/>
+              </div>
+            </button>
+        
+            @if (accordionItem.expanded) {
+              <div 
+                class="sidebar__collapsible__content" 
+                @collapsibleAnimation
+              >
+                <ul class="sidebar__collapsible-list">
+                  @for (child of item.items; track $index) {
+                    <li class="sidebar__collapsible-list-item">
+                      <a
+                        class="sidebar__collapsible-list-link"
+                        [routerLink]="child.route"
+                        routerLinkActive="sidebar__collapsible-list-link--active"
+                      >
+                        {{ child.label }}
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          </cdk-accordion-item>
+        }
+        @else {
+          <a
+            class="sidebar__group-list-link"
+            [routerLink]="item.route"
+            routerLinkActive="sidebar__group-list-link--active"
+          >
+            {{ item.label }}
+          </a>
+        }
       }
-    </ul>
+    </cdk-accordion>
   </div>
-</ng-template>
-
-<ng-template #navCollapsible let-item>
-  <cdk-accordion-item class="sidebar__collapsible" #accordionItem="cdkAccordionItem">
-    <button class="sidebar__collapsible__trigger">
-      @if (item.icon) {
-azdazdazazdazaddd
-      }
-    </button>
-  </cdk-accordion-item>
 </ng-template>
