@@ -1,0 +1,31 @@
+<div class="tab-group" role="tablist">
+  <menu class="tab-group__headers">
+    @for (tab of tabs(); track $index) {
+      <li class="tab-group__header" role="presentation">
+        <button 
+          class="tab-group__header-button" 
+          (click)="onTabClick(tab)" 
+          [attr.data-tab-selected]="tab.selected()" 
+          role="tab" 
+          [attr.aria-selected]="tab.selected()"
+        >
+          @if (tab.label()) {
+            <span>{{ tab.label() }}</span>
+          }
+
+          @if (tab.labelTemplate()) {
+            <ng-container *ngTemplateOutlet="tab.labelTemplate()!"/>
+          }
+        </button>
+      </li>
+    }
+  </menu>
+
+  <div class="tab-group__content">
+    @for (tab of tabs(); track $index) {
+      @if (tab.selected()) {
+        <ng-container [ngTemplateOutlet]="tab.template()"/>
+      }
+    }
+  </div>
+</div>

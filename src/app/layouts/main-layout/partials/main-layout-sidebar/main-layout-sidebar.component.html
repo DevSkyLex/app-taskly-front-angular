@@ -1,0 +1,52 @@
+<aside class="sidebar">
+  <section class="sidebar__section">
+
+  </section>
+
+  <section class="sidebar__section">
+    <nav class="sidebar__nav">
+      <cdk-accordion class="sidebar__nav__accordion">
+        @for (category of navigation(); track $index) {
+          <ng-container
+            [ngTemplateOutlet]="categoryTemplate"
+            [ngTemplateOutletContext]="{ $implicit: category }"
+          />
+        }
+      </cdk-accordion>
+    </nav>
+  </section>
+
+  <section class="sidebar__section">
+    
+  </section>
+</aside>
+
+<ng-template #categoryTemplate let-category>
+  <div class="sidebar__category">
+    <span class="sidebar__category-title">
+      {{ category.label }}
+    </span>
+
+    <ul class="sidebar__category__list">
+
+      @for (item of category.items; track $index) {
+        <li class="sidebar__category__list-item">
+          @let hasChildren = item.children && item.children.length > 0;
+
+          @if (hasChildren) {
+          }
+        </li>
+      }
+    </ul>
+  </div>
+</ng-template>
+
+<ng-template #navCollapsible let-item>
+  <cdk-accordion-item class="sidebar__collapsible" #accordionItem="cdkAccordionItem">
+    <button class="sidebar__collapsible__trigger">
+      @if (item.icon) {
+azdazdazazdazaddd
+      }
+    </button>
+  </cdk-accordion-item>
+</ng-template>

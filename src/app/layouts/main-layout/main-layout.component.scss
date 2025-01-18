@@ -1,0 +1,29 @@
+@use 'abstracts/functions' as fn;
+
+:host {
+  --background-color: #{fn.get-color('neutral', '000')};
+
+  display: grid;
+  height: 100dvh;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  background-color: var(--background-color);
+  grid-template-areas:
+    'sidebar header'
+    'sidebar content';
+
+  app-main-layout {
+    &-sidebar { 
+      grid-area: sidebar; 
+    }
+
+    &-header { 
+      grid-area: header; 
+    }
+
+    &-content { 
+      grid-area: content; 
+      overflow-y: auto;
+    }
+  }
+}

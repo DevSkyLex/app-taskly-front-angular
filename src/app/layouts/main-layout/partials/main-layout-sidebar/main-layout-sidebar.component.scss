@@ -1,0 +1,26 @@
+@use 'abstracts/functions' as fn;
+
+:host {
+  position: relative;
+
+  .sidebar {
+    --background-color: #{fn.get-color('neutral', '050')};
+    --text-color: #{fn.get-color('neutral', '950')};
+    --border-color: #{fn.get-color('neutral', '200')};
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100dvh;
+    min-width: 300px;
+    position: sticky;
+    top: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-right: 1px solid var(--border-color);
+
+    &__section {
+      --padding: #{fn.get-spacing('xs')};
+      padding: var(--padding);
+    }
+  }
+}

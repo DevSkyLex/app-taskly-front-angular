@@ -1,0 +1,77 @@
+@use 'abstracts/functions' as fn;
+
+.tab-group {
+  --border-width: 1px;
+
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "headers"
+    "content";
+
+  &__header {
+    display: flex;
+    align-items: stretch;
+
+    &-button {
+      --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('lg')};
+      --font-size: #{fn.get-font-size('md')};
+      --box-shadow-color: #{fn.get-color('neutral', '200')};
+      --text-color: #{fn.get-color('neutral', '600')};
+      --font-weight: #{fn.get-font-weight('semibold')};
+      --gap: #{fn.get-spacing('xs')};
+
+      font-size: var(--font-size);
+      padding: var(--padding);
+      gap: var(--gap);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-color);
+      border: none;
+      font-weight: var(--font-weight);
+      box-shadow: 0 var(--border-width) 0 0 var(--box-shadow-color);
+      background: none;
+      cursor: pointer;
+
+      &[data-tab-selected="false"]:is(:hover, :focus-visible) {
+        --box-shadow-color: #{fn.get-color('neutral', '300')};
+        box-shadow: 0 var(--border-width) 0 0 var(--box-shadow-color);
+      }
+
+      &[data-tab-selected="false"]:focus-visible {
+        outline: none;
+      }
+
+      &[data-tab-selected="true"] {
+        --text-color: #{fn.get-color('neutral', '950')};
+        --box-shadow-color: #{fn.get-color('primary', '500')};
+        box-shadow: 0 var(--border-width) 0 0 var(--box-shadow-color);
+      }
+    }
+  }
+
+  &__headers {
+    --padding-inline: #{fn.get-spacing('2xl')};
+    --border-color: #{fn.get-color('neutral', '200')};
+
+    padding-inline: var(--padding-inline);
+    grid-area: headers;
+    display: flex;
+    border-bottom: var(--border-width) solid var(--border-color);
+    list-style: none;
+  }
+
+  &__content {
+    --background-color: #{fn.get-color('neutral', '000')};
+    --padding: #{fn.get-spacing('2xl')};
+
+    padding: var(--padding);
+    background-color: var(--background-color);
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+  }
+}

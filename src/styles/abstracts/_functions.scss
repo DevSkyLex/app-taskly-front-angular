@@ -1,0 +1,136 @@
+@use "sass:color";
+@use "sass:map";
+@use "abstracts/variables" as var;
+
+/// Get color
+///
+/// Récupère la couleur en fonction de la palette et de la clé
+///
+/// @param {String} $palette - Palette de couleur
+/// @param {String} $shade - Clé de la couleur
+/// @param {Number} $opacity - Opacité de la couleur
+///
+/// @return {Color} - Couleur
+///
+@function get-color($palette: 'primary', $shade: '500', $opacity: 1) {
+  @return hsla(var(--#{var.$app-prefix}-color-#{$palette}-#{$shade}), $opacity);
+}
+
+/// Get Spacing
+///
+/// Récupère la valeur d'espacement en fonction
+/// de la clé passée en paramètre.
+///
+/// @param {String} $key - Clé de l'espacement
+///
+/// @return {String} - Valeur de l'espacement
+///
+@function get-spacing($key) {
+  @return map.get(var.$spacings, $key);
+}
+
+/// Get Fluid Spacing
+///
+/// Récupère la valeur d'espacement fluid en fonction
+/// de la clé passée en paramètre.
+///
+/// @param {String} $key - Clé de l'espacement
+///
+/// @return {String} - Valeur de l'espacement
+///
+@function get-fluid-spacing($key) {
+  @return map.get(var.$fluid-spacings, $key);
+}
+
+/// Get font size
+///
+/// Récupère la valeur de la taille de police en fonction
+/// de la clé passée en paramètre.
+///
+/// @param {String} $key - Clé de la taille de police
+///
+/// @return {String} - Valeur de la taille de police
+///
+@function get-font-size($key) {
+  @return map.get(var.$font-sizes, $key);
+}
+
+/// Get font weight
+///
+/// Récupère la valeur du poids de la police en fonction
+/// de la clé passée en paramètre.
+///
+/// @param {String} $key - Clé du poids de la police
+///
+/// @return {String} - Valeur du poids de la police
+///
+@function get-font-weight($key) {
+  @return map.get(var.$font-weights, $key);
+}
+
+/// Get border radius
+///
+/// Récupère la valeur du rayon de la bordure en fonction
+/// de la clé passée en paramètre.
+///
+/// @param {String} $key - Clé du rayon de la bordure
+///
+/// @return {String} - Valeur du rayon de la bordure
+///
+@function get-border-radius($key) {
+  @return map.get(var.$border-radius, $key);
+}
+
+/// Get z-index
+///
+/// Récupère la valeur de l'index z en fonction
+/// de la clé passée en paramètre.
+///
+/// @param {String} $key - Clé de l'index z
+///
+/// @return {String} - Valeur de l'index z
+///
+@function get-z-index($key) {
+  @return map.get(var.$z-indexes, $key);
+}
+
+/// Get letter spacing
+///
+/// Récupère la valeur de l'espacement des lettres en fonction
+/// de la clé passée en paramètre.
+///
+/// @param {String} $key - Clé de l'espacement des lettres
+///
+/// @return {String} - Valeur de l'espacement des lettres
+///
+@function get-letter-spacing($key) {
+  @return map.get(var.$letter-spacings, $key);
+}
+
+/// Get line height
+///
+/// Récupère la valeur de la hauteur de ligne en fonction
+/// de la clé passée en paramètre.
+///
+/// @param {String} $key - Clé de la hauteur de ligne
+///
+/// @return {String} - Valeur de la hauteur de ligne
+///
+@function get-line-height($key) {
+  @return map.get(var.$line-heights, $key);
+}
+
+/// Get animation timing
+///
+/// Récupère la valeur de la durée de l'animation en fonction
+/// de la clé passée en paramètre.
+///
+/// @param {String} $key - Clé de la durée de l'animation
+///
+/// @return {String} - Valeur de la durée de l'animation
+///
+@function get-animation-timing($key) {
+  @return map.get(var.$animation-timings, $key);
+}
+
+

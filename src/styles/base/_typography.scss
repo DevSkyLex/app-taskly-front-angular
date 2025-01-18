@@ -1,0 +1,66 @@
+@use 'abstracts/functions' as fn;
+
+.text {
+  --margin-bottom: .25em;
+  --font-size: #{fn.get-font-size('md')};
+  --font-weight: #{fn.get-font-weight('regular')};
+  --line-height: #{fn.get-line-height('loose')};
+
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  line-height: var(--line-height);
+  margin-bottom: var(--margin-bottom);
+
+  &--light {
+    --text-color: #{fn.get-color('neutral', '000')};
+    color: var(--text-color);
+  }
+
+  &--dark {
+    --text-color: #{fn.get-color('neutral', '950')};
+    color: var(--text-color);
+  }
+
+  &--muted {
+    --text-color: #{fn.get-color('neutral', '500')};
+    color: var(--text-color);
+  }
+}
+
+.title {
+  --font-weight: #{fn.get-font-weight('semibold')};
+  --margin-bottom: .25em;
+  
+  font-weight: var(--font-weight);
+  margin-bottom: var(--margin-bottom);
+
+  &:is(h1) {
+    --font-size: #{fn.get-font-size('3xl')};
+    font-size: var(--font-size);
+  }
+
+  &:is(h2) {
+    --font-size: #{fn.get-font-size('2xl')};
+    font-size: var(--font-size);
+  }
+
+  &:is(h3) {
+    --font-size: #{fn.get-font-size('xl')};
+    font-size: var(--font-size);
+  }
+
+  &:is(h4) {
+    --font-size: #{fn.get-font-size('lg')};
+    font-size: var(--font-size);
+  }
+
+  &:is(h5) {
+    --font-size: #{fn.get-font-size('md')};
+    font-size: var(--font-size);
+  }
+
+  &:is(h6) {
+    --font-size: #{fn.get-font-size('sm')};
+    font-size: var(--font-size);
+  }
+}

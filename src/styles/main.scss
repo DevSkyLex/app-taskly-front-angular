@@ -1,0 +1,22 @@
+@forward 'abstracts/variables';
+@forward 'abstracts/mixins';
+@forward 'abstracts/functions';
+
+@forward 'base/reset';
+@forward 'base/fonts';
+@forward 'base/typography';
+@forward 'base/base';
+
+@forward '@angular/cdk/overlay-prebuilt.css';
+
+body {
+  --text-color: #{get-color('neutral', '950')};
+  color: var(--text-color);
+}
+
+.overlay-blur {
+  backdrop-filter: blur(4px);
+}
+
+router-outlet { display: none; }
+
