@@ -1,8 +1,190 @@
 @use 'abstracts/functions' as fn;
 
 .btn {
+  --border-radius: #{fn.get-border-radius('md')};
+  --font-size: #{fn.get-font-size('md')};
+  --font-weight: #{fn.get-font-weight('medium')};
+  --animation-duration: #{fn.get-animation-timing('fast')};
+  --outline-width: 3px;
+
   display: grid;
   place-content: center;
+  border: 0;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size);
+  cursor: pointer;
+  font-weight: var(--font-weight);
+  transition: background-color var(--animation-duration),
+              border-color var(--animation-duration),
+              color var(--animation-duration),
+              opacity var(--animation-duration);
 
-  
+  &:disabled {
+    --opacity: .75;
+
+    opacity: var(--opacity);
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline-offset: 0;
+  }
+
+  &--primary {
+    --background-color: #{fn.get-color('primary', '500')};
+    --border-color: #{fn.get-color('primary', '500')};
+    --text-color: #{fn.get-color('neutral', '000')};
+
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --background-color: #{fn.get-color('primary', '600')};
+      --border-color: #{fn.get-color('primary', '600')};
+
+      background-color: var(--background-color);
+      border-color: var(--border-color);
+    }
+
+    &:focus-visible {
+      --outline-color: #{fn.get-color('primary', '500', .5)};
+      outline: var(--outline-width) solid var(--outline-color);
+    }
+  }
+
+  &--secondary {
+    --background-color: #{fn.get-color('neutral', '100')};
+    --border-color: #{fn.get-color('neutral', '200')};
+    --text-color: #{fn.get-color('neutral', '950')};
+
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --background-color: #{fn.get-color('neutral', '200')};
+      --border-color: #{fn.get-color('neutral', '200')};
+
+      border-color: var(--border-color);
+      background-color: var(--background-color);
+    }
+
+    &:focus-visible {
+      --outline-color: #{fn.get-color('neutral', '100', .5)};
+      outline: var(--outline-width) solid var(--outline-color);
+    }
+  }
+
+  &--outlined {
+    --border-color: #{fn.get-color('neutral', '200')};
+    --background-color: #{fn.get-color('neutral', '000')};
+    --text-color: #{fn.get-color('neutral', '950')};
+
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --background-color: #{fn.get-color('neutral', '050')};
+      --border-color: #{fn.get-color('neutral', '300')};
+
+      background-color: var(--background-color);
+      border-color: var(--border-color);
+    }
+
+    &:focus-visible {
+      --outline-color: #{fn.get-color('neutral', '200', .5)};
+      outline: var(--outline-width) solid var(--outline-color);
+    }
+  }
+
+  &--ghost {
+    --background-color: transparent;
+    --border-color: transparent;
+    --text-color: #{fn.get-color('neutral', '100')};
+
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --background-color: #{fn.get-color('neutral', '050')};
+      --border-color: transparent;
+
+      border-color: var(--border-color);
+      background-color: var(--background-color);
+    }
+
+    &:focus-visible {
+      --outline-color: #{fn.get-color('neutral', '100', .5)};
+      outline: var(--outline-width) solid var(--outline-color);
+    }
+  }
+
+  &--destructive {
+    --background-color: #{fn.get-color('danger', '500')};
+    --border-color: #{fn.get-color('danger', '500')};
+    --text-color: #{fn.get-color('neutral', '000')};
+
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --background-color: #{fn.get-color('danger', '600')};
+      --border-color: #{fn.get-color('danger', '600')};
+
+      border-color: var(--border-color);
+      background-color: var(--background-color);
+    }
+
+    &:focus-visible {
+      --outline-color: #{fn.get-color('danger', '500', .5)};
+      outline: var(--outline-width) solid var(--outline-color);
+    }
+  }
+
+  &--sm {
+    --padding: #{fn.get-spacing('xs')} #{fn.get-spacing('sm')};
+    --font-size: #{fn.get-font-size('sm')};
+
+    font-size: var(--font-size);
+    padding: var(--padding);
+  }
+
+  &--md {
+    --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('md')};
+    --font-size: #{fn.get-font-size('md')};
+
+    padding: var(--padding);
+    font-size: var(--font-size);
+  }
+
+  &--lg {
+    --padding: #{fn.get-spacing('md')} #{fn.get-spacing('lg')};
+    --font-size: #{fn.get-font-size('lg')};
+
+    padding: var(--padding);
+    font-size: var(--font-size);
+  }
+
+  &--icon-sm {
+    --padding: #{fn.get-spacing('xs')};
+    padding: var(--padding);
+  }
+
+  &--icon-md {
+    --padding: #{fn.get-spacing('sm')};
+    padding: var(--padding);
+  }
+
+  &--icon-lg {
+    --padding: #{fn.get-spacing('md')};
+    padding: var(--padding);
+  }
+
+  &--full-width {
+    width: 100%;
+  }
 }

@@ -90,6 +90,22 @@ export class ButtonComponent {
     input<boolean>(false);
 
   /**
+   * Propriété fullWidth
+   * @readonly
+   * 
+   * Indique si le bouton occupe toute 
+   * la largeur de son conteneur
+   * 
+   * @access public
+   * @memberof ButtonComponent
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<boolean>} fullWidth
+   */
+  public readonly fullWidth: InputSignal<boolean> =
+    input<boolean>(false);
+
+  /**
    * Propriété type
    * @readonly
    * 
@@ -166,6 +182,7 @@ export class ButtonComponent {
       'btn',
       `btn--${this.variant()}`,
       `btn--${this.size()}`,
+      this.fullWidth() ? 'btn--full-width' : '',
     ];
   });
 
