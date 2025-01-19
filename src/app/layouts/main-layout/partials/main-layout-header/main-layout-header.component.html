@@ -1,10 +1,14 @@
 <header class="header">
-  <button class="test" [app-tooltip]="content">
-    Hover me!
-  </button>
+  <section class="header__section">
+    <app-button variant="outlined" size="icon-sm" [loading]="false">
+      <i-lucide name="panel-right-open" size="16"/>
+    </app-button>
+  </section>
 
-  <ng-template #content>
-    <i-lucide name="settings" size="16"/>
-    <span>Hover me !</span>
-  </ng-template>
+  <section class="header__section">
+    <app-button variant="outlined" size="sm" [loading]="false">
+      <i-lucide name="bell" size="16"/>
+      <span>Notifications</span>
+    </app-button>
+  </section>
 </header>

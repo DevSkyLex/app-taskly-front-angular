@@ -3,8 +3,16 @@
   [disabled]="disabled()"
   [class]="classes()"
   (click)="onClick($event)"
+  [attr.data-button-loading]="loading()"
   (mouseenter)="onMouseEnter($event)"
   (mouseleave)="onMouseLeave($event)"
+  (mousedown)="onMouseDown($event)"
+  (mouseup)="onMouseUp($event)"
+  (keydown)="onKeyDown($event)"
+  (keyup)="onKeyUp($event)"
+  (contextmenu)="onContextMenu($event)"
+  (focus)="onFocus($event)"
+  (blur)="onBlur($event)"
 >
   <!-- Contenu -->
   <div class="btn__content">
@@ -12,7 +20,5 @@
   </div>
 
   <!-- Loader -->
-  <div class="btn__loader">
-
-  </div>
+  <app-loader class="btn__loader"/>
 </button>

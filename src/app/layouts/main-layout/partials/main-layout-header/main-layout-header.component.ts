@@ -8,5 +8,4 @@ import { SharedModule } from '@app/shared/shared.module';
   styleUrl: './main-layout-header.component.scss'
 })
 export class MainLayoutHeaderComponent {
-
 }
