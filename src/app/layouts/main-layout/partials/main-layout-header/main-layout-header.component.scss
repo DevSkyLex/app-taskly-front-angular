@@ -13,9 +13,6 @@
   align-items: center;
 
   &__section {
-    --gap: #{fn.get-spacing('md')};
-
     display: flex;
-    gap: var(--gap);
   }
 }

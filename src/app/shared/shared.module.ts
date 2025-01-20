@@ -70,16 +70,17 @@ import {
   User,
   X,
 } from 'lucide-angular';
-import { TabComponent } from './components/tab/tab.component';
-import { TabGroupComponent } from './components/tab/tab-group/tab-group.component';
-import { TabLabelDirective } from './directives/tab-label.directive';
+import { TabComponent } from '@shared/components/tab/tab.component';
+import { TabGroupComponent } from '@shared/components/tab/tab-group/tab-group.component';
+import { TabLabelDirective } from '@shared/directives/tab-label.directive';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { RouterModule } from '@angular/router';
-import { TooltipComponent } from './components/tooltip/tooltip.component';
-import { TooltipDirective } from './directives/tooltip.directive';
-import { ButtonComponent } from './components/button/button.component';
-import { LoaderComponent } from './components/loader/loader.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { TooltipComponent } from '@shared/components/tooltip/tooltip.component';
+import { TooltipDirective } from '@shared/directives/tooltip.directive';
+import { ButtonComponent } from '@shared/components/button/button.component';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
+import { SeparatorComponent } from '@shared/components/separator/separator.component';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -96,7 +97,8 @@ const Components: Type<any>[] = [
   TooltipComponent,
   ButtonComponent,
   LoaderComponent,
-  BreadcrumbComponent
+  BreadcrumbComponent,
+  SeparatorComponent
 ];
 
 @NgModule({
