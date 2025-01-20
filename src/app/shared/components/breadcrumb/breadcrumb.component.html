@@ -1,0 +1,87 @@
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  <ul class="breadcrumb__list">
+    @let last = breadcrumbs().length - 1;
+    
+    @if (breadcrumbs().length > max()) {
+      <ng-container [ngTemplateOutlet]="breadcrumbItem" [ngTemplateOutletContext]="{ item: breadcrumbs()[0] }"/>
+      <ng-container [ngTemplateOutlet]="breadcrumbSeparator"/>
+
+      <ng-container [ngTemplateOutlet]="breadcrumbMenu"/>
+      <ng-container [ngTemplateOutlet]="breadcrumbSeparator"/>
+
+      <ng-container [ngTemplateOutlet]="breadcrumbItem" [ngTemplateOutletContext]="{ item: breadcrumbs()[last - 1] }"/>
+      <ng-container [ngTemplateOutlet]="breadcrumbSeparator"/>
+
+      <ng-container [ngTemplateOutlet]="breadcrumbItemLast"/>
+    }
+
+    @if (breadcrumbs().length <= max()) {
+      @for (breadcrumb of breadcrumbs(); track $index) {
+        @if ($index < last) {
+          <ng-container [ngTemplateOutlet]="breadcrumbItem" [ngTemplateOutletContext]="{ item: breadcrumb }"/>
+          <ng-container [ngTemplateOutlet]="breadcrumbSeparator"/>
+        }
+        @else {
+          <ng-container [ngTemplateOutlet]="breadcrumbItemLast"/>
+        }
+      }
+    }
+
+  </ul>
+</nav>
+
+<ng-template #breadcrumbItem let-item="item">
+  <li class="breadcrumb__list-item">
+    <a class="breadcrumb-link" [routerLink]="item.url">{{ item.label }}</a>
+  </li>
+</ng-template>
+
+<ng-template #breadcrumbSeparator>
+  <li class="breadcrumb-separator" role="presentation" aria-hidden="true">
+    <i-lucide name="chevron-right" size="14"/>
+  </li>
+</ng-template>
+
+<ng-template #breadcrumbItemLast>
+  <li class="breadcrumb__list-item">
+    <span class="breadcrumb-current">
+      {{ breadcrumbs()[last].label }}
+    </span>
+  </li>
+</ng-template>
+
+<ng-template #breadcrumbMenu>
+  <li class="breadcrumb__list-item">
+    <app-button 
+      variant="ghost" 
+      size="icon-sm" 
+      (click)="toggleMore()"
+      cdkOverlayOrigin 
+      #trigger="cdkOverlayOrigin"
+    >
+      <i-lucide name="ellipsis" size="16"/>
+    </app-button>
+
+    @let isOpen = moreOpen();
+
+    <ng-template 
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="trigger"
+      [cdkConnectedOverlayOpen]="isOpen"
+      (detach)="closeMore()"
+      (overlayOutsideClick)="closeMore()"
+    >
+      @let moreBreadcrumbs = breadcrumbs().slice(1, -2);
+      
+      <menu class="breadcrumb__menu">
+        @for (breadcrumb of moreBreadcrumbs; track $index) {
+          <li class="breadcrumb__menu-item">
+            <a class="breadcrumb__menu-link" [routerLink]="breadcrumb.url">
+              {{ breadcrumb.label }}
+            </a>
+          </li>
+        }
+      </menu>
+    </ng-template>
+  </li>
+</ng-template>

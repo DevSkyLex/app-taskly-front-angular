@@ -79,6 +79,7 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { TooltipDirective } from './directives/tooltip.directive';
 import { ButtonComponent } from './components/button/button.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -94,7 +95,8 @@ const Components: Type<any>[] = [
   TabGroupComponent,
   TooltipComponent,
   ButtonComponent,
-  LoaderComponent
+  LoaderComponent,
+  BreadcrumbComponent
 ];
 
 @NgModule({

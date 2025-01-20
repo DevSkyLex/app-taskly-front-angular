@@ -1,0 +1,87 @@
+@use 'abstracts/functions' as fn;
+
+:host {
+  display: flex;
+  align-items: stretch;
+}
+
+.breadcrumb {
+  --font-size: #{fn.get-font-size('sm')};
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: var(--font-size);
+
+  &__list {
+    --gap: #{fn.get-spacing('xs')};
+
+    display: flex;
+    gap: var(--gap);
+    list-style: none;
+    align-items: center;
+  }
+
+  &-current {
+    --font-weight: #{fn.get-font-weight('medium')};
+    font-weight: var(--font-weight);
+  }
+
+  &-link {
+    --text-color: #{fn.get-color('neutral', '500')};
+    --animation-duration: #{fn.get-animation-timing('fast')};
+
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color var(--animation-duration);
+
+    &:is(:hover, :focus) {
+      --text-color: #{fn.get-color('neutral', '700')};
+      color: var(--text-color);
+    }
+  }
+
+  &-separator {
+    --text-color: #{fn.get-color('neutral', '500')};
+    color: var(--text-color);
+  }
+
+  &__menu {
+    --padding: #{fn.get-spacing('2xs')};
+    --background-color: #{fn.get-color('neutral', '000')};
+    --border-radius: #{fn.get-border-radius('md')};
+    --shadow-color: #{fn.get-color('neutral', '950', .1)};
+    --border-color: #{fn.get-color('neutral', '200')};
+
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    list-style: none;
+    box-shadow: 0 4px 6px -1px var(--shadow-color), 
+                0 2px 4px -2px var(--shadow-color);
+
+    &-link {
+      --padding: #{fn.get-spacing('2xs')} #{fn.get-spacing('sm')};
+      --border-radius: #{fn.get-border-radius('md')};
+      --font-size: #{fn.get-font-size('sm')};
+      --text-color: inherit;
+
+      padding: var(--padding);
+      border-radius: var(--border-radius);
+      font-size: var(--font-size);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-color);
+
+      &:is(:hover, :focus-visible) {
+        --background-color: #{fn.get-color('neutral', '050')};
+        background-color: var(--background-color);
+      }
+    }
+  }
+}

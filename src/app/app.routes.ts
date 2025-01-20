@@ -8,8 +8,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () =>
-          import('src/app/features/main/main.module').then(m => m.MainModule)     
+        loadChildren: () => import('@features/main/main.module').then(m => m.MainModule)     
       },
       {
         path: '**',
