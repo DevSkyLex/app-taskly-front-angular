@@ -1,4 +1,4 @@
-<aside (click)="toggleSidebar()" class="sidebar" [attr.data-sidebar-expanded]="collapsed()">
+<aside class="sidebar" [attr.data-sidebar-collapsed]="collapsed()">
   <section class="sidebar__header">
     <a class="sidebar__brand">
       <span class="sidebar__brand-name sidebar-collapse">
@@ -28,35 +28,40 @@
       {{ group.title }}
     </span>
 
-    <cdk-accordion class="sidebar__group__accordion">
+    <div class="sidebar__group__accordion">
       @for (item of group.items; track $index) {
         @let hasChildren = item.items && item.items.length > 0;
 
         @if (hasChildren) {
-          <cdk-accordion-item 
+          <div
             class="sidebar__collapsible" 
-            #accordionItem="cdkAccordionItem" 
-            [attr.data-sidebar-collapsible-expanded]="accordionItem.expanded"
+            appCollapsible
+            #appCollapsible="appCollapsible"
+            [attr.data-sidebar-collapsible-expanded]="appCollapsible.expanded()"
+            (click)="expandSidebar()"
           >
             <button 
               class="sidebar__collapsible__trigger" 
-              (click)="accordionItem.toggle()" 
-              [app-tooltip]="item.label"
-              placement="right"
+              (click)="appCollapsible.toggle()" 
+              [appTooltip]="item.label"
+              [appTooltipDisabled]="!collapsed()"
+              [appTooltipPlacement]="'right'"
             >
               <div class="sidebar__collapsible__label">
-                @if (item.icon) {
-                  <i-lucide [name]="item.icon" [size]="18"/>
-                }
+                @if (item.icon) { <i-lucide [name]="item.icon" [size]="18"/> }
                 <span class="sidebar-label sidebar-collapse">{{ item.label }}</span>
               </div>
         
               <div class="sidebar__collapsible-indicator sidebar-collapse">
-                <i-lucide class="sidebar-indicator" name="chevron-right" [size]="16"/>
+                <i-lucide 
+                  class="sidebar-indicator" 
+                  name="chevron-right" 
+                  [size]="16"
+                />
               </div>
             </button>
         
-            @if (accordionItem.expanded) {
+            @if (appCollapsible.expanded()) {
               <div 
                 class="sidebar__collapsible__content" 
                 @collapsibleAnimation
@@ -76,7 +81,7 @@
                 </ul>
               </div>
             }
-          </cdk-accordion-item>
+          </div>
         }
         @else {
           <a
@@ -88,6 +93,6 @@
           </a>
         }
       }
-    </cdk-accordion>
+    </div>
   </div>
 </ng-template>

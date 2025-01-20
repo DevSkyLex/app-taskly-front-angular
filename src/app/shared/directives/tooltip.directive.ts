@@ -25,7 +25,7 @@ import { TooltipComponent } from '../components/tooltip/tooltip.component';
 export type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
 
 @Directive({
-  selector: '[app-tooltip]',
+  selector: '[appTooltip]',
   standalone: false,
 })
 export class TooltipDirective implements OnDestroy {
@@ -43,7 +43,7 @@ export class TooltipDirective implements OnDestroy {
    * @type {InputSignal<string | TemplateRef<any>>} content
    */
   public readonly content: InputSignal<string | TemplateRef<any>> =
-    input.required<string | TemplateRef<any>>({ alias: 'app-tooltip' });
+    input.required<string | TemplateRef<any>>({ alias: 'appTooltip' });
 
   /**
    * Propriété placement
@@ -58,7 +58,22 @@ export class TooltipDirective implements OnDestroy {
    * @type {InputSignal<TooltipPlacement>} placement
    */
   public readonly placement: InputSignal<TooltipPlacement> =
-    input<TooltipPlacement>('top');
+    input<TooltipPlacement>('top', { alias: 'appTooltipPlacement' });
+
+  /**
+   * Propriété disabled
+   * @readonly
+   * 
+   * Désactive le tooltip
+   * 
+   * @access public
+   * @memberof TooltipDirective
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<boolean>} disabled
+   */
+  public readonly disabled: InputSignal<boolean> = 
+    input<boolean>(false, { alias: 'appTooltipDisabled' });
 
   /**
    * Propriété elementRef
@@ -197,6 +212,9 @@ export class TooltipDirective implements OnDestroy {
    */
   @HostListener('mouseenter')
   public show(): void {
+    // Vérifie si le tooltip est désactivé
+    if (this.disabled()) return;
+
     /**
      * Création de la stratégie de
      * positionnement

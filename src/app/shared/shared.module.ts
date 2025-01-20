@@ -81,6 +81,7 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import { SeparatorComponent } from '@shared/components/separator/separator.component';
+import { CollapsibleDirective } from './directives/collapsible.directive';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -98,7 +99,8 @@ const Components: Type<any>[] = [
   ButtonComponent,
   LoaderComponent,
   BreadcrumbComponent,
-  SeparatorComponent
+  SeparatorComponent,
+  CollapsibleDirective
 ];
 
 @NgModule({

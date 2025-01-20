@@ -41,13 +41,9 @@
         opacity var(--sidebar-collapse-animation-duration),
     }
 
-    &[data-sidebar-expanded="false"] {
-      --sidebar-gap: 0;
+    &[data-sidebar-collapsed="true"] {
       --navigation-gap: 0;
       --accordion-gap: 0;
-      // --collapsible-label-gap: 0;
-      // --collapsible-trigger-gap: 0;
-      // --collapsible-list-gap: 0;
       width: 58px;
       
       .sidebar {
@@ -65,10 +61,6 @@
         &__group-title {
           margin-bottom: 0;
           display: none;
-        }
-
-        &__content {
-          
         }
       }
     }
