@@ -4,22 +4,75 @@
   position: relative;
 
   .sidebar {
+    --sidebar-gap: #{fn.get-spacing('xl')};
+    --navigation-gap: #{fn.get-spacing('xl')};
+    --accordion-gap: #{fn.get-spacing('2xs')};
+    --collapsible-label-gap: #{fn.get-spacing('sm')};
+    --collapsible-trigger-gap: #{fn.get-spacing('2xs')};
+    --collapsible-list-gap: #{fn.get-spacing('2xs')};
+    --sidebar-collapse-animation-duration: 500ms;
+
     --background-color: #{fn.get-color('neutral', '000')};
     --text-color: #{fn.get-color('neutral', '700')};
     --border-color: #{fn.get-color('neutral', '200')};
-    --gap: #{fn.get-spacing('xl')};
 
     display: grid;
     grid-template-rows: auto 1fr auto;
     height: 100dvh;
-    min-width: 300px;
     position: sticky;
     top: 0;
     background-color: var(--background-color);
     color: var(--text-color);
     border-right: 1px solid var(--border-color);
-    overflow-y: auto;
-    gap: var(--gap);
+    overflow: hidden;
+    width: 300px;
+    white-space: nowrap;
+    gap: var(--sidebar-gap);
+    transition: width var(--sidebar-collapse-animation-duration);
+
+    //#region Gestion de l'expansion de la barre latérale
+    &-collapse {
+      visibility: visible;
+      opacity: 1;
+      width: auto;
+      height: auto;
+      transition: 
+        visibility var(--sidebar-collapse-animation-duration),
+        opacity var(--sidebar-collapse-animation-duration),
+    }
+
+    &[data-sidebar-expanded="false"] {
+      --sidebar-gap: 0;
+      --navigation-gap: 0;
+      --accordion-gap: 0;
+      // --collapsible-label-gap: 0;
+      // --collapsible-trigger-gap: 0;
+      // --collapsible-list-gap: 0;
+      width: 58px;
+      
+      .sidebar {
+        &__collapsible__trigger {
+          width: 2rem;
+          height: 2rem;
+        }
+
+        &-collapse {
+          visibility: hidden;
+          opacity: 0;
+          width: 0;
+        }
+
+        &__group-title {
+          margin-bottom: 0;
+          display: none;
+        }
+
+        &__content {
+          
+        }
+      }
+    }
+    //#endregion
 
     & > * {
       --padding: #{fn.get-spacing('sm')};
@@ -36,12 +89,29 @@
       }
     }
 
-    &__navigation {
-      --gap: #{fn.get-spacing('xl')};
+    &__header {
+      height: 69px;
+    }
 
+    &__brand {
+      display: flex;
+      align-items: center;
+
+      &-name {
+        --font-size: #{fn.get-font-size('3xl')};
+        --font-weight: #{fn.get-font-weight('semibold')};
+        --text-color:#{fn.get-color('neutral', '950')};
+
+        font-size: var(--font-size);
+        font-weight: var(--font-weight);
+        color: var(--text-color);
+      }
+    }
+
+    &__navigation {
       display: flex;
       flex-direction: column;
-      gap: var(--gap);
+      gap: var(--navigation-gap);
     }
 
     &__group {
@@ -65,11 +135,9 @@
       }
 
       &__accordion {
-        --gap: #{fn.get-spacing('2xs')};
-
         display: flex;
         flex-direction: column;
-        gap: var(--gap);
+        gap: var(--accordion-gap);
       }
     }
 
@@ -86,17 +154,15 @@
       }
 
       &__label {
-        --gap: #{fn.get-spacing('sm')};
         --font-size: #{fn.get-font-size('md')};
 
         display: flex;
         align-items: center;
-        gap: var(--gap);
+        gap: var(--collapsible-label-gap);
         font-size: var(--font-size);
       }
 
       &__trigger {
-        --gap: #{fn.get-spacing('2xs')};
         --padding: #{fn.get-spacing('xs')};
         --border-radius: #{fn.get-border-radius('md')};
         --animation-duration: #{fn.get-animation-timing('fast')};
@@ -106,7 +172,7 @@
         align-items: center;
         border-radius: var(--border-radius);
         padding: var(--padding);
-        gap: var(--gap);
+        gap: var(--collapsible-trigger-gap);
         background-color: transparent;
         border: none;
         cursor: pointer;
@@ -141,7 +207,6 @@
         --padding-inline: #{fn.get-spacing('xs')};
         --margin-inline: #{fn.get-spacing('md')};
         --border-color: #{fn.get-color('neutral', '200')};
-        --gap: #{fn.get-spacing('2xs')};
 
         padding-block: var(--padding-block);
         padding-inline: var(--padding-inline);
@@ -149,7 +214,7 @@
         border-left: 1px solid var(--border-color);
         display: flex;
         flex-direction: column;
-        gap: var(--gap);
+        gap: var(--collapsible-list-gap);
         list-style: none;
 
         &-link {

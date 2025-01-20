@@ -16,7 +16,7 @@
     align-items: stretch;
 
     &-button {
-      --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('lg')};
+      --padding: #{fn.get-spacing('xs')} #{fn.get-spacing('md')};
       --font-size: #{fn.get-font-size('md')};
       --box-shadow-color: #{fn.get-color('neutral', '200')};
       --text-color: #{fn.get-color('neutral', '600')};
@@ -54,7 +54,7 @@
   }
 
   &__headers {
-    --padding-inline: #{fn.get-spacing('2xl')};
+    --padding-inline: #{fn.get-spacing('xl')};
     --border-color: #{fn.get-color('neutral', '200')};
 
     padding-inline: var(--padding-inline);

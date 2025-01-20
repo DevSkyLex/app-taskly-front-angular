@@ -1,0 +1,26 @@
+@use 'abstracts/functions' as fn;
+
+.content {
+  --background-color: #{fn.get-color('neutral', '050')};
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+
+  &__page {
+    --padding: #{fn.get-spacing('xl')};
+
+    padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+
+    &-title {
+      --font-weight: #{fn.get-font-weight('semibold')};
+      --font-size: #{fn.get-font-size('3xl')};
+
+      font-size: var(--font-size);
+      font-weight: var(--font-weight);
+    }
+  }
+}

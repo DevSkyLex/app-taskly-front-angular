@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal, Signal } from '@angular/core';
+import { Component, input, InputSignal, model, ModelSignal, signal, Signal } from '@angular/core';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
@@ -47,6 +47,35 @@ type SidebarItem = {
 })
 export class MainLayoutSidebarComponent {
   //#region Propriétés
+  /**
+   * Propriété appName
+   * @readonly
+   * 
+   * Nom de l'application
+   * 
+   * @access public
+   * @memberof MainLayoutSidebarComponent
+   * @since 1.0.0
+   * 
+   * @type {string} appName
+   */
+  public readonly appName: string = environment.app.name;
+
+  /**
+   * Propriété collapsed
+   * @readonly
+   * 
+   * Indique si le menu est réduit
+   * 
+   * @access public
+   * @memberof MainLayoutSidebarComponent
+   * @since 1.0.0
+   * 
+   * @type {ModelSignal<boolean>} collapsed
+   */
+  public readonly collapsed: ModelSignal<boolean> = 
+    model<boolean>(false);
+
   /**
    * Propriété navigation
    * @readonly
@@ -124,5 +153,52 @@ export class MainLayoutSidebarComponent {
       ]
     }
   ]);
+  //#endregion
+
+  //#region Méthodes
+  /**
+   * Méthode toggleSidebar
+   * 
+   * Permet de basculer l'état du menu
+   * 
+   * @access public
+   * @memberof MainLayoutSidebarComponent
+   * @since 1.0.0
+   * 
+   * @return {void} - Ne retourne rien
+   */
+  public toggleSidebar(): void {
+    this.collapsed.set(!this.collapsed());
+  }
+
+  /**
+   * Méthode expandSidebar
+   * 
+   * Permet d'ouvrir le menu
+   * 
+   * @access public
+   * @memberof MainLayoutSidebarComponent
+   * @since 1.0.0
+   * 
+   * @return {void} - Ne retourne rien
+   */
+  public expandSidebar(): void {
+    this.collapsed.set(false);
+  }
+
+  /**
+   * Méthode collapseSidebar
+   * 
+   * Permet de fermer le menu
+   * 
+   * @access public
+   * @memberof MainLayoutSidebarComponent
+   * @since 1.0.0
+   * 
+   * @return {void} - Ne retourne rien
+   */
+  public collapseSidebar(): void {
+    this.collapsed.set(true);
+  }
   //#endregion
 }

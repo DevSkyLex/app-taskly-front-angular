@@ -1,6 +1,10 @@
-<aside class="sidebar">
+<aside (click)="toggleSidebar()" class="sidebar" [attr.data-sidebar-expanded]="collapsed()">
   <section class="sidebar__header">
-
+    <a class="sidebar__brand">
+      <span class="sidebar__brand-name sidebar-collapse">
+        {{ appName }}
+      </span>
+    </a>
   </section>
 
   <section class="sidebar__body">
@@ -20,7 +24,7 @@
 
 <ng-template #groupTemplate let-group>
   <div class="sidebar__group">
-    <span class="sidebar__group-title">
+    <span class="sidebar__group-title sidebar-collapse">
       {{ group.title }}
     </span>
 
@@ -42,13 +46,13 @@
             >
               <div class="sidebar__collapsible__label">
                 @if (item.icon) {
-                  <i-lucide [name]="item.icon" [size]="16"/>
+                  <i-lucide [name]="item.icon" [size]="18"/>
                 }
-                <span>{{ item.label }}</span>
+                <span class="sidebar-label sidebar-collapse">{{ item.label }}</span>
               </div>
         
-              <div class="sidebar__collapsible-indicator">
-                <i-lucide name="chevron-right" [size]="16"/>
+              <div class="sidebar__collapsible-indicator sidebar-collapse">
+                <i-lucide class="sidebar-indicator" name="chevron-right" [size]="16"/>
               </div>
             </button>
         
@@ -65,7 +69,7 @@
                         [routerLink]="child.route"
                         routerLinkActive="sidebar__collapsible-list-link--active"
                       >
-                        {{ child.label }}
+                        <span class="sidebar-label sidebar-collapse">{{ child.label }}</span>
                       </a>
                     </li>
                   }
@@ -80,7 +84,7 @@
             [routerLink]="item.route"
             routerLinkActive="sidebar__group-list-link--active"
           >
-            {{ item.label }}
+            <span class="sidebar-label sidebar-collapse">{{ item.label }}</span>
           </a>
         }
       }
