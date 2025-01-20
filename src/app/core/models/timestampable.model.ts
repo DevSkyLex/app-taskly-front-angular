@@ -33,6 +33,6 @@ export interface Timestampable {
    * 
    * @type {Date} updatedAt
    */
-  updatedAt: Date;
+  updatedAt?: Date;
   //#endregion
 }

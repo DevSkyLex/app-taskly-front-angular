@@ -59,7 +59,7 @@ export class ProjectService {
   
   //#region Méthodes
   /**
-   * Méthode getProjects
+   * Méthode findAll
    * 
    * Permet de récupérer la liste des projets
    * 
@@ -71,7 +71,7 @@ export class ProjectService {
    * 
    * @returns {Observable<JsonLdResponse<Project>>} Liste des projets
    */
-  public getProjects(options?: JsonLdRequestOptions): Observable<JsonLdResponse<Project>> {
+  public findAll(options?: JsonLdRequestOptions): Observable<JsonLdResponse<Project>> {
     /**
      * Génération des paramètres de la 
      * requête HTTP grâce au service JSON-LD
@@ -89,11 +89,14 @@ export class ProjectService {
      */
     const url: string = `${ProjectService.API_URL}/projects`;
 
-    return this.httpClient.get<JsonLdResponse<Project>>(url, { params });
+    return this.httpClient.get<JsonLdResponse<Project>>(url, { 
+      params: params,
+      headers: { 'Content-Type': 'application/ld+json' } 
+    });
   }
 
   /**
-   * Méthode getProject
+   * Méthode find
    * 
    * Permet de récupérer un projet
    * 
@@ -101,11 +104,11 @@ export class ProjectService {
    * @memberof ProjectService
    * @since 1.0.0
    * 
-   * @param {string} id Identifiant du projet
+   * @param {string | number} id Identifiant du projet
    * 
    * @returns {Observable<Project>} Projet
    */
-  public getProject(id: string): Observable<Project> {
+  public find(id: string | number): Observable<Project> {
     /**
      * URL de la requête HTTP
      * 
@@ -113,11 +116,13 @@ export class ProjectService {
      */
     const url: string = `${ProjectService.API_URL}/projects/${id}`;
 
-    return this.httpClient.get<Project>(url);
+    return this.httpClient.get<Project>(url, {
+      headers: { 'Content-Type': 'application/ld+json' }
+    });
   }
 
   /**
-   * Méthode createProject
+   * Méthode create
    * 
    * Permet de créer un projet
    * 
@@ -129,7 +134,7 @@ export class ProjectService {
    * 
    * @returns {Observable<Project>} Projet créé
    */
-  public createProject(project: Partial<Project>): Observable<Project> {
+  public create(project: Partial<Project>): Observable<Project> {
     /**
      * URL de la requête HTTP
      * 
@@ -137,11 +142,13 @@ export class ProjectService {
      */
     const url: string = `${ProjectService.API_URL}/projects`;
 
-    return this.httpClient.post<Project>(url, project);
+    return this.httpClient.post<Project>(url, project, {
+      headers: { 'Content-Type': 'application/ld+json' }
+    });
   }
 
   /**
-   * Méthode updateProject
+   * Méthode update
    * 
    * Permet de mettre à jour un projet
    * 
@@ -154,7 +161,7 @@ export class ProjectService {
    * 
    * @returns {Observable<Project>} Projet mis à jour
    */
-  public updateProject(id: string, project: Partial<Project>): Observable<Project> {
+  public update(id: string | number, project: Partial<Project>): Observable<Project> {
     /**
      * URL de la requête HTTP
      * 
@@ -162,11 +169,13 @@ export class ProjectService {
      */
     const url: string = `${ProjectService.API_URL}/projects/${id}`;
 
-    return this.httpClient.put<Project>(url, project);
+    return this.httpClient.put<Project>(url, project, {
+      headers: { 'Content-Type': 'application/ld+json' }
+    });
   }
 
   /**
-   * Méthode deleteProject
+   * Méthode delete
    * 
    * Permet de supprimer un projet
    * 
@@ -174,11 +183,11 @@ export class ProjectService {
    * @memberof ProjectService
    * @since 1.0.0
    * 
-   * @param {string} id Identifiant du projet
+   * @param {string | number} id Identifiant du projet
    * 
    * @returns {Observable<void>} Aucune donnée
    */
-  public deleteProject(id: string): Observable<void> {
+  public delete(id: string | number): Observable<void> {
     /**
      * URL de la requête HTTP
      * 
@@ -186,7 +195,10 @@ export class ProjectService {
      */
     const url: string = `${ProjectService.API_URL}/projects/${id}`;
 
-    return this.httpClient.delete<void>(url);
+    // Modifie le content-type de la requête pour mettre json-ld
+    return this.httpClient.delete<void>(url, {
+      headers: { 'Content-Type': 'application/ld+json' }
+    });
   }
   //#endregion
 }

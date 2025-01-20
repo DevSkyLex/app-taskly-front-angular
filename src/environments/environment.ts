@@ -21,7 +21,7 @@ export const environment = {
   api: {
     taskly: {
       name: 'Taskly API',
-      url: '',
+      url: 'http://localhost:8000/api',
     }
   }
 }
