@@ -137,7 +137,7 @@
       display: flex;
       flex-direction: column;
 
-      &[data-sidebar-collapsible-expanded='true'] {
+      &[data-sidebar-group-item-collapsed='false'] {
         .sidebar__collapsible {
           &-indicator {
             transform: rotate(90deg);

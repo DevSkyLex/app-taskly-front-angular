@@ -1,4 +1,4 @@
-import { Directive, signal, WritableSignal } from '@angular/core';
+import { Directive, model, ModelSignal, signal, WritableSignal } from '@angular/core';
 
 @Directive({
   selector: '[appCollapsible]',
@@ -8,7 +8,7 @@ import { Directive, signal, WritableSignal } from '@angular/core';
 export class CollapsibleDirective {
   //#region Propriétés
   /**
-   * Propriété expanded
+   * Propriété collapsed
    * 
    * Indique si le collapsible est ouvert
    * 
@@ -16,9 +16,11 @@ export class CollapsibleDirective {
    * @memberof CollapsibleDirective
    * @since 1.0.0
    * 
-   * @type {WritableSignal<boolean>} expanded
+   * @type {WModelSignal<boolean>} collapsed
    */
-  public readonly expanded: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly collapsed: ModelSignal<boolean> = model<boolean>(true, {
+    alias: 'collapsed',
+  });
   //#endregion
 
   //#region Méthodes
@@ -34,7 +36,7 @@ export class CollapsibleDirective {
    * @return {void} - Ne retourne rien
    */
   public toggle(): void {
-    this.expanded.set(!this.expanded());
+    this.collapsed.set(!this.collapsed());
   }
 
   /**
@@ -49,7 +51,7 @@ export class CollapsibleDirective {
    * @return {void} - Ne retourne rien
    */
   public collapse(): void {
-    this.expanded.set(false);
+    this.collapsed.set(true);
   }
 
   /**
@@ -64,7 +66,7 @@ export class CollapsibleDirective {
    * @return {void} - Ne retourne rien
    */
   public expand(): void {
-    this.expanded.set(true);
+    this.collapsed.set(false);
   }
   //#endregion
 }

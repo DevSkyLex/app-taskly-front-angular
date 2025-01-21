@@ -62,21 +62,6 @@ export class MainLayoutSidebarComponent {
   public readonly appName: string = environment.app.name;
 
   /**
-   * Propriété collapsed
-   * @readonly
-   * 
-   * Indique si le menu est réduit
-   * 
-   * @access public
-   * @memberof MainLayoutSidebarComponent
-   * @since 1.0.0
-   * 
-   * @type {ModelSignal<boolean>} collapsed
-   */
-  public readonly collapsed: ModelSignal<boolean> = 
-    model<boolean>(false);
-
-  /**
    * Propriété navigation
    * @readonly
    * 
@@ -153,52 +138,5 @@ export class MainLayoutSidebarComponent {
       ]
     }
   ]);
-  //#endregion
-
-  //#region Méthodes
-  /**
-   * Méthode toggleSidebar
-   * 
-   * Permet de basculer l'état du menu
-   * 
-   * @access public
-   * @memberof MainLayoutSidebarComponent
-   * @since 1.0.0
-   * 
-   * @return {void} - Ne retourne rien
-   */
-  public toggleSidebar(): void {
-    this.collapsed.set(!this.collapsed());
-  }
-
-  /**
-   * Méthode expandSidebar
-   * 
-   * Permet d'ouvrir le menu
-   * 
-   * @access public
-   * @memberof MainLayoutSidebarComponent
-   * @since 1.0.0
-   * 
-   * @return {void} - Ne retourne rien
-   */
-  public expandSidebar(): void {
-    this.collapsed.set(false);
-  }
-
-  /**
-   * Méthode collapseSidebar
-   * 
-   * Permet de fermer le menu
-   * 
-   * @access public
-   * @memberof MainLayoutSidebarComponent
-   * @since 1.0.0
-   * 
-   * @return {void} - Ne retourne rien
-   */
-  public collapseSidebar(): void {
-    this.collapsed.set(true);
-  }
   //#endregion
 }

@@ -1,4 +1,9 @@
-<aside class="sidebar" [attr.data-sidebar-collapsed]="collapsed()">
+<aside 
+  class="sidebar" 
+  appCollapsible #sidebarController="appCollapsible" 
+  [collapsed]="false"
+  [attr.data-sidebar-collapsed]="sidebarController.collapsed()"
+>
   <section class="sidebar__header">
     <a class="sidebar__brand">
       <span class="sidebar__brand-name sidebar-collapse">
@@ -36,15 +41,14 @@
           <div
             class="sidebar__collapsible" 
             appCollapsible
-            #appCollapsible="appCollapsible"
-            [attr.data-sidebar-collapsible-expanded]="appCollapsible.expanded()"
-            (click)="expandSidebar()"
+            #collapsibleController="appCollapsible"
+            [attr.data-sidebar-group-item-collapsed]="collapsibleController.collapsed()"
           >
             <button 
               class="sidebar__collapsible__trigger" 
-              (click)="appCollapsible.toggle()" 
+              (click)="collapsibleController.toggle()" 
               [appTooltip]="item.label"
-              [appTooltipDisabled]="!collapsed()"
+              [appTooltipDisabled]="!sidebarController.collapsed()"
               [appTooltipPlacement]="'right'"
             >
               <div class="sidebar__collapsible__label">
@@ -61,7 +65,7 @@
               </div>
             </button>
         
-            @if (appCollapsible.expanded()) {
+            @if (!collapsibleController.collapsed()) {
               <div 
                 class="sidebar__collapsible__content" 
                 @collapsibleAnimation

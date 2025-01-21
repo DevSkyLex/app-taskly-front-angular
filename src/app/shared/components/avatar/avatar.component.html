@@ -1,0 +1,13 @@
+<div class="avatar" [style.--size.px]="size()">
+  <img 
+    [src]="src()" 
+    [alt]="alt()" 
+    class="avatar-image"
+  >
+
+  @if (fallback()) {
+    <span class="avatar-fallback">
+      {{ fallback() | uppercase }}
+    </span>
+  }
+</div>

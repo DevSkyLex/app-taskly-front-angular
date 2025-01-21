@@ -1,0 +1,31 @@
+@use 'abstracts/functions' as fn;
+
+.avatar {
+  --border-radius: #{fn.get-border-radius('full')};
+  --background-color: #{fn.get-color('neutral', '100')};
+  --font-weight: #{fn.get-font-weight('medium')};
+  --font-size: 80%;
+  --text-color: #{fn.get-color('neutral', '600')};
+  --size: 2.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  background-color: var(--background-color);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  color: var(--text-color);
+  overflow: hidden;
+  height: var(--size);
+  width: var(--size);
+
+  &-image {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &-fallback {
+    user-select: none;
+  }
+}
