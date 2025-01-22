@@ -1,0 +1,8 @@
+<div class="command-list" role="listbox">
+  @if (!empty()) {
+    <ng-content/>
+  }
+  @else {
+    <ng-content select="app-command-empty"/>
+  }
+</div>

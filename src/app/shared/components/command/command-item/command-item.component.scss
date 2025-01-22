@@ -1,0 +1,41 @@
+@use 'abstracts/functions' as fn;
+
+.command-item {
+  --padding: #{fn.get-spacing('xs')} #{fn.get-spacing('sm')};
+  --border-radius: #{fn.get-border-radius('md')};
+  --font-size: #{fn.get-font-size('sm')};
+  --animation-duration: #{fn.get-animation-timing('fast')};
+
+  display: flex;
+  align-items: center;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: transparent;
+  font-size: var(--font-size);
+  transition: background-color var(--animation-duration);
+  width: 100%;
+  cursor: pointer;
+  gap: var(--gap);
+
+  &:is(:hover, :focus-visible) {
+    --background-color: #{fn.get-color('neutral', '050')};
+    background-color: var(--background-color);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &__content {
+    --gap: .75em;
+    
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+  }
+
+  &__shortcut {
+    margin-left: auto;
+  }
+}

@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, InputSignal, model, ModelSignal, signal, Signal } from '@angular/core';
+import { Component, signal, Signal } from '@angular/core';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '@app/shared/shared.module';
-import { LucideAngularModule } from 'lucide-angular';
-import { state, style, transition, trigger, useAnimation } from '@angular/animations';
+import { SharedModule } from '@shared/shared.module';
+import { transition, trigger, useAnimation } from '@angular/animations';
 import { AnimationTiming, AppAnimations } from '@shared/animations/app.animations';
 import { environment } from '@env/environment';
 

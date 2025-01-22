@@ -17,6 +17,85 @@
     
     <app-separator orientation="vertical"/>
 
-    <app-avatar fallback="VF" [size]="36"/>
+    <button 
+      class="header__profile" 
+      (click)="toggleProfile()" 
+      cdkOverlayOrigin 
+      #profileTrigger="cdkOverlayOrigin"
+    >
+      <!-- Badge profil utilisateur -->
+      <app-profile-badge
+        class="header__profile-badge"
+        [username]="'devSkyLex'"
+        [email]="'contact@valentin-fortin.pro'"
+      />
+
+      <!-- Icone de flèche -->
+      <i-lucide 
+        class="header__profile-indicator"
+        name="chevrons-up-down" 
+        size="16"
+      />
+    </button>
+
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="profileTrigger"
+      [cdkConnectedOverlayOpen]="profileOpen()"
+      [cdkConnectedOverlayOffsetY]="8"
+      (overlayOutsideClick)="closeProfile()"
+      (detach)="closeProfile()"
+    >
+      <app-command @profilePopAnimation>
+        <app-command-input placeholder="Recherche..."/>
+        <app-command-list>
+          <app-command-empty>
+            Aucun résultat trouvé.
+          </app-command-empty>
+
+          <app-command-group heading="Account">
+            <app-command-item>
+              <i-lucide name="user" size="16"/>
+              <span>Profile</span>
+              <app-command-shortcut>
+                <span>Ctrl + P</span>
+              </app-command-shortcut>
+            </app-command-item>
+
+            <app-command-item>
+              <i-lucide name="settings" size="16"/>
+              <span>Settings</span>
+              <app-command-shortcut>
+                <span>Ctrl + S</span>
+              </app-command-shortcut>
+            </app-command-item>
+
+            <app-command-item>
+              <i-lucide name="log-out" size="16"/>
+              <span>Logout</span>
+            </app-command-item>
+          </app-command-group>
+
+          <app-command-separator/>
+
+          <app-command-group heading="Help">
+            <app-command-item>
+              <i-lucide name="headset" size="16"/>
+              <span>Help</span>
+            </app-command-item>
+
+            <app-command-item>
+              <i-lucide name="info" size="16"/>
+              <span>About</span>
+            </app-command-item>
+
+            <app-command-item>
+              <i-lucide name="settings" size="16"/>
+              <span>Settings</span>
+            </app-command-item>
+          </app-command-group>
+        </app-command-list>
+      </app-command>
+    </ng-template>
   </section>
 </header>

@@ -1,0 +1,26 @@
+@use 'abstracts/functions' as fn;
+
+.command-group {
+  --padding: #{fn.get-spacing('2xs')};
+
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding);
+
+  &__heading {
+    --font-weight: #{fn.get-font-weight('medium')};
+    --text-color: #{fn.get-color('neutral', '600')};
+    --font-size: #{fn.get-font-size('xs')};
+    --padding: #{fn.get-spacing('2xs')} #{fn.get-spacing('sm')};
+
+    font-weight: var(--font-weight);
+    color: var(--text-color);
+    font-size: var(--font-size);
+    padding: var(--padding);
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+  }
+}

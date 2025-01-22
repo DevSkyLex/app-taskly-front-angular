@@ -1,0 +1,9 @@
+@use 'abstracts/functions' as fn;
+
+.command-list {
+  --max-height: 300px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: var(--max-height);
+}

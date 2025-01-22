@@ -1,0 +1,32 @@
+@use 'abstracts/functions' as fn;
+
+.profile-badge {
+  --gap: #{fn.get-spacing('sm')};
+  --text-align: left;
+
+  gap: var(--gap);
+  display: flex;
+  align-items: center;
+  text-align: var(--text-align);
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+
+    &-username {
+      --font-weight: #{fn.get-font-weight('medium')};
+      --font-size: #{fn.get-font-size('sm')};
+
+      font-weight: var(--font-weight);
+      font-size: var(--font-size);
+    }
+
+    &-email {
+      --text-color: #{fn.get-color('neutral', '600')};
+      --font-size: #{fn.get-font-size('xs')};
+
+      color: var(--text-color);
+      font-size: var(--font-size);
+    }
+  }
+}

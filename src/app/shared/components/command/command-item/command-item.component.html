@@ -1,0 +1,11 @@
+@if (match()) {
+  <button class="command-item" role="option">
+    <div class="command-item__content" #content>
+      <ng-content/>
+    </div>
+
+    <div class="command-item__shortcut">
+      <ng-content select="app-command-shortcut"/>
+    </div>
+  </button>
+}

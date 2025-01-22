@@ -1,0 +1,17 @@
+@use 'abstracts/functions' as fn;
+
+.command-shortcut {
+  --border-color: #{fn.get-color('neutral', '200')};
+  --font-size: #{fn.get-font-size('xs')};
+  --text-color: #{fn.get-color('neutral', '600')};
+  --padding-inline: #{fn.get-spacing('2xs')};
+  --border-radius: #{fn.get-border-radius('md')};
+  --background-color: #{fn.get-color('neutral', '000')};
+
+  color: var(--text-color);
+  font-size: var(--font-size);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding-inline: var(--padding-inline);
+  background-color: var(--background-color);
+}

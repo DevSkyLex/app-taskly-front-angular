@@ -1,0 +1,17 @@
+@if (!empty()) {
+  <div class="command-group">
+    <!-- Titre du groupe -->
+    @if (heading()) {
+      <div class="command-group__heading" [ariaHidden]="true">
+        <span class="command-group__heading-text">
+          {{ heading() | titlecase }}
+        </span>
+      </div>
+    }
+
+    <!-- Liste des éléments -->
+    <div class="command-group__items" role="group">
+      <ng-content select="app-command-item"/>
+    </div>
+  </div>
+}

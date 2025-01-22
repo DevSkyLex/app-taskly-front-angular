@@ -1,0 +1,11 @@
+@use 'abstracts/functions' as fn;
+
+.command-empty {
+  --padding-block: #{fn.get-spacing('md')};
+  --font-size: #{fn.get-font-size('sm')};
+
+  display: grid;
+  place-content: center;
+  padding-block: var(--padding-block);
+  font-size: var(--font-size);
+}

@@ -1,0 +1,16 @@
+<label for="command-input" class="command-input">
+  <div class="command-input__controller">
+    <i-lucide 
+      name="search" 
+      size="16"
+      class="command-input__controller-icon"
+    />
+
+    <input 
+      type="search" 
+      class="command-input__controller-field"
+      [placeholder]="placeholder()"
+      (input)="onInput($event)"
+    >
+  </div>
+</label>

@@ -81,8 +81,17 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import { SeparatorComponent } from '@shared/components/separator/separator.component';
-import { CollapsibleDirective } from './directives/collapsible.directive';
-import { AvatarComponent } from './components/avatar/avatar.component';
+import { CollapsibleDirective } from '@shared/directives/collapsible.directive';
+import { AvatarComponent } from '@shared/components/avatar/avatar.component';
+import { ProfileBadgeComponent } from '@shared/components/profile/profile-badge/profile-badge.component';
+import { CommandComponent } from '@shared/components/command/command.component';
+import { CommandEmptyComponent } from '@shared/components/command/command-empty/command-empty.component';
+import { CommandGroupComponent } from '@shared/components/command/command-group/command-group.component';
+import { CommandInputComponent } from '@shared/components/command/command-input/command-input.component';
+import { CommandItemComponent } from '@shared/components/command/command-item/command-item.component';
+import { CommandListComponent } from '@shared/components/command/command-list/command-list.component';
+import { CommandSeparatorComponent } from '@shared/components/command/command-separator/command-separator.component';
+import { CommandShortcutComponent } from '@shared/components/command/command-shortcut/command-shortcut.component';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -102,7 +111,16 @@ const Components: Type<any>[] = [
   BreadcrumbComponent,
   SeparatorComponent,
   CollapsibleDirective,
-  AvatarComponent
+  AvatarComponent,
+  ProfileBadgeComponent,
+  CommandComponent,
+  CommandEmptyComponent,
+  CommandGroupComponent,
+  CommandInputComponent,
+  CommandItemComponent,
+  CommandListComponent,
+  CommandSeparatorComponent,
+  CommandShortcutComponent,
 ];
 
 @NgModule({
@@ -110,6 +128,7 @@ const Components: Type<any>[] = [
     ...Components,
     ...Directives,
     ...Pipes,
+    
   ],
   imports: [
     CommonModule,
@@ -124,6 +143,7 @@ const Components: Type<any>[] = [
       BookOpenCheck,
       Bot,
       Building,
+      ChevronsUpDown,
       Building2,
       CalendarDays,
       Check,
@@ -132,7 +152,6 @@ const Components: Type<any>[] = [
       ChevronLast,
       ChevronLeft,
       ChevronRight,
-      ChevronsUpDown,
       CircleAlert,
       CircleCheck,
       Clock,

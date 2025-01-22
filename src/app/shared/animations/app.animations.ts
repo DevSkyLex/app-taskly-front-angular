@@ -89,7 +89,11 @@ export class AppAnimations {
         overflow: 'hidden',
       })
     ),
-  ]);
+  ], {
+    params: {
+      timing: AnimationTiming.NORMAL,
+    }
+  });
 
   /**
    * Méthode popIn
@@ -115,7 +119,11 @@ export class AppAnimations {
         opacity: 1,
       })
     ),
-  ]);
+  ], {
+    params: {
+      timing: AnimationTiming.NORMAL,
+    }
+  });
 
   /**
    * Méthode popOut
@@ -141,6 +149,136 @@ export class AppAnimations {
         opacity: 0,
       })
     ),
-  ]);
+  ], {
+    params: {
+      timing: AnimationTiming.NORMAL,
+    }
+  });
+
+  /**
+   * Méthode fadeIn
+   * @readonly
+   * @static
+   * 
+   * Animation de fondu en entrée
+   * 
+   * @access public
+   * @memberof AppAnimations
+   * @since 1.0.0
+   * 
+   * @type {AnimationReferenceMetadata} fadeIn
+   */
+  public static readonly fadeIn: AnimationReferenceMetadata = animation([
+    style({
+      opacity: 0,
+    }),
+    animate(
+      '{{ timing }} ease-in-out',
+      style({
+        opacity: 1,
+      })
+    ),
+  ], {
+    params: {
+      timing: AnimationTiming.NORMAL,
+    }
+  });
+
+  /**
+   * Méthode fadeOut
+   * @readonly
+   * @static
+   * 
+   * Animation de fondu en sortie
+   * 
+   * @access public
+   * @memberof AppAnimations
+   * @since 1.0.0
+   * 
+   * @type {AnimationReferenceMetadata} fadeOut
+   */
+  public static readonly fadeOut: AnimationReferenceMetadata = animation([
+    style({
+      opacity: 1,
+    }),
+    animate(
+      '{{ timing }} ease-in-out',
+      style({
+        opacity: 0,
+      })
+    ),
+  ], {
+    params: {
+      timing: AnimationTiming.NORMAL,
+    }
+  });
+
+  /**
+   * Méthode slideIn
+   * @readonly
+   * @static
+   * 
+   * Permet de slide dans une direction passée 
+   * en paramètre
+   * 
+   * @access public
+   * @memberof AppAnimations
+   * @since 1.0.0
+   * 
+   * @type {AnimationReferenceMetadata} slideIn
+   */
+  public static readonly slideIn: AnimationReferenceMetadata = animation([
+    style({
+      transform: 'translate({{ translateX }}, {{ translateY }})',
+      opacity: 0,
+    }),
+    animate(
+      '{{ timing }} ease-in-out',
+      style({
+        transform: 'translate(0, 0)',
+        opacity: 1,
+      })
+    ),
+  ], {
+    params: {
+      timing: AnimationTiming.NORMAL,
+      translateX: '0',
+      translateY: '0',
+    }
+  });
+
+  /**
+   * Méthode slideOut
+   * @readonly
+   * @static
+   * 
+   * Permet de slide dans une direction passée 
+   * en paramètre
+   * 
+   * @access public
+   * @memberof AppAnimations
+   * @since 1.0.0
+   * 
+   * @type {AnimationReferenceMetadata} slideOut
+   */
+  public static readonly slideOut: AnimationReferenceMetadata = animation([
+    style({
+      transform: 'translate(0, 0)',
+      opacity: 1,
+    }),
+    animate(
+      '{{ timing }} ease-in-out',
+      style({
+        transform: 'translate({{ translateX }}, {{ translateY }})',
+        opacity: 0,
+      })
+    ),
+  ], {
+    params: {
+      timing: AnimationTiming.NORMAL,
+      translateX: '0',
+      translateY: '0',
+    }
+  });
   //#endregion
 }

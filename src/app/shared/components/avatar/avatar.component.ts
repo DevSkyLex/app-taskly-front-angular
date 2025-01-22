@@ -1,4 +1,4 @@
-import { Component, input, InputSignal } from '@angular/core';
+import { Component, computed, input, InputSignal, Signal } from '@angular/core';
 
 @Component({
   selector: 'app-avatar',
@@ -23,6 +23,21 @@ export class AvatarComponent {
    */
   public readonly src: InputSignal<string | null> = 
     input<string | null>(null);
+
+  /**
+   * Propriété rounded
+   * @readonly
+   * 
+   * Définit si l'image est arrondie
+   * 
+   * @access public
+   * @memberof AvatarComponent
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<boolean>} rounded
+   */
+  public readonly rounded: InputSignal<boolean> =
+    input<boolean>(false);
 
   /**
    * Propriété alt
@@ -68,5 +83,24 @@ export class AvatarComponent {
    */
   public readonly fallback: InputSignal<string | null> =
     input<string | null>(null);
+
+  /**
+   * Propriété classes
+   * @readonly
+   * 
+   * Classes CSS de l'élément
+   * 
+   * @access public
+   * @memberof AvatarComponent
+   * @since 1.0.0
+   * 
+   * @type {Signal<string[]>} classes
+   */
+  public readonly classes: Signal<string[]> = computed(() => {
+    return [
+      'avatar',
+      this.rounded() ? 'avatar--rounded' : ''
+    ];
+  });
   //#endregion
 }
