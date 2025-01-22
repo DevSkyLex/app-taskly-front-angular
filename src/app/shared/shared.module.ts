@@ -92,6 +92,7 @@ import { CommandItemComponent } from '@shared/components/command/command-item/co
 import { CommandListComponent } from '@shared/components/command/command-list/command-list.component';
 import { CommandSeparatorComponent } from '@shared/components/command/command-separator/command-separator.component';
 import { CommandShortcutComponent } from '@shared/components/command/command-shortcut/command-shortcut.component';
+import { ProfileNavComponent } from './components/profile/profile-nav/profile-nav.component';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -113,6 +114,7 @@ const Components: Type<any>[] = [
   CollapsibleDirective,
   AvatarComponent,
   ProfileBadgeComponent,
+  ProfileNavComponent,
   CommandComponent,
   CommandEmptyComponent,
   CommandGroupComponent,
@@ -128,7 +130,6 @@ const Components: Type<any>[] = [
     ...Components,
     ...Directives,
     ...Pipes,
-    
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,72 @@
+<button
+  class="profile-nav"
+  (click)="toggle()"
+  cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin"
+>
+  <!-- Badge profil utilisateur -->
+  <app-profile-badge
+    class="profile-nav-badge"
+    [username]="username()"
+    [avatar]="avatar()"
+    [email]="email()"
+  />
+
+  <!-- Icone de flèche -->
+  <i-lucide
+    class="profile-nav-indicator"
+    name="chevrons-up-down"
+    size="16"
+  />
+</button>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="open()"
+  [cdkConnectedOverlayOffsetY]="8"
+  (overlayOutsideClick)="hide()"
+  (detach)="hide()"
+>
+  <app-command @popAnimation>
+    <app-command-input placeholder="Recherche..." />
+    <app-command-list>
+      <app-command-empty> Aucun résultat trouvé. </app-command-empty>
+
+      <app-command-group heading="Account">
+        <app-command-item [routerLink]="['user', 'profile']">
+          <i-lucide name="user" size="16" />
+          <span>Mon profil</span>
+        </app-command-item>
+
+        <app-command-item [routerLink]="['user', 'settings']">
+          <i-lucide name="settings" size="16" />
+          <span>Paramètres</span>
+        </app-command-item>
+      </app-command-group>
+
+      <app-command-separator/>
+
+      <app-command-group heading="Aide">
+        <app-command-item [routerLink]="['support']">
+          <i-lucide name="headset" size="16" />
+          <span>Support</span>
+        </app-command-item>
+
+        <app-command-item [routerLink]="['about']">
+          <i-lucide name="info" size="16" />
+          <span>A propos</span>
+        </app-command-item>
+      </app-command-group>
+
+      <app-command-separator/>
+
+      <app-command-group>
+        <app-command-item [routerLink]="['auth', 'logout']">
+          <i-lucide name="log-out" size="16" />
+          <span>Se déconnecter</span>
+        </app-command-item>
+      </app-command-group>
+    </app-command-list>
+  </app-command>
+</ng-template>

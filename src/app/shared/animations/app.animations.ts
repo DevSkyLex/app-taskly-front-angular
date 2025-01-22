@@ -110,6 +110,7 @@ export class AppAnimations {
   public static readonly popIn: AnimationReferenceMetadata = animation([
     style({
       transform: 'scale(0)',
+      transformOrigin: '{{ origin }}',
       opacity: 0,
     }),
     animate(
@@ -122,6 +123,7 @@ export class AppAnimations {
   ], {
     params: {
       timing: AnimationTiming.NORMAL,
+      origin: 'center center',
     }
   });
 
@@ -140,6 +142,7 @@ export class AppAnimations {
   public static readonly popOut: AnimationReferenceMetadata = animation([
     style({
       transform: 'scale(1)',
+      transformOrigin: '{{ origin }}',
       opacity: 1,
     }),
     animate(
@@ -152,6 +155,7 @@ export class AppAnimations {
   ], {
     params: {
       timing: AnimationTiming.NORMAL,
+      origin: 'center center',
     }
   });
 
