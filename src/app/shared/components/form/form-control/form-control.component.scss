@@ -1,0 +1,6 @@
+@use 'abstracts/functions' as fn;
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+}

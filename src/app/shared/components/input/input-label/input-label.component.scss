@@ -1,0 +1,19 @@
+@use 'abstracts/functions' as fn;
+
+.input-label {
+  --margin-bottom: #{fn.get-spacing('2xs')};
+  --font-weight: #{fn.get-font-weight('medium')};
+  --font-size: #{fn.get-font-size('sm')};
+
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  margin-bottom: var(--margin-bottom);
+  display: inline-flex;
+
+  &--required::after {
+    --text-color: #{fn.get-color('danger', '500')};
+
+    color: var(--text-color);
+    content: '*';
+  }
+}

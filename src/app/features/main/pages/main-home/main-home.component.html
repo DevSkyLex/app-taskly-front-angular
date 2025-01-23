@@ -1,39 +1,43 @@
 <app-input-text
   placeholder="Search"
 />
-
-<app-input-select
-  [multiple]="true"
-  [options]="[
-    { value: 'bulbasaur', label: 'Bulbasaur' },
-    { value: 'ivysaur', label: 'Ivysaur' },
-    { value: 'venusaur', label: 'Venusaur' },
-    { value: 'charmander', label: 'Charmander' },
-    { value: 'charmeleon', label: 'Charmeleon' },
-    { value: 'charizard', label: 'Charizard' },
-    { value: 'squirtle', label: 'Squirtle' },
-    { value: 'wartortle', label: 'Wartortle' },
-    { value: 'blastoise', label: 'Blastoise' },
-    { value: 'caterpie', label: 'Caterpie' },
-    { value: 'metapod', label: 'Metapod' },
-    { value: 'butterfree', label: 'Butterfree' },
-    { value: 'weedle', label: 'Weedle' },
-    { value: 'kakuna', label: 'Kakuna' },
-    { value: 'beedrill', label: 'Beedrill' },
-    { value: 'pidgey', label: 'Pidgey' },
-    { value: 'pidgeotto', label: 'Pidgeotto' },
-    { value: 'pidgeot', label: 'Pidgeot' },
-    { value: 'rattata', label: 'Rattata' },
-    { value: 'raticate', label: 'Raticate' },
-    { value: 'spearow', label: 'Spearow' },
-    { value: 'fearow', label: 'Fearow' },
-    { value: 'ekans', label: 'Ekans' },
-    { value: 'arbok', label: 'Arbok' },
-    { value: 'pikachu', label: 'Pikachu' },
-    { value: 'raichu', label: 'Raichu' },
-    { value: 'sandshrew', label: 'Sandshrew' },
-    { value: 'sandslash', label: 'Sandslash' },
-    { value: 'nidoran-f', label: 'Nidoran♀' },
-    { value: 'nidorina', label: 'Nidorina' }
-  ]"
-/>
+<app-form-control>
+  <app-input-label [required]="true">
+    Select a Pokémon
+  </app-input-label>
+  <app-input-select
+    [multiple]="true"
+    [options]="[
+      { value: 'bulbasaur', label: 'Bulbasaur' },
+      { value: 'ivysaur', label: 'Ivysaur' },
+      { value: 'venusaur', label: 'Venusaur' },
+      { value: 'charmander', label: 'Charmander' },
+      { value: 'charmeleon', label: 'Charmeleon' },
+      { value: 'charizard', label: 'Charizard' },
+      { value: 'squirtle', label: 'Squirtle' },
+      { value: 'wartortle', label: 'Wartortle' },
+      { value: 'blastoise', label: 'Blastoise' },
+      { value: 'caterpie', label: 'Caterpie' },
+      { value: 'metapod', label: 'Metapod' },
+      { value: 'butterfree', label: 'Butterfree' },
+      { value: 'weedle', label: 'Weedle' },
+      { value: 'kakuna', label: 'Kakuna' },
+      { value: 'beedrill', label: 'Beedrill' },
+      { value: 'pidgey', label: 'Pidgey' },
+      { value: 'pidgeotto', label: 'Pidgeotto' },
+      { value: 'pidgeot', label: 'Pidgeot' },
+      { value: 'rattata', label: 'Rattata' },
+      { value: 'raticate', label: 'Raticate' },
+      { value: 'spearow', label: 'Spearow' },
+      { value: 'fearow', label: 'Fearow' },
+      { value: 'ekans', label: 'Ekans' },
+      { value: 'arbok', label: 'Arbok' },
+      { value: 'pikachu', label: 'Pikachu' },
+      { value: 'raichu', label: 'Raichu' },
+      { value: 'sandshrew', label: 'Sandshrew' },
+      { value: 'sandslash', label: 'Sandslash' },
+      { value: 'nidoran-f', label: 'Nidoran♀' },
+      { value: 'nidorina', label: 'Nidorina' }
+    ]"
+  />
+</app-form-control>
