@@ -29,17 +29,14 @@
   (detach)="hide()"
 >
   <app-command @popAnimation>
-    <app-command-input placeholder="Recherche..." />
     <app-command-list>
-      <app-command-empty> Aucun résultat trouvé. </app-command-empty>
-
       <app-command-group heading="Account">
-        <app-command-item [routerLink]="['user', 'profile']">
+        <app-command-item (click)="hide()" [routerLink]="['user', 'profile']">
           <i-lucide name="user" size="16" />
           <span>Mon profil</span>
         </app-command-item>
 
-        <app-command-item [routerLink]="['user', 'settings']">
+        <app-command-item (click)="hide()" [routerLink]="['user', 'settings']">
           <i-lucide name="settings" size="16" />
           <span>Paramètres</span>
         </app-command-item>
@@ -48,12 +45,12 @@
       <app-command-separator/>
 
       <app-command-group heading="Aide">
-        <app-command-item [routerLink]="['support']">
+        <app-command-item (click)="hide()" [routerLink]="['support']">
           <i-lucide name="headset" size="16" />
           <span>Support</span>
         </app-command-item>
 
-        <app-command-item [routerLink]="['about']">
+        <app-command-item (click)="hide()" [routerLink]="['about']">
           <i-lucide name="info" size="16" />
           <span>A propos</span>
         </app-command-item>
@@ -62,7 +59,7 @@
       <app-command-separator/>
 
       <app-command-group>
-        <app-command-item [routerLink]="['auth', 'logout']">
+        <app-command-item (click)="hide()" [routerLink]="['auth', 'logout']">
           <i-lucide name="log-out" size="16" />
           <span>Se déconnecter</span>
         </app-command-item>

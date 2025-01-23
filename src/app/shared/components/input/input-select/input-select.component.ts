@@ -10,13 +10,13 @@ export type InputComboxOption<T> = {
 };
 
 @Component({
-  selector: 'app-input-combobox',
+  selector: 'app-input-select',
   standalone: false,
-  templateUrl: './input-combobox.component.html',
-  styleUrl: './input-combobox.component.scss',
+  templateUrl: './input-select.component.html',
+  styleUrl: './input-select.component.scss',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => InputComboboxComponent),
+    useExisting: forwardRef(() => InputSelectComponent),
     multi: true,
   }],
   animations: [
@@ -40,22 +40,53 @@ export type InputComboxOption<T> = {
     ]),
   ],
 })
-export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
+export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
   //#region Propriétés
   /**
    * Propriété value
    * @readonly
    * 
-   * Valeur de la combobox
+   * Valeur de la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
-   * @type {ModelSignal<T | null>} value
+   * @type {ModelSignal<T[]>} value
    */
-  public readonly value: ModelSignal<T | null> =
-    model<T | null>(null);
+  public readonly value: ModelSignal<T[]> =
+    model<T[]>([]);
+
+  /**
+   * Propriété multiple
+   * @readonly
+   * 
+   * Indique si la select
+   * accepte plusieurs options
+   * 
+   * @access public
+   * @memberof InputSelectComponent
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<boolean>} multiple
+   */
+  public readonly multiple: InputSignal<boolean> =
+    input<boolean>(false);
+
+  /**
+   * Propriété max
+   * @readonly
+   * 
+   * Nombre maximum d'options sélectionnables
+   * 
+   * @access public
+   * @memberof InputSelectComponent
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<number>} max
+   */
+  public readonly max: InputSignal<number> =
+    input<number>(Infinity);
 
   /**
    * Propriété options
@@ -64,7 +95,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Liste des options
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {ModelSignal<InputComboxOption<T>[]>} options
@@ -76,11 +107,11 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Propriété disabled
    * @readonly
    * 
-   * Indique si la combobox
+   * Indique si la select
    * est désactivé
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {ModelSignal<boolean>} disabled
@@ -92,11 +123,11 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Propriété required
    * @readonly
    * 
-   * Indique si la combobox
+   * Indique si la select
    * est obligatoire
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {ModelSignal<boolean>} required
@@ -108,10 +139,10 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Propriété name
    * @readonly
    * 
-   * Nom de la combobox
+   * Nom de la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {InputSignal<string>} name
@@ -123,10 +154,10 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Propriété placeholder
    * @readonly
    * 
-   * Placeholder de la combobox
+   * Placeholder de la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {InputSignal<string>} placeholder
@@ -138,10 +169,10 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Propriété id
    * @readonly
    * 
-   * Identifiant de la combobox
+   * Identifiant de la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {InputSignal<string>} id
@@ -156,7 +187,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * sélection d'une option
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {(value: T | null) => void} onChange
@@ -167,10 +198,10 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Propriété onTouched
    * 
    * Évènement déclenché lors de la
-   * sortie de la combobox
+   * sortie de la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {() => void} onTouched
@@ -181,10 +212,10 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Propriété open
    * @readonly
    * 
-   * État d'ouverture de la combobox
+   * État d'ouverture de la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {WritableSignal<boolean>} open
@@ -199,7 +230,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Injecteur de dépendances
    * 
    * @access private
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {Injector} injector
@@ -215,7 +246,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Angular
    * 
    * @access private
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {WritableSignal<NgControl | null>} ngControl
@@ -230,7 +261,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Contrôle de formulaire
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @type {Signal<FormControl | null>} control
@@ -241,19 +272,19 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
   });
 
   /**
-   * Propriété selectedOption
+   * Propriété selectedOptions
    * @readonly
    * 
-   * Option sélectionnée
+   * Liste des options sélectionnées
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
-   * @type {Signal<InputComboxOption<T> | null>} selectedOption
+   * @type {Signal<InputComboxOption<T>[]>} selectedOptions
    */
-  public readonly selectedOption: Signal<InputComboxOption<T> | null> = computed(() => {
-    return this.options().find(option => option.value === this.value()) || null;
+  public readonly selectedOptions: Signal<InputComboxOption<T>[]> = computed(() => {
+    return this.options().filter(option => this.value().includes(option.value));
   });
   //#endregion
 
@@ -265,7 +296,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * appelée après la construction du composant
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @returns {void} - Ne retourne rien
@@ -275,7 +306,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
      * Configuration du contrôle de 
      * formulaire
      * 
-     * @see InputComboboxComponent#setupControl
+     * @see InputSelectComponent#setupControl
      */
     this.setupControl();
   }
@@ -287,7 +318,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * formulaire réactif (si présent)
    * 
    * @access private
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @returns {void} - Ne retourne rien
@@ -307,17 +338,17 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * 
    * Permet aux contrôles de formulaire
    * réactifs d'écrire une valeur dans
-   * la combobox
+   * la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @param {T | null} value - Valeur à écrire
    * 
    * @returns {void} - Ne retourne rien
    */
-  public writeValue(value: T | null): void {
+  public writeValue(value: T[]): void {
     this.value.set(value);
   }
 
@@ -328,7 +359,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * rappel lors de la sélection d'une option
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @param {(value: T | null) => void} fn - Fonction de rappel
@@ -343,10 +374,10 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * Méthode registerOnTouched
    * 
    * Permet d'enregistrer une fonction de
-   * rappel lors de la sortie de la combobox
+   * rappel lors de la sortie de la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @param {() => void} fn - Fonction de rappel
@@ -360,13 +391,13 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
   /**
    * Méthode setDisabledState
    * 
-   * Permet de désactiver la combobox
+   * Permet de désactiver la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
-   * @param {boolean} disabled - Indique si la combobox est désactivée
+   * @param {boolean} disabled - Indique si la select est désactivée
    * 
    * @returns {void} - Ne retourne rien
    */
@@ -381,7 +412,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * option
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @param {T} value - Valeur de l'option
@@ -389,7 +420,28 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * @returns {void} - Ne retourne rien
    */
   public select(value: T): void {
-    this.value.set(value);
+    this.value.update((values: T[]) => {
+      if (this.multiple()) {
+        if (values.includes(value)) {
+          return values.filter(v => v !== value);
+        } else {
+          const max: number = this.max();
+
+          if (values.length < max) {
+            return [...values, value];
+          } else {
+            return values;
+          }
+        }
+      } else {
+        return [value];
+      }
+    });
+
+    if (!this.multiple()) {
+      this.hide();
+    }
+
     this.onChange(value);
   }
 
@@ -400,7 +452,7 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * est sélectionnée
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @param {T} value - Valeur de l'option
@@ -408,17 +460,17 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
    * @returns {boolean} - Retourne vrai si l'option est sélectionnée
    */
   public isSelected(value: T): boolean {
-    return this.value() === value;
+    return this.value().includes(value);
   }
 
   /**
    * Méthode toggle
    * 
    * Bascule l'état d'ouverture de 
-   * la combobox
+   * la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @returns {void} - Ne retourne rien
@@ -430,10 +482,10 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
   /**
    * Méthode show
    * 
-   * Affiche le menu de la combobox
+   * Affiche le menu de la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @returns {void} - Ne retourne rien
@@ -445,10 +497,10 @@ export class InputComboboxComponent<T> implements OnInit, ControlValueAccessor {
   /**
    * Méthode hide
    * 
-   * Masque le menu de la combobox
+   * Masque le menu de la select
    * 
    * @access public
-   * @memberof InputComboboxComponent
+   * @memberof InputSelectComponent
    * @since 1.0.0
    * 
    * @returns {void} - Ne retourne rien

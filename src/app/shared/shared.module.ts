@@ -95,7 +95,12 @@ import { CommandShortcutComponent } from '@shared/components/command/command-sho
 import { ProfileNavComponent } from '@shared/components/profile/profile-nav/profile-nav.component';
 import { GanttComponent } from '@shared/components/gantt/gantt.component';
 import { InputTextComponent } from '@shared/components/input/input-text/input-text.component';
-import { InputComboboxComponent } from './components/input/input-combobox/input-combobox.component';
+import { InputSelectComponent } from '@shared/components/input/input-select/input-select.component';
+import { FormComponent } from './components/form/form.component';
+import { FormControlComponent } from './components/form/form-control/form-control.component';
+import { InputLabelComponent } from './components/input/input-label/input-label.component';
+import { InputErrorComponent } from './components/input/input-error/input-error.component';
+import { InputHelpComponent } from './components/input/input-help/input-help.component';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -127,8 +132,13 @@ const Components: Type<any>[] = [
   CommandSeparatorComponent,
   CommandShortcutComponent,
   GanttComponent,
+  FormComponent,
+  FormControlComponent,
+  InputLabelComponent,
+  InputErrorComponent,
+  InputHelpComponent,
   InputTextComponent,
-  InputComboboxComponent
+  InputSelectComponent
 ];
 
 @NgModule({

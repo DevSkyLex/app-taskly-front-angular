@@ -1,16 +1,22 @@
-<div class="input-combobox">
+<div class="input-select">
   <button 
-    class="input-combobox__trigger"
+    class="input-select__trigger"
     (click)="toggle()"
     cdkOverlayOrigin
     #trigger="cdkOverlayOrigin"
   >
-    <span class="input-combobox__trigger-label">
-      {{ selectedOption()?.label || placeholder() }}
+    <span class="input-select__trigger-label">
+      @if (selectedOptions().length > 0) {
+        @for (option of selectedOptions(); track $index) {
+          {{ option.label }}{{ $last ? '' : ', ' }}
+        }
+      } @else {
+        {{ placeholder() }}
+      }
     </span>
 
     <i-lucide 
-      class="input-combobox__trigger-indicator" 
+      class="input-select__trigger-indicator" 
       name="chevrons-up-down"
       size="16"
     />
@@ -27,19 +33,21 @@
     <app-command @popAnimation>
       <app-command-input placeholder="Recherche..."/>
       <app-command-list>
-        <app-command-empty> Aucun résultat trouvé. </app-command-empty>
+        <app-command-empty>
+          Aucune option trouvée.
+        </app-command-empty>
 
         <app-command-group>
           @for (option of options(); track $index) {
-            <app-command-item (click)="select(option.value)">
-              <div class="input-combobox__option">
-                <span class="input-combobox__option-label">
+            <app-command-item (click)="select(option.value);">
+              <div class="input-select__option">
+                <span class="input-select__option-label">
                   {{ option.label }}
                 </span>
 
                 @if (isSelected(option.value)) {
                   <i-lucide 
-                    class="input-combobox__option-check" 
+                    class="input-select__option-check" 
                     name="check"
                     size="16"
                   />

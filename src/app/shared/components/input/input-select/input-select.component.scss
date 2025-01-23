@@ -1,8 +1,11 @@
 @use 'abstracts/functions' as fn;
 
-.input-combobox {
+.input-select {
+  display: flex;
+  width: 100%;
+
   &__trigger {
-    --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('md')};
+    --padding: #{fn.get-spacing('sm')};
     --font-size: #{fn.get-font-size('sm')};
     --border-radius: #{fn.get-border-radius('md')};
     --font-weight: #{fn.get-font-weight('medium')};
@@ -13,7 +16,11 @@
     --text-color: #{fn.get-color('neutral', '950')};
     --gap: #{fn.get-spacing('md')};
 
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
     border: 1px solid var(--border-color);
+    width: 100%;
     background-color: var(--background-color);
     color: var(--text-color);
     gap: var(--gap);
