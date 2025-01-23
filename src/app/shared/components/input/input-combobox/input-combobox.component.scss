@@ -1,0 +1,64 @@
+@use 'abstracts/functions' as fn;
+
+.input-combobox {
+  &__trigger {
+    --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('md')};
+    --font-size: #{fn.get-font-size('sm')};
+    --border-radius: #{fn.get-border-radius('md')};
+    --font-weight: #{fn.get-font-weight('medium')};
+    --animation-duration: #{fn.get-animation-timing('fast')};
+    --outline-width: 3px;
+    --border-color: #{fn.get-color('neutral', '200')};
+    --background-color: #{fn.get-color('neutral', '000')};
+    --text-color: #{fn.get-color('neutral', '950')};
+    --gap: #{fn.get-spacing('md')};
+
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    gap: var(--gap);
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size);
+    cursor: pointer;
+    padding: var(--padding);
+    font-weight: var(--font-weight);
+    transition: background-color var(--animation-duration),
+                border-color var(--animation-duration),
+                color var(--animation-duration),
+                opacity var(--animation-duration);
+
+    &:is(:hover, :focus-visible) {
+      --background-color: #{fn.get-color('neutral', '050')};
+      --border-color: #{fn.get-color('neutral', '300')};
+
+      background-color: var(--background-color);
+      border-color: var(--border-color);
+    }
+
+    &:focus-visible {
+      --outline-color: #{fn.get-color('neutral', '200', .5)};
+      outline: var(--outline-width) solid var(--outline-color);
+    }
+
+    &-indicator {
+      --margin-left: auto;
+      --text-color:#{fn.get-color('neutral', '500')};
+  
+      color: var(--text-color);
+      margin-left: var(--margin-left);
+    }
+  }
+
+  &__option {
+    --gap: .75em;
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+    justify-content: space-between;
+    width: 100%;
+  }
+}

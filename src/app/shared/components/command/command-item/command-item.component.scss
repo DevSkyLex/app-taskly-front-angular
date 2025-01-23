@@ -16,7 +16,6 @@
   transition: background-color var(--animation-duration);
   width: 100%;
   cursor: pointer;
-  gap: var(--gap);
 
   &:is(:hover, :focus-visible) {
     --background-color: #{fn.get-color('neutral', '050')};
@@ -33,6 +32,7 @@
     display: flex;
     align-items: center;
     gap: var(--gap);
+    width: 100%;
   }
 
   &__shortcut {

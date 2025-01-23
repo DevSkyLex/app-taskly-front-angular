@@ -170,3 +170,35 @@ export interface Task extends Entity, Timestampable {
   leaf: boolean;
   //#endregion
 }
+
+/**
+ * Type NewTask
+ * @type NewTask
+ * 
+ * Type de données pour ajouter une tâche
+ * 
+ * @version 1.0.0
+ * 
+ * @author Valentin FORTIN <contact@valentin-fortin.pro>
+ */
+export type NewTask = Omit<Task, 
+  | 'id' 
+  | 'createdAt' 
+  | 'updatedAt'
+>;
+
+/**
+ * Type UpdateTask
+ * @type UpdateTask
+ * 
+ * Type de données pour mettre à jour une tâche
+ * 
+ * @version 1.0.0
+ * 
+ * @author Valentin FORTIN <contact@valentin-fortin.pro>
+ */
+export type UpdateTask = Partial<Omit<Task, 
+  | 'id' 
+  | 'createdAt' 
+  | 'updatedAt'
+>>;

@@ -53,3 +53,37 @@ export interface Project extends Entity, Timestampable, SoftDeleteable {
   tasks: Task[];
   //#endregion
 }
+
+/**
+ * Type NewProject
+ * @type NewProject
+ * 
+ * Type de données pour l'ajout d'un projet
+ * 
+ * @version 1.0.0
+ * 
+ * @author Valentin FORTIN <contact@valentin-fortin.pro>
+ */
+export type NewProject = Omit<Project, 
+  | "id"
+  | "createdAt" 
+  | "updatedAt" 
+  | "deletedAt"
+>;
+
+/**
+ * Type UpdateProject
+ * @type UpdateProject
+ * 
+ * Type de données pour la mise à jour d'un projet
+ * 
+ * @version 1.0.0
+ * 
+ * @author Valentin FORTIN <contact@valentin-fortin.pro>
+ */
+export type UpdateProject = Partial<Omit<Project, 
+  | "id"
+  | "createdAt" 
+  | "updatedAt" 
+  | "deletedAt"
+>>;

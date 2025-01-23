@@ -1,0 +1,54 @@
+<div class="input-combobox">
+  <button 
+    class="input-combobox__trigger"
+    (click)="toggle()"
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+  >
+    <span class="input-combobox__trigger-label">
+      {{ selectedOption()?.label || placeholder() }}
+    </span>
+
+    <i-lucide 
+      class="input-combobox__trigger-indicator" 
+      name="chevrons-up-down"
+      size="16"
+    />
+  </button>
+
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="open()"
+    [cdkConnectedOverlayOffsetY]="2"
+    (overlayOutsideClick)="hide()"
+    (detach)="hide()"
+  >
+    <app-command @popAnimation>
+      <app-command-input placeholder="Recherche..."/>
+      <app-command-list>
+        <app-command-empty> Aucun résultat trouvé. </app-command-empty>
+
+        <app-command-group>
+          @for (option of options(); track $index) {
+            <app-command-item (click)="select(option.value)">
+              <div class="input-combobox__option">
+                <span class="input-combobox__option-label">
+                  {{ option.label }}
+                </span>
+
+                @if (isSelected(option.value)) {
+                  <i-lucide 
+                    class="input-combobox__option-check" 
+                    name="check"
+                    size="16"
+                  />
+                }
+              </div>
+            </app-command-item>
+          }
+        </app-command-group>
+      </app-command-list>
+    </app-command>
+  </ng-template>
+</div>

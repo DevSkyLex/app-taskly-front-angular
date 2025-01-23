@@ -1,0 +1,14 @@
+<div class="input-text">
+  <input 
+    class="input-text__field"
+    [name]="name()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [value]="value()"
+    [required]="required()"
+    [disabled]="disabled()"
+    [readOnly]="readonly()"
+    (input)="onInput($event)"
+    (blur)="onBlur($event)"
+  >
+</div>
