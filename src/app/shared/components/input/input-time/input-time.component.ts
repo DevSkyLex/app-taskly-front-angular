@@ -1,12 +1,15 @@
 import { Component, computed, inject, Injector, input, InputSignal, model, ModelSignal, OnInit, signal, Signal, WritableSignal } from '@angular/core';
-import { ControlValueAccessor, NgControl, FormControl } from '@angular/forms';
+import { ControlValueAccessor, NgControl, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { noop } from 'rxjs';
 
 @Component({
   selector: 'app-input-time',
-  imports: [],
+  standalone: false,
   templateUrl: './input-time.component.html',
-  styleUrl: './input-time.component.scss'
+  styleUrl: './input-time.component.scss',
+  providers: [{ provide: NG_VALUE_ACCESSOR, 
+    useExisting: InputTimeComponent, 
+    multi: true }],
 })
 export class InputTimeComponent implements OnInit, ControlValueAccessor {
   // #region Propriétés principales

@@ -1,6 +1,5 @@
 import { Component, computed, forwardRef, inject, Injector, input, InputSignal, model, ModelSignal, OnInit, signal, Signal, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
-import { InputTextComponent } from '../input-text/input-text.component';
 import { noop } from 'rxjs';
 
 @Component({
@@ -10,7 +9,7 @@ import { noop } from 'rxjs';
   styleUrl: './input-checkbox.component.scss',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => InputTextComponent),
+    useExisting: forwardRef(() => InputCheckboxComponent),
     multi: true,
   }],
 })

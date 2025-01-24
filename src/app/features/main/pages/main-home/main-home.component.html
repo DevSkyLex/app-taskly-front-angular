@@ -59,4 +59,31 @@
   <app-input-help>
     We will call you back
   </app-input-help>
+
+  <app-input-error>
+    Please enter a valid phone number
+  ></app-input-error>
+
+  <app-input-checkbox [required]="true">
+    I agree to the terms and conditions of the website
+  </app-input-checkbox>
+
+
+  <app-input-file
+    [required]="true"
+  >
+    Upload your CV
+  </app-input-file>
+
+  <app-input-date [required]="true">
+    Select a date of birth
+  </app-input-date>
+
+  <app-input-textarea
+    [placeholder]="'Enter your message'"
+  >
+    Enter your message
+  </app-input-textarea>
+
+
 </app-form-control>

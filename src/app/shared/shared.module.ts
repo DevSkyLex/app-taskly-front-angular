@@ -1,8 +1,4 @@
-import { NgModule, Type } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { CdkTableModule } from '@angular/cdk/table';
-import { ReactiveFormsModule } from '@angular/forms';
+
 import { 
   Bell,
   BellOff,
@@ -73,8 +69,13 @@ import {
 import { TabComponent } from '@shared/components/tab/tab.component';
 import { TabGroupComponent } from '@shared/components/tab/tab-group/tab-group.component';
 import { TabLabelDirective } from '@shared/directives/tab-label.directive';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { CommonModule } from '@angular/common';
+import { NgModule, Type } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TooltipComponent } from '@shared/components/tooltip/tooltip.component';
 import { TooltipDirective } from '@shared/directives/tooltip.directive';
 import { ButtonComponent } from '@shared/components/button/button.component';
@@ -102,6 +103,11 @@ import { InputLabelComponent } from './components/input/input-label/input-label.
 import { InputErrorComponent } from './components/input/input-error/input-error.component';
 import { InputHelpComponent } from './components/input/input-help/input-help.component';
 import { InputPhoneComponent } from './components/input/input-phone/input-phone.component';
+import { InputCheckboxComponent } from './components/input/input-checkbox/input-checkbox.component';
+import { InputDateComponent } from './components/input/input-date/input-date.component';
+import { InputFileComponent } from './components/input/input-file/input-file.component';
+import { InputTimeComponent } from './components/input/input-time/input-time.component';
+import { InputTextareaComponent } from './components/input/input-textarea/input-textarea.component';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -141,6 +147,12 @@ const Components: Type<any>[] = [
   InputTextComponent,
   InputSelectComponent,
   InputPhoneComponent,
+  InputCheckboxComponent,
+  InputDateComponent,
+  InputFileComponent,
+  InputTextareaComponent,
+  InputTimeComponent,
+
 ];
 
 @NgModule({

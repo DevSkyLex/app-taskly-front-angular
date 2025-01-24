@@ -1,12 +1,18 @@
-import { Component, computed, inject, Injector, input, Input, InputSignal, model, ModelSignal, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
-import { ControlValueAccessor, NgControl, FormControl } from '@angular/forms';
+import { Component, computed, inject, Injector, input, InputSignal, model, ModelSignal, OnInit, signal, Signal, WritableSignal } from '@angular/core';
+import { ControlValueAccessor, NgControl, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { noop } from 'rxjs';
+
 
 @Component({
   selector: 'app-input-textarea',
-  imports: [],
+  standalone: false,
   templateUrl: './input-textarea.component.html',
-  styleUrl: './input-textarea.component.scss'
+  styleUrl: './input-textarea.component.scss',
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: InputTextareaComponent,
+    multi: true,
+  }],
 })
 export class InputTextareaComponent implements OnInit, ControlValueAccessor {
   // #region Propriétés principales
@@ -20,17 +26,6 @@ export class InputTextareaComponent implements OnInit, ControlValueAccessor {
   public readonly value: ModelSignal<string> = 
   model<string>('');
 
-  /**
-   * Propriété type
-   * @readonly
-   * Type du champ de saisie 
-   * de texte
-   * @access public
-   * 
-   * @type {InputSignal<InputTextType>} type
-   */
-  public readonly type: InputSignal<string> = 
-  input<string>('text');
 
 
   /**
