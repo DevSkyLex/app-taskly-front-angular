@@ -1,0 +1,12 @@
+<div class="input-container">
+    <label [for]="id">{{ label }}</label>
+    <input 
+    type="file" 
+    [id]="id" 
+    [name]="name()"
+    [required]="required()"
+    [value]="value()"
+    (blur)="onBlur()"
+    (change)="onFileSelected($event)" />
+  </div>
+  

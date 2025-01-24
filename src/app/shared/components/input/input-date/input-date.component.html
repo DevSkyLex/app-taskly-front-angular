@@ -1,0 +1,15 @@
+<div class="input-container">
+    <label [for]="id">{{ label }}</label>
+    <input 
+    [id]="id()"
+    [name]="name()"
+    [placeholder]="placeholder()"
+    [required]="required()"
+    [disabled]="disabled()"
+    [value]="value()"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    type="date"
+  />
+  </div>
+  

@@ -1,0 +1,11 @@
+<p>input-time works!</p>
+a<div class="input-container">
+    <label [for]="id">{{ label }}</label>
+    <input
+      type="time"
+      [id]="id"
+      [value]="value"
+      (change)="onValueChange($event.target.value)"
+    />
+  </div>
+  

@@ -1,0 +1,11 @@
+<div class="input-container">
+    <label [for]="id">{{ label }}</label>
+    <textarea
+      [id]="id"
+      [rows]="rows"
+      [cols]="cols"
+      [value]="value"
+      (input)="onValueChange($event.target.value)"
+    ></textarea>
+  </div>
+  
