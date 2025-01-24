@@ -1,4 +1,4 @@
-import { Component, computed, EventEmitter, inject, Injector, input, Input, InputSignal, model, ModelSignal, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, Injector, input, Input, InputSignal, model, ModelSignal, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, NgControl, FormControl } from '@angular/forms';
 import { noop } from 'rxjs';
 
@@ -9,8 +9,8 @@ import { noop } from 'rxjs';
   styleUrl: './input-textarea.component.scss'
 })
 export class InputTextareaComponent implements OnInit, ControlValueAccessor {
-[x: string]: any;
   // #region Propriétés principales
+  
   /**
    * Propriété value : valeur du champ de saisie
    * @readonly
@@ -20,6 +20,27 @@ export class InputTextareaComponent implements OnInit, ControlValueAccessor {
   public readonly value: ModelSignal<string> = 
   model<string>('');
 
+  /**
+   * Propriété type
+   * @readonly
+   * Type du champ de saisie 
+   * de texte
+   * @access public
+   * 
+   * @type {InputSignal<InputTextType>} type
+   */
+  public readonly type: InputSignal<string> = 
+  input<string>('text');
+
+
+  /**
+   * Propriété disabled : champ de saisie désactivé
+   * @readonly
+   * @access public
+   * @type {ModelSignal<boolean>} disabled
+   */
+  public readonly disabled: ModelSignal<boolean> =
+  model<boolean>(false);
 
 
   /**
@@ -39,7 +60,43 @@ export class InputTextareaComponent implements OnInit, ControlValueAccessor {
    * @type {InputSignal<string>} id
    */
   public readonly id: InputSignal<string> = 
-  input<string>('input-${crypto.randomUUID()}');
+  input<string>(`input-${crypto.randomUUID()}`);
+
+  /**
+   * Propriété name : nom du champ de saisie
+   * @readonly
+   * @access public
+   * @type {InputSignal<string>} name
+   */
+  public readonly name: InputSignal<string> =
+  input<string>('');
+
+
+  /**
+   * Propriété readonly
+   * @readonly
+   * 
+   * Indique si le champ de saisie
+   * est en lecture seule
+   * 
+   * @access public
+   * @memberof InputTextComponent
+   * @since 1.0.0
+   * 
+   * @type {ModelSignal<boolean>} readonly
+   */
+  public readonly readonly: ModelSignal<boolean> =
+    model<boolean>(false);
+
+
+  /**
+   * Propriété placeholder  : libellé du champ de saisie
+   * @readonly
+   * @access public
+   * @type {InputSignal<string>} placeholder
+   */
+  public readonly placeholder: InputSignal<string> =
+  input<string>('');
 
 
 

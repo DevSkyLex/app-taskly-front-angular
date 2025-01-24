@@ -1,4 +1,4 @@
-import { Component, computed, forwardRef, inject, Injector, input, Input, InputSignal, model, ModelSignal, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, computed, forwardRef, inject, Injector, input, InputSignal, model, ModelSignal, OnInit, signal, Signal, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 import { InputTextComponent } from '../input-text/input-text.component';
 import { noop } from 'rxjs';
@@ -50,7 +50,7 @@ export class InputCheckboxComponent implements OnInit, ControlValueAccessor {
    * @type {InputSignal<string>} id
    */
   public readonly id: InputSignal<string> =
-  input<string>('input-${crypto.randomUUID()}');
+  input<string>(`input-${crypto.randomUUID()}`);
 
   /**
    * Propriété label : libellé du champ de saisie

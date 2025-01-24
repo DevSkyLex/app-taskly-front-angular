@@ -51,7 +51,7 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
    * @type {InputSignal<string>} id
    */
   public readonly id: InputSignal<string> = 
-  input<string>('input-${crypto.randomUUID()}');
+  input<string>(`input-${crypto.randomUUID()}`);
 
 
   //#region Événements
