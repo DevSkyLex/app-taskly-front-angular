@@ -1,0 +1,79 @@
+<div class="input-phone">
+  <div class="input-phone__format">
+    <button
+      class="input-phone__format__trigger"
+      (click)="toggle()"
+      cdkOverlayOrigin
+      #trigger="cdkOverlayOrigin"
+    >
+      <img
+        class="input-phone__format__trigger-flag"
+        [src]="flag(format().countryCode)"
+      />
+
+      <span class="input-phone__format__trigger-label">
+        {{ format().dialCode }}
+      </span>
+
+      <i-lucide
+        class="input-phone__format__trigger-indicator"
+        name="chevrons-up-down"
+        size="16"
+      />
+    </button>
+
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="trigger"
+      [cdkConnectedOverlayOpen]="open()"
+      [cdkConnectedOverlayOffsetY]="2"
+      (overlayOutsideClick)="hide()"
+      (detach)="hide()"
+    >
+      <app-command @popAnimation>
+        <app-command-input placeholder="Recherche..." />
+        <app-command-list>
+          <app-command-empty> Aucun format trouvé. </app-command-empty>
+
+          <app-command-group>
+            @for (format of formats(); track $index) {
+            <app-command-item (click)="select(format)">
+              <div class="input-phone__format__option">
+                <img
+                  class="input-phone__format__option-flag"
+                  [src]="flag(format.countryCode)"
+                />
+
+                <span class="input-phone__format__option-label">
+                  {{ format.countryName }} ({{ format.dialCode }})
+                </span>
+
+                @if (isSelected(format)) {
+                  <i-lucide 
+                    class="input-phone__format__option-check" 
+                    name="check"
+                    size="16"
+                  />
+                }
+              </div>
+            </app-command-item>
+            }
+          </app-command-group>
+        </app-command-list>
+      </app-command>
+    </ng-template>
+  </div>
+
+  <input
+    class="input-phone__field"
+    type="phone"
+    [name]="name()"
+    [placeholder]="placeholder()"
+    [value]="value()"
+    [required]="required()"
+    [disabled]="disabled()"
+    [readOnly]="readonly()"
+    (input)="onInput($event)"
+    (blur)="onBlur($event)"
+  />
+</div>

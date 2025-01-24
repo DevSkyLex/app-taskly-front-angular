@@ -1,12 +1,5 @@
 @use 'abstracts/functions' as fn;
 
-:host-context(app-input-group) {
-  .input-text {
-    border: none;
-    width: 100%;
-  }
-}
-
 .input-text {
   --background-color: #{fn.get-color('neutral', '000')};
   --border-color: #{fn.get-color('neutral', '200')};
@@ -16,7 +9,6 @@
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  overflow: hidden;
 
   &__field {
     --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('md')};

@@ -1,0 +1,11 @@
+@use 'abstracts/functions' as fn;
+
+.input-help {
+  --margin-top: #{fn.get-spacing('xs')};
+  --text-color: #{fn.get-color('neutral', '600')};
+  --font-size: #{fn.get-font-size('xs')};
+
+  color: var(--text-color);
+  font-size: var(--font-size);
+  margin-top: var(--margin-top);
+}

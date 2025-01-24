@@ -101,6 +101,7 @@ import { FormControlComponent } from './components/form/form-control/form-contro
 import { InputLabelComponent } from './components/input/input-label/input-label.component';
 import { InputErrorComponent } from './components/input/input-error/input-error.component';
 import { InputHelpComponent } from './components/input/input-help/input-help.component';
+import { InputPhoneComponent } from './components/input/input-phone/input-phone.component';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -138,7 +139,8 @@ const Components: Type<any>[] = [
   InputErrorComponent,
   InputHelpComponent,
   InputTextComponent,
-  InputSelectComponent
+  InputSelectComponent,
+  InputPhoneComponent,
 ];
 
 @NgModule({
@@ -146,6 +148,7 @@ const Components: Type<any>[] = [
     ...Components,
     ...Directives,
     ...Pipes,
+    
   ],
   imports: [
     CommonModule,

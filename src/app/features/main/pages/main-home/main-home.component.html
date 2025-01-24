@@ -5,6 +5,7 @@
   <app-input-label [required]="true">
     Select a Pokémon
   </app-input-label>
+  
   <app-input-select
     [multiple]="true"
     [options]="[
@@ -40,4 +41,22 @@
       { value: 'nidorina', label: 'Nidorina' }
     ]"
   />
+
+  <app-input-help>
+    Select multiple Pokémon
+  </app-input-help>
+</app-form-control>
+
+<app-form-control>
+  <app-input-label>
+    Your phone number
+  </app-input-label>
+
+  <app-input-phone
+    [placeholder]="'Phone number'"
+  />
+
+  <app-input-help>
+    We will call you back
+  </app-input-help>
 </app-form-control>
