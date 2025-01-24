@@ -1,4 +1,4 @@
-import { Component, computed, forwardRef, inject, Injector, input, Input, InputSignal, model, ModelSignal, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, computed, forwardRef, inject, Injector, input, InputSignal, model, ModelSignal, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 import { noop } from 'rxjs';
 import { InputDateComponent } from '../input-date/input-date.component';
@@ -51,7 +51,7 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
    * @type {InputSignal<string>} id
    */
   public readonly id: InputSignal<string> = 
-  input<string>();
+  input<string>('input-${crypto.randomUUID()}');
 
 
   //#region Événements

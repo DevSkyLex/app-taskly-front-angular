@@ -50,7 +50,7 @@ export class InputCheckboxComponent implements OnInit, ControlValueAccessor {
    * @type {InputSignal<string>} id
    */
   public readonly id: InputSignal<string> =
-  input<string>();
+  input<string>('input-${crypto.randomUUID()}');
 
   /**
    * Propriété label : libellé du champ de saisie

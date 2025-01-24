@@ -45,16 +45,8 @@ export class InputTimeComponent implements OnInit, ControlValueAccessor {
    * @type {InputSignal<string>} id
    */
   public readonly id: InputSignal<string> = 
-  input<string>();
+  input<string>('input-${crypto.randomUUID()}');
 
-  /**
-   * Propriété label : libellé du champ de saisie
-   * @readonly
-   * @access public
-   * @type {InputSignal<string>} label
-   */
-  public readonly placeholder: InputSignal<string> = 
-  input<string>('');
 
   //#region Événements
   /**

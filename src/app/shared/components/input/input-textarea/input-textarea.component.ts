@@ -9,6 +9,7 @@ import { noop } from 'rxjs';
   styleUrl: './input-textarea.component.scss'
 })
 export class InputTextareaComponent implements OnInit, ControlValueAccessor {
+[x: string]: any;
   // #region Propriétés principales
   /**
    * Propriété value : valeur du champ de saisie
@@ -38,7 +39,7 @@ export class InputTextareaComponent implements OnInit, ControlValueAccessor {
    * @type {InputSignal<string>} id
    */
   public readonly id: InputSignal<string> = 
-  input<string>();
+  input<string>('input-${crypto.randomUUID()}');
 
 
 

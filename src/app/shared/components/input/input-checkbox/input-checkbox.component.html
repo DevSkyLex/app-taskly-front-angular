@@ -1,13 +1,10 @@
 <div class="checkbox-container">
     <input
       type="checkbox"
-      [id]="id"
+      [id]="id()"
       [required]="required()"
-      [checked]="checked"
       [value]="value()"
       (blur)="onBlur()"
-      (change)="onCheckedChange($event.target.checked)"
     />
-    <label [for]="id">{{ label }}</label>
   </div>
   
