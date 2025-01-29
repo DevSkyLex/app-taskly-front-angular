@@ -1,0 +1,82 @@
+@use 'abstracts/functions' as fn;
+
+.account-profile-view {
+  --gap: #{fn.get-spacing('md')};
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+
+  &__banner {
+    --height: 200px;
+    --background-color: #{fn.get-color('neutral', '100')};
+    --border-radius: #{fn.get-border-radius('lg')};
+
+    height: var(--height);
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius);
+    justify-content: center;
+  }
+
+  &__header {
+    --padding-inline: #{fn.get-spacing('xl')};
+    --margin-top: -50px;
+    --gap: #{fn.get-spacing('md')};
+
+    padding-inline: var(--padding-inline);
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+    margin-top: var(--margin-top);
+  }
+
+  &__avatar {
+    --border-radius: #{fn.get-border-radius('full')};
+    --border-color: #{fn.get-color('neutral', '000')};
+    
+    border-radius: var(--border-radius);
+    border: 10px solid var(--border-color);
+  }
+
+  &__info {
+    --gap: #{fn.get-spacing('2xs')};
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+
+    &-username {
+      --font-size: #{fn.get-font-size('2xl')};
+      --font-weight: #{fn.get-font-weight('bold')};
+
+      font-size: var(--font-size);
+      font-weight: var(--font-weight);
+    }
+
+    &-description {
+      --text-color: #{fn.get-color('neutral', '600')};
+      color: var(--text-color);
+    }
+  }
+
+  &__details {
+    --gap: #{fn.get-spacing('md')};
+    --margin-top: #{fn.get-spacing('lg')};
+
+    gap: var(--gap);
+    margin-top: var(--margin-top);
+    display: flex;
+    flex-wrap: wrap;
+    
+    &__edit {
+      flex: 2;
+    }
+
+    &__info {
+      flex: 1;
+    }
+  }
+
+}

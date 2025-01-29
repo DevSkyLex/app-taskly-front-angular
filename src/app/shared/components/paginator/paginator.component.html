@@ -1,0 +1,44 @@
+<div class="paginator">
+  <section class="paginator__size">
+    <app-input-select
+      (valueChange)="resetPage()"
+      [(value)]="pageSize"
+      [options]="pageSizeOptions()"
+    />
+  </section>
+
+  <section class="paginator__navigation">
+    <!-- Bouton - Aller à la première page -->
+    <button class="paginator__navigation-btn" (click)="goToFirst()" [disabled]="isFirstPage()">
+      <i-lucide name="chevron-first" [size]="16"/>
+    </button>
+
+    <!-- Bouton - Aller à la page précédente -->
+    <button class="paginator__navigation-btn" (click)="goToPrevious()" [disabled]="isFirstPage()">
+      <i-lucide name="chevron-left" [size]="16"/>
+    </button>
+
+    <!-- Boutons - Pages -->
+    <div class="paginator__navigation__pages">
+      @for (page of pageToDisplay(); track $index) {
+        <button
+          class="paginator__navigation-btn"
+          [disabled]="(page) === currentPage()"
+          (click)="goTo(page)"
+        >
+          {{ page }}
+        </button>
+      }
+    </div>
+
+    <!-- Bouton - Aller à la page suivante -->
+    <button class="paginator__navigation-btn" (click)="goToNext()" [disabled]="isLastPage()">
+      <i-lucide name="chevron-right" [size]="16"/>
+    </button>
+
+    <!-- Bouton - Aller à la dernière page -->
+    <button class="paginator__navigation-btn" (click)="goToLast()" [disabled]="isLastPage()">
+      <i-lucide name="chevron-last" [size]="16"/>
+    </button>
+  </section>
+</div>

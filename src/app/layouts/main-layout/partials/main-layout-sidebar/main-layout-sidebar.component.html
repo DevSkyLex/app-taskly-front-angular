@@ -1,8 +1,6 @@
 <aside 
   class="sidebar" 
-  appCollapsible #sidebarController="appCollapsible" 
-  [collapsed]="false"
-  [attr.data-sidebar-collapsed]="sidebarController.collapsed()"
+  [attr.data-sidebar-collapsed]="sidebarService.collapsed()"
 >
   <section class="sidebar__header">
     <a class="sidebar__brand">
@@ -48,7 +46,7 @@
               class="sidebar__collapsible__trigger" 
               (click)="collapsibleController.toggle()" 
               [appTooltip]="item.label"
-              [appTooltipDisabled]="!sidebarController.collapsed()"
+              [appTooltipDisabled]="sidebarService.expanded()"
               [appTooltipPlacement]="'right'"
             >
               <div class="sidebar__collapsible__label">

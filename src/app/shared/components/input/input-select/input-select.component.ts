@@ -4,7 +4,7 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, Valida
 import { AnimationTiming, AppAnimations } from '@app/shared/animations/app.animations';
 import { noop } from 'rxjs';
 
-export type InputComboxOption<T> = {
+export type InputSelectOption<T> = {
   value: T;
   label: string;
 };
@@ -52,10 +52,10 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
    * @memberof InputSelectComponent
    * @since 1.0.0
    * 
-   * @type {ModelSignal<T[]>} value
+   * @type {ModelSignal<T[] | T>} value
    */
-  public readonly value: ModelSignal<T[]> =
-    model<T[]>([]);
+  public readonly value: ModelSignal<T[] | T> =
+    model<T[] | T>([]);
 
   /**
    * Propriété multiple
@@ -98,10 +98,10 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
    * @memberof InputSelectComponent
    * @since 1.0.0
    * 
-   * @type {ModelSignal<InputComboxOption<T>[]>} options
+   * @type {ModelSignal<InputSelectOption<T>[]>} options
    */
-  public readonly options: ModelSignal<InputComboxOption<T>[]> =
-    model<InputComboxOption<T>[]>([]);
+  public readonly options: ModelSignal<InputSelectOption<T>[]> =
+    model<InputSelectOption<T>[]>([]);
 
   /**
    * Propriété disabled
@@ -313,7 +313,7 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
      * 
      * @see InputSelectComponent#value
      */
-    const value: T[] = this.value();
+    const value: T[] | T = this.value();
 
     /**
      * Erreurs de validation
@@ -347,10 +347,30 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
    * @memberof InputSelectComponent
    * @since 1.0.0
    * 
-   * @type {Signal<InputComboxOption<T>[]>} selectedOptions
+   * @type {Signal<InputSelectOption<T>[]>} selectedOptions
    */
-  public readonly selectedOptions: Signal<InputComboxOption<T>[]> = computed(() => {
-    return this.options().filter(option => this.value().includes(option.value));
+  public readonly selectedOptions: Signal<InputSelectOption<T>[]> = computed(() => {
+    /**
+     * Liste des options
+     * 
+     * @see InputSelectComponent#options
+     */
+    const options: InputSelectOption<T>[] = this.options();
+
+    /**
+     * Valeur de la select
+     * 
+     * @see InputSelectComponent#value
+     */
+    const value: T[] | T = this.value();
+
+    return options.filter(option => {
+      if (Array.isArray(value)) {
+        return value.includes(option.value);
+      } else {
+        return value === option.value;
+      }
+    });
   });
   //#endregion
 
@@ -486,21 +506,19 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
    * @returns {void} - Ne retourne rien
    */
   public select(value: T): void {
-    this.value.update((values: T[]) => {
+    this.value.update((values: T[] | T) => {
       if (this.multiple()) {
-        if (values.includes(value)) {
-          return values.filter(v => v !== value);
-        } else {
-          const max: number = this.max();
-
-          if (values.length < max) {
-            return [...values, value];
+        if (Array.isArray(values)) {
+          if (values.includes(value)) {
+            return values.filter(v => v !== value);
           } else {
-            return values;
+            return [...values, value];
           }
+        } else {
+          return [values, value];
         }
       } else {
-        return [value];
+        return value;
       }
     });
 
@@ -526,7 +544,11 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
    * @returns {boolean} - Retourne vrai si l'option est sélectionnée
    */
   public isSelected(value: T): boolean {
-    return this.value().includes(value);
+    if (this.multiple()) {
+      return (this.value() as T[]).includes(value);
+    } else {
+      return this.value() === value;
+    }
   }
 
   /**

@@ -1,0 +1,43 @@
+<app-form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <app-form-row>
+    <app-form-control>
+      <app-input-phone
+        formControlName="phone"
+        name="input-update-account-phone"
+        id="input-update-account-phone"
+        placeholder="Votre numéro de téléphone"
+        label="Numéro de téléphone"
+        help="Veuillez saisir votre nouveau numéro de téléphone"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-input-date-picker
+        formControlName="birthDate"
+        name="input-update-account-birth-date"
+        id="input-update-account-birth-date"
+        mode="single"
+        placeholder="Votre date de naissance"
+        label="Date de naissance"
+        help="Veuillez saisir votre nouvelle date de naissance"
+        [max]="birthDateMax()"
+        [min]="birthDateMin()"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-input-select
+        formControlName="gender"
+        name="input-update-account-gender"
+        id="input-update-account-gender"
+        label="Genre"
+        help="Veuillez sélectionner votre genre"
+        [options]="genderOptions()"
+      />
+    </app-form-control>
+  </app-form-row>
+</app-form>

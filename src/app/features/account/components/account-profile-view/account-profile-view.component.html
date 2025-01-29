@@ -1,0 +1,56 @@
+<div class="account-profile-view">
+  <div class="account-profile-view__banner">
+    
+  </div>
+
+  <div class="account-profile-view__header">
+    <app-avatar
+      class="account-profile-view__avatar"
+      src="https://i.pravatar.cc/150?img=3" 
+      alt="Avatar"
+      [size]="150"
+    />
+
+    <div class="account-profile-view__info">
+      <span class="account-profile-view__info-username">
+        John Doe
+      </span>
+
+      <span class="account-profile-view__info-description">
+        Modifier votre profil grâce au formulaire ci-dessous.
+      </span>
+    </div>
+  </div>
+
+  <app-separator/>
+
+  <div class="account-profile-view__details">
+    <address class="account-profile-view__details__info">
+      <ul class="account-profile-view__details__list">
+        <li class="account-profile-view__details__list-item">
+          <span class="account-profile-view__details__list-item-label">
+            Nom
+          </span>
+
+          <span class="account-profile-view__details__list-item-value">
+            Doe
+          </span>
+        </li>
+
+        <li class="account-profile-view__details__list-item">
+          <span class="account-profile-view__details__list-item-label">
+            Prénom
+          </span>
+
+          <span class="account-profile-view__details__list-item-value">
+            John
+          </span>
+        </li>
+      </ul>
+    </address>
+
+    <div class="account-profile-view__details__edit">
+      <app-account-update-profile-form/>
+    </div>
+  </div>
+</div>

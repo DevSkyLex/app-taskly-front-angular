@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal, Signal } from '@angular/core';
+import { Component, inject, signal, Signal } from '@angular/core';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { AnimationTiming, AppAnimations } from '@shared/animations/app.animations';
 import { environment } from '@env/environment';
+import { SidebarService } from '@app/shared/services/sidebar.service';
 
 type SidebarGroup = {
   title: string;
@@ -59,6 +60,21 @@ export class MainLayoutSidebarComponent {
    * @type {string} appName
    */
   public readonly appName: string = environment.app.name;
+
+  /**
+   * Propriété sidebarService
+   * @readonly
+   * 
+   * Service de panneau latéral
+   * 
+   * @access public
+   * @memberof MainLayoutSidebarComponent
+   * @since 1.0.0
+   * 
+   * @type {SidebarService} sidebarService
+   */
+  public readonly sidebarService: SidebarService = 
+    inject<SidebarService>(SidebarService);
 
   /**
    * Propriété navigation

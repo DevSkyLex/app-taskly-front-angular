@@ -1,0 +1,58 @@
+@use 'abstracts/functions' as fn;
+
+.paginator {
+  --gap: #{fn.get-spacing('md')};
+  
+  display: flex;
+  gap: var(--gap);
+  
+  &__navigation {
+    --border-radius: #{fn.get-border-radius('md')};
+    --border-color: #{fn.get-color('neutral', '200')};
+    --column-gap: #{fn.get-spacing('2xs')};
+    --background-color: #{fn.get-color('neutral', '000')};
+    --animation-duration: #{fn.get-animation-timing('fast')};
+    --padding: #{fn.get-spacing('2xs')};
+
+    display: flex;
+    background-color: var(--background-color);
+    padding: var(--padding);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    transition: background-color var(--animation-duration) ease-in-out,
+                border-color var(--animation-duration) ease-in-out;
+
+    &-btn {
+      --font-size: #{fn.get-font-size('md')};
+      --border-radius: #{fn.get-border-radius('md')};
+      --background-color: transparent;
+      --animation-duration: #{fn.get-animation-timing('fast')};
+      --size: 35px;
+      
+      display: grid;
+      border: 0;
+      font-size: var(--font-size);
+      border-radius: var(--border-radius);
+      place-content: center;
+      background-color: var(--background-color);
+      width: var(--size);
+      height: var(--size);
+      cursor: pointer;
+      transition: color var(--animation-duration) ease-in-out;
+
+      &:disabled {
+        --text-color: #{fn.get-color('neutral', '300')};
+        color: var(--text-color);
+      }
+
+      &:not(:disabled):is(:hover, :focus) {
+        --text-color: #{fn.get-color('primary', '500')};
+        color: var(--text-color);
+      }
+    }
+
+    &__pages {
+      display: flex;
+    }
+  }
+}

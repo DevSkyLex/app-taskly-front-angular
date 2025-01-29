@@ -1,0 +1,23 @@
+<div class="toc">
+  <aside class="toc__aside">
+    <div class="toc__menu">
+      <menu class="toc__menu__list">
+        @for (item of items(); track $index) {
+          <li class="toc__menu__list-item">
+            <button
+              [attr.data-toc-menu-active]="isActivated(item)"
+              class="toc__menu-btn" #menuButton (click)="scrollTo(item.id())">
+              {{ item.title() }}
+            </button>
+          </li>
+        }
+      </menu>
+
+      <span #smartbar class="toc__menu-smartbar"></span>
+    </div>
+  </aside>
+
+  <div class="toc__content">
+    <ng-content select="app-toc-item"/>
+  </div>
+</div>

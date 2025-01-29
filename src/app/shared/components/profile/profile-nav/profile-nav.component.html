@@ -31,12 +31,12 @@
   <app-command @popAnimation>
     <app-command-list>
       <app-command-group heading="Account">
-        <app-command-item (click)="hide()" [routerLink]="['user', 'profile']">
+        <app-command-item (click)="hide()" [routerLink]="['account', 'profile']" fragment="profile">
           <i-lucide name="user" size="16" />
           <span>Mon profil</span>
         </app-command-item>
 
-        <app-command-item (click)="hide()" [routerLink]="['user', 'settings']">
+        <app-command-item (click)="hide()" [routerLink]="['account', 'profile']" fragment="settings">
           <i-lucide name="settings" size="16" />
           <span>Paramètres</span>
         </app-command-item>

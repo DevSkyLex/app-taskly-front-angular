@@ -51,8 +51,10 @@ import {
   PencilOff,
   Phone,
   Plus,
+  RefreshCw,
   Rocket,
   RotateCw,
+  Save,
   Scroll,
   ScrollText,
   Search,
@@ -110,16 +112,23 @@ import { CardBodyComponent } from '@shared/components/card/card-body/card-body.c
 import { CardHeaderComponent } from '@shared/components/card/card-header/card-header.component';
 import { CardFooterComponent } from '@shared/components/card/card-footer/card-footer.component';
 import { FormRowComponent } from '@shared/components/form/form-row/form-row.component';
-import { TranslocoModule, TranslocoPipe } from '@jsverse/transloco';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { TranslocoDatePipe, TranslocoLocaleModule } from '@jsverse/transloco-locale';
-import { InputDatePickerComponent } from './components/input/input-date-picker/input-date-picker.component';
-import { InputFileComponent } from './components/input/input-file/input-file.component';
-import { InputCheckboxComponent } from './components/input/input-checkbox/input-checkbox.component';
+import { TranslocoModule } from '@jsverse/transloco';
+import { CalendarComponent } from '@shared/components/calendar/calendar.component';
+import { TranslocoLocaleModule } from '@jsverse/transloco-locale';
+import { InputDatePickerComponent } from '@shared/components/input/input-date-picker/input-date-picker.component';
+import { InputFileComponent } from '@shared/components/input/input-file/input-file.component';
+import { InputCheckboxComponent } from '@shared/components/input/input-checkbox/input-checkbox.component';
+import { PaginatorComponent } from '@shared/components/paginator/paginator.component';
+import { TocComponent } from '@shared/components/toc/toc.component';
+import { TocItemComponent } from '@shared/components/toc/toc-item/toc-item.component';
+import { TitleDirective } from '@shared/directives/title.directive';
+import { TextDirective } from '@shared/directives/text.directive';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
-  TooltipDirective
+  TooltipDirective,
+  TitleDirective,
+  TextDirective
 ];
 
 const Pipes: Type<any>[] = [
@@ -164,7 +173,10 @@ const Components: Type<any>[] = [
   CardBodyComponent,
   CardHeaderComponent,
   CardFooterComponent,
-  CalendarComponent
+  CalendarComponent,
+  PaginatorComponent,
+  TocComponent,
+  TocItemComponent,
 ];
 
 @NgModule({
@@ -172,6 +184,7 @@ const Components: Type<any>[] = [
     ...Components,
     ...Directives,
     ...Pipes,
+
   ],
   imports: [
     CommonModule,
@@ -190,12 +203,14 @@ const Components: Type<any>[] = [
       BookOpenCheck,
       Bot,
       Building,
+      RefreshCw,
       ChevronsUpDown,
       Building2,
       CalendarDays,
       Check,
       ChevronDown,
       PencilOff,
+      Save,
       ChevronFirst,
       ChevronLast,
       ChevronLeft,

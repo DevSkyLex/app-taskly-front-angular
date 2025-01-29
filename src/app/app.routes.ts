@@ -12,6 +12,10 @@ export const routes: Routes = [
       },
       {
         path: '',
+        loadChildren: () => import('@features/account/account.module').then(m => m.AccountModule)
+      },
+      {
+        path: '',
         loadChildren: () => import('@features/auth/auth.module').then(m => m.AuthModule)
       },
       {

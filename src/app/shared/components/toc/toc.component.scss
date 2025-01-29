@@ -1,0 +1,79 @@
+@use 'abstracts/functions' as fn;
+
+.toc {
+  --padding: #{fn.get-spacing('lg')};
+  --gap: #{fn.get-fluid-spacing('sm')};
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding: var(--padding);
+  position: relative;
+  gap: var(--gap);
+
+  &__content {
+    --gap: #{fn.get-spacing('xl')};
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
+
+  &__menu {
+    --padding-top: #{fn.get-spacing('xl')};
+
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--padding-top);
+    position: sticky;
+    top: 0;
+
+    &__list {
+      --border-color: #{fn.get-color('neutral', '200')};
+
+      list-style: none;
+      border-right: 1px solid var(--border-color);
+    }
+
+    &-btn {
+      --padding: #{fn.get-spacing('xs')} #{fn.get-spacing('lg')};
+      --text-color: #{fn.get-color('neutral', '600')};
+      --font-weight: #{fn.get-font-weight('medium')};
+      --font-size: #{fn.get-font-size('sm')};
+
+      display: flex;
+      align-items: center;
+      font-size: var(--font-size);
+      color: var(--text-color);
+      padding: var(--padding);
+      font-weight: var(--font-weight);
+      background: none;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+
+      &:is(:hover, :focus-visible) {
+        --text-color: #{fn.get-color('neutral', '950')};
+        color: var(--text-color);
+      }
+
+      &[data-toc-menu-active="true"] {
+        --text-color: #{fn.get-color('neutral', '950')};
+        color: var(--text-color);
+        position: relative;
+
+        &::after {
+          --background-color: #{fn.get-color('primary', '500')};
+          --width: 2px;
+          --height: 100%;
+
+          content: '';
+          position: absolute;
+          background-color: var(--background-color);
+          width: var(--width);
+          height: var(--height);
+          right: -1px;
+        }
+      }
+    }
+  }
+}

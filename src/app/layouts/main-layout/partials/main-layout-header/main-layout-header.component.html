@@ -1,7 +1,13 @@
 <header class="header">
   <section class="header__section">
-    <app-button variant="outlined" size="icon-sm" [loading]="false">
-      <i-lucide name="panel-right-open" size="16"/>
+    <app-button (click)="sidebarService.toggle()" variant="outlined" size="icon-sm" [loading]="false">
+      @if (sidebarService.expanded()) {
+        <i-lucide name="panel-right-open" size="16"/>
+      }
+
+      @if (sidebarService.collapsed()) {
+        <i-lucide name="panel-right-close" size="16"/>
+      }
     </app-button>
 
     <app-separator orientation="vertical"/>
