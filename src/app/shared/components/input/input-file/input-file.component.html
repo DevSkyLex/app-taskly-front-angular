@@ -1,0 +1,61 @@
+@let formControl = control();
+@let formLabel = label();
+@let formHelp = help();
+@let formErrors = errors();
+
+@if (formLabel) {
+  <app-input-label [for]="id()" [required]="required()">
+    {{ formLabel }}
+  </app-input-label>
+}
+
+<div class="input-file">
+  <div 
+    class="input-file__dropzone"
+    [attr.data-input-file-dragging]="dragging()"
+    (dragover)="onDragOver($event)" 
+    (dragleave)="onDragLeave($event)" 
+    (drop)="onDrop($event)"
+  >
+    <i-lucide class="input-file__dropzone-icon" name="upload" [size]="32"/>
+    <div class="input-file__dropzone__content">
+      <span class="input-file__dropzone__content-title">
+        Glissez et déposez un fichier ici
+      </span>
+
+      <p class="input-file__dropzone__content-text">
+        {{ files().length ? files().length + ' fichier(s) sélectionné(s)' : 'ou cliquez pour sélectionner un fichier' }}
+      </p>
+
+      <app-button
+        class="input-file__dropzone__content-button"
+        variant="outlined"
+        (click)="onPick()"
+        role="button"
+        size="sm"
+      >
+        Parcourir les fichiers
+      </app-button>
+    </div>
+  </div>
+
+  <input 
+    #input
+    type="file"
+    [name]="name()"
+    [id]="id()"
+    [accept]="accept()"
+    [multiple]="multiple()"
+    (change)="onFileChange($event)"
+    class="input-file__field"
+  />
+</div>
+
+@if (formErrors && formControl?.touched) {
+  <app-input-errors [errors]="formErrors"/>
+}
+@else if (formHelp) {
+  <app-input-help>
+    {{ formHelp }}
+  </app-input-help>
+}

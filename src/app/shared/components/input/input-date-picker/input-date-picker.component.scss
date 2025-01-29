@@ -8,7 +8,7 @@
   gap: var(--gap);
 }
 
-.input-select {
+.input-date-picker {
   display: flex;
   width: 100%;
 
@@ -62,15 +62,5 @@
       color: var(--text-color);
       margin-left: var(--margin-left);
     }
-  }
-
-  &__option {
-    --gap: .75em;
-
-    display: flex;
-    align-items: center;
-    gap: var(--gap);
-    justify-content: space-between;
-    width: 100%;
   }
 }

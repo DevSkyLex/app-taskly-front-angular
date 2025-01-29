@@ -1,0 +1,111 @@
+@use "abstracts/functions" as fn;
+
+.calendar {
+  --padding: #{fn.get-spacing('md')};
+  --background-color: #{fn.get-color('neutral', '000')};
+  --gap: #{fn.get-spacing('xs')};
+
+  padding: var(--padding);
+  width: max-content;
+  gap: var(--gap);
+  background-color: var(--background-color);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header"
+    "days";
+
+  &__header {
+    --gap: #{fn.get-spacing('sm')};
+
+    grid-area: header;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    width: 100%;
+    gap: var(--gap);
+
+    &-month {
+      --font-size: #{fn.get-font-size('sm')};
+
+      text-align: center;
+      font-size: var(--font-size);
+    }
+  }
+
+  &__days {
+    grid-area: days;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    &-day, &-weekday {
+      --size: 2.15rem;
+      --font-size: #{fn.get-font-size('xs')};
+
+      width: var(--size);
+      height: var(--size);
+      display: grid;
+      place-content: center;
+      font-size: var(--font-size);
+    }
+
+    &-weekday {
+      --text-color: #{fn.get-color('neutral', '600')};
+      color: var(--text-color);
+    }
+
+    &-day {
+      --border-radius: #{fn.get-border-radius('md')};
+      --animation-duration: #{fn.get-animation-timing(fast)};
+      --background-color: transparent;
+      --text-color: inherit;
+    
+      background-color: var(--background-color);
+      border: none;
+      cursor: pointer;
+      border-radius: var(--border-radius);
+      color: var(--text-color);
+      transition: background-color var(--animation-duration), color var(--animation-duration);
+    
+      &[data-calendar-status='selected'],
+      &:is([data-calendar-status='range-start'], [data-calendar-status='range-end']) {
+        --background-color: #{fn.get-color('neutral', '950')};
+        --text-color: #{fn.get-color('neutral', '000')};
+      }
+    
+      &[data-calendar-status='range-between'],
+      &[data-calendar-hover-range='true'] {
+        --background-color: #{fn.get-color('neutral', '100')};
+        border-radius: 0;
+      }
+    
+      &[data-calendar-status='range-between'] {
+        --background-color: #{fn.get-color('neutral', '200')};
+      }
+    
+      &[data-calendar-status*='range'] {
+        border-radius: 0;
+      }
+    
+      &[data-calendar-status='range-start'] {
+        border-top-left-radius: var(--border-radius);
+        border-bottom-left-radius: var(--border-radius);
+      }
+    
+      &[data-calendar-status='range-end'] {
+        border-top-right-radius: var(--border-radius);
+        border-bottom-right-radius: var(--border-radius);
+      }
+    
+      &:is(:hover, :focus):not([data-calendar-status='selected'], [data-calendar-status*='range']) {
+        --background-color: #{fn.get-color('neutral', '100')};
+      }
+    
+      &[data-calendar-other-month='true'],
+      &:disabled {
+        --text-color: #{fn.get-color('neutral', '400')};
+      }
+    }
+  }
+}

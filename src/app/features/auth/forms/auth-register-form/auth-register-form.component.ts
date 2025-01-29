@@ -42,6 +42,7 @@ export class AuthRegisterFormComponent {
       Validators.required, 
       Validators.email
     ]),
+    phone: this.formBuilder.control<string>(''),
     firstName: this.formBuilder.control<string>('', [
       Validators.minLength(2),
       Validators.maxLength(50)
@@ -50,7 +51,9 @@ export class AuthRegisterFormComponent {
       Validators.minLength(2),
       Validators.maxLength(50)
     ]),
-    phone: this.formBuilder.control<string>(''),
+    birthDate: this.formBuilder.control<Date>(new Date(), [
+      Validators.required
+    ]),
     password: this.formBuilder.control<string>('', [
       Validators.required, 
       Validators.minLength(8),
@@ -58,8 +61,13 @@ export class AuthRegisterFormComponent {
     passwordConfirmation: this.formBuilder.control<string>('', [
       Validators.required, 
       Validators.minLength(8)
+    ]),
+    gender: this.formBuilder.control<string>('other'),
+    avatar: this.formBuilder.control<FileList | null>(null),
+    acceptTerms: this.formBuilder.control<boolean>(false, [
+      Validators.requiredTrue
     ])
-  }, [AppValidators.passwordMatch('password', 'passwordConfirmation')]);
+  });
   //#endregion
 
   //#region Méthodes
@@ -75,6 +83,11 @@ export class AuthRegisterFormComponent {
    * @return {void} - Ne retourne rien
    */
   public onSubmit(): void {
+    if (this.form.invalid) {
+      return;
+    }
+
+    console.log(this.form.value);
   }
   //#endregion
 }

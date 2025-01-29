@@ -1,0 +1,36 @@
+<div class="calendar">
+  <div class="calendar__header">
+    <app-button variant="outlined" size="icon-sm" class="calendar__header-btn" (click)="previousMonth()">
+      <i-lucide name="chevron-left" [size]="18"/>
+    </app-button>
+
+    <app-button [fullWidth]="true" class="calendar__header-month" variant="outlined" size="sm" class="calendar__header-btn">
+      {{ currentMonth() | translocoDate: { month: 'long', year: 'numeric' } | titlecase }}
+    </app-button>
+    
+    <app-button variant="outlined" size="icon-sm" class="calendar__header-btn" (click)="nextMonth()">
+      <i-lucide name="chevron-right" [size]="18"/>
+    </app-button>
+  </div>
+
+  <div class="calendar__days">
+    @for (day of weekDays(); track $index) {
+      <span class="calendar__days-weekday">{{ 'common.week-days.' + day | transloco | slice:0:2 }}</span>
+    }
+
+    @for (date of calendarDates(); track $index) {
+      <button 
+        class="calendar__days-day" 
+        [disabled]="!isDateInRange(date)"
+        (click)="selectDate(date)"
+        (mouseenter)="hoverDate(date)"
+        (mouseleave)="clearHoverRange()"
+        [attr.data-calendar-status]="getDateStatus(date)"
+        [attr.data-calendar-hover-range]="isDateInHoverRange(date)"
+        [attr.data-calendar-other-month]="!isDateFromCurrentMonth(date)"
+      >
+        {{ date | date: 'd' }}
+      </button>
+    }
+  </div>
+</div>

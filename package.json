@@ -23,6 +23,7 @@
     "@angular/router": "^19.1.0",
     "@angular/ssr": "^19.1.1",
     "@jsverse/transloco": "^7.5.1",
+    "@jsverse/transloco-locale": "^7.0.1",
     "@ngrx/effects": "^19.0.0",
     "@ngrx/entity": "^19.0.0",
     "@ngrx/store": "^19.0.0",

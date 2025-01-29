@@ -1,35 +1,35 @@
 <app-form [formGroup]="form" (ngSubmit)="onSubmit()">
   <app-form-row>
     <app-form-control>
-      <app-input-label>
-        Adresse email
-      </app-input-label>
-
-      <app-input-text 
-        formControlName="email" 
-        placeholder="Adresse email"
+      <app-input-text
+        formControlName="email"
+        type="email"
+        [required]="true"
+        [placeholder]="'features.auth.forms.auth-login-form.fields.email.placeholder' | transloco"
+        [label]="'features.auth.forms.auth-login-form.fields.email.label' | transloco"
+        [help]="'features.auth.forms.auth-login-form.fields.email.help' | transloco"
       />
-
-      <app-input-help>
-        Votre adresse email
-      </app-input-help>
     </app-form-control>
   </app-form-row>
 
   <app-form-row>
     <app-form-control>
-      <app-input-label>
-        Mot de passe
-      </app-input-label>
-
-      <app-input-text 
-        formControlName="password" 
-        placeholder="Mot de passe"
+      <app-input-text
+        formControlName="password"
+        type="password"
+        [required]="true"
+        [placeholder]="'features.auth.forms.auth-login-form.fields.password.placeholder' | transloco"
+        [label]="'features.auth.forms.auth-login-form.fields.password.label' | transloco"
+        [help]="'features.auth.forms.auth-login-form.fields.password.help' | transloco"
       />
+    </app-form-control>
+  </app-form-row>
 
-      <app-input-help>
-        Votre mot de passe
-      </app-input-help>
+  <app-form-row>
+    <app-form-control>
+      <app-button type="submit" variant="primary" [fullWidth]="true">
+        {{ 'features.auth.forms.auth-login-form.buttons.login' | transloco }}
+      </app-button>
     </app-form-control>
   </app-form-row>
 </app-form>

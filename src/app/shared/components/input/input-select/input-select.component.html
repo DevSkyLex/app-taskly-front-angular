@@ -4,7 +4,7 @@
 @let formErrors = errors();
 
 @if (formLabel) {
-  <app-input-label [required]="required()">
+  <app-input-label [for]="id()" [required]="required()">
     {{ formLabel }}
   </app-input-label>
 }
@@ -13,6 +13,8 @@
   <button 
     class="input-select__trigger"
     (click)="toggle()"
+    [id]="id()"
+    type="button"
     cdkOverlayOrigin
     #trigger="cdkOverlayOrigin"
   >

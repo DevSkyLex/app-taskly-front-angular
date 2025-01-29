@@ -4,6 +4,8 @@
       <app-input-text
         formControlName="firstName"
         type="text"
+        name="input-first-name"
+        id="input-first-name"
         [placeholder]="'features.auth.forms.auth-register-form.fields.firstName.placeholder' | transloco"
         [label]="'features.auth.forms.auth-register-form.fields.firstName.label' | transloco"
         [help]="'features.auth.forms.auth-register-form.fields.firstName.help' | transloco"
@@ -14,6 +16,8 @@
       <app-input-text
         formControlName="lastName"
         type="text"
+        name="input-last-name"
+        id="input-last-name"
         [placeholder]="'features.auth.forms.auth-register-form.fields.lastName.placeholder' | transloco"
         [label]="'features.auth.forms.auth-register-form.fields.lastName.label' | transloco"
         [help]="'features.auth.forms.auth-register-form.fields.lastName.help' | transloco"
@@ -38,6 +42,8 @@
     <app-form-control>
       <app-input-phone
         formControlName="phone"
+        name="input-phone"
+        id="input-phone"
         [placeholder]="'features.auth.forms.auth-register-form.fields.phone.placeholder' | transloco"
         [label]="'features.auth.forms.auth-register-form.fields.phone.label' | transloco"
         [help]="'features.auth.forms.auth-register-form.fields.phone.help' | transloco"
@@ -47,13 +53,14 @@
 
   <app-form-row>
     <app-form-control>
-      <app-input-text
-        formControlName="password"
-        type="password"
-        [required]="true"
-        [placeholder]="'features.auth.forms.auth-register-form.fields.password.placeholder' | transloco"
-        [label]="'features.auth.forms.auth-register-form.fields.password.label' | transloco"
-        [help]="'features.auth.forms.auth-register-form.fields.password.help' | transloco"
+      <app-input-date-picker
+        formControlName="birthDate"
+        name="input-birth-date"
+        id="input-birth-date"
+        mode="single"
+        [placeholder]="'features.auth.forms.auth-register-form.fields.birthDate.placeholder' | transloco"
+        [label]="'features.auth.forms.auth-register-form.fields.birthDate.label' | transloco"
+        [help]="'features.auth.forms.auth-register-form.fields.birthDate.help' | transloco"
       />
     </app-form-control>
   </app-form-row>
@@ -61,12 +68,71 @@
   <app-form-row>
     <app-form-control>
       <app-input-text
+        formControlName="password"
+        name="input-password"
+        id="input-password"
+        type="password"
+        [required]="true"
+        [placeholder]="'features.auth.forms.auth-register-form.fields.password.placeholder' | transloco"
+        [label]="'features.auth.forms.auth-register-form.fields.password.label' | transloco"
+        [help]="'features.auth.forms.auth-register-form.fields.password.help' | transloco"
+      />
+    </app-form-control>
+
+    <app-form-control>
+      <app-input-text
         formControlName="passwordConfirmation"
         type="password"
+        name="input-password-confirmation"
+        id="input-password-confirmation"
         [required]="true"
         [placeholder]="'features.auth.forms.auth-register-form.fields.passwordConfirmation.placeholder' | transloco"
         [label]="'features.auth.forms.auth-register-form.fields.passwordConfirmation.label' | transloco"
         [help]="'features.auth.forms.auth-register-form.fields.passwordConfirmation.help' | transloco"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-input-file
+        formControlName="avatar"
+        name="input-avatar"
+        id="input-avatar"
+        [accept]="'image/*'"
+        [multiple]="false"
+        label="Avatar"
+        help="Veuillez choisir une image pour votre avatar"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-input-select
+        formControlName="gender"
+        name="input-gender"
+        id="input-gender"
+        label="Genre"
+        help="Veuillez choisir votre genre"
+        [multiple]="false"
+        [options]="[
+          { label: 'Homme', value: 'male' },
+          { label: 'Femme', value: 'female' },
+          { label: 'Autre', value: 'other' }
+        ]"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-input-checkbox
+        formControlName="acceptTerms"
+        name="input-accept-terms"
+        id="input-accept-terms"
+        label="J'accepte les conditions d'utilisation"
+        help="Veuillez accepter les conditions d'utilisation"
       />
     </app-form-control>
   </app-form-row>

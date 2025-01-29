@@ -15,8 +15,8 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
-import { TranslocoHttpLoader } from './core/loaders/transloco.loader';
-import { environment } from '../environments/environment';
+import { TranslocoHttpLoader } from '@core/loaders/transloco.loader';
+import { environment } from '@env/environment';
 import {
   provideNgxWebstorage,
   withLocalStorage,
@@ -30,6 +30,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { projectReducer } from '@core/stores/project/project.reducer';
 import { ProjectEffects } from '@core/stores/project/project.effects';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
+import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -55,6 +56,12 @@ export const appConfig: ApplicationConfig = {
         prodMode: !isDevMode(),
       },
       loader: TranslocoHttpLoader,
+    }),
+    provideTranslocoLocale({
+      langToLocaleMapping: {
+        en: 'en',
+        fr: 'fr',
+      }
     }),
     provideStore({
       project: projectReducer

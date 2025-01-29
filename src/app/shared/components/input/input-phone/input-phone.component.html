@@ -4,7 +4,7 @@
 @let formErrors = errors();
 
 @if (formLabel) {
-  <app-input-label [required]="required()">
+  <app-input-label [for]="id()" [required]="required()">
     {{ formLabel }}
   </app-input-label>
 }
@@ -14,6 +14,8 @@
     <button
       class="input-phone__format__trigger"
       (click)="toggle()"
+      type="button"
+      [id]="id()"
       cdkOverlayOrigin
       #trigger="cdkOverlayOrigin"
     >

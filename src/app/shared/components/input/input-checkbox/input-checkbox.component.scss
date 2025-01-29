@@ -1,0 +1,64 @@
+@use 'abstracts/functions' as fn;
+
+:host {
+  --gap: #{fn.get-spacing('2xs')};
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+
+  .input-checkbox {
+    --gap: #{fn.get-spacing('xs')};
+    
+    display: flex;
+    border: none;
+    background: none;
+    align-items: center;
+    position: relative;
+    gap: var(--gap);
+
+    &:focus-visible {
+      outline: none;
+
+      .input-checkbox__trigger {
+        --border-color: #{fn.get-color('primary', '500')};
+        --outline-color: #{fn.get-color('primary', '500', .1)};
+
+        outline: 3px solid var(--outline-color);
+        border-color: var(--border-color);
+      }
+    }
+
+    &:has(&__field:checked) .input-checkbox__trigger {
+      --border-color: #{fn.get-color('primary', '500')};
+      --background-color: #{fn.get-color('primary', '500')};
+      --text-color: #{fn.get-color('neutral', '000')};
+    }
+
+    &__trigger {
+      --size: 18px;
+      --animation-duration: #{fn.get-animation-timing('normal')};
+      --border-color: #{fn.get-color('neutral', '200')};
+      --border-radius: #{fn.get-border-radius('sm')};
+      --background-color: #{fn.get-color('neutral', '000')};
+      --text-color: #{fn.get-color('neutral', '950')};
+
+      width: var(--size);
+      height: var(--size);
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border-color);
+      background-color: var(--background-color);
+      border-radius: var(--border-radius);
+      color: var(--text-color);
+      cursor: pointer;
+      transition: border-color var(--animation-duration),
+                  outline-color var(--animation-duration),
+                  background-color var(--animation-duration);
+    }
+
+    &__field {
+      display: none;
+    }
+  }
+}

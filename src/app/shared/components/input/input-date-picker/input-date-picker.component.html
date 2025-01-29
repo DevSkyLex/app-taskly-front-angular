@@ -1,0 +1,77 @@
+@let formControl = control();
+@let formLabel = label();
+@let formHelp = help();
+@let formErrors = errors();
+@let formDateRange = rangeDate();
+@let formSingleDate = singleDate();
+@let formMode = mode();
+
+@if (formLabel) {
+  <app-input-label [for]="id()" [required]="required()">
+    {{ formLabel }}
+  </app-input-label>
+}
+
+<div class="input-date-picker">
+  <button 
+    class="input-date-picker__trigger"
+    (click)="toggle()"
+    [id]="id()"
+    cdkOverlayOrigin
+    type="button"
+    #trigger="cdkOverlayOrigin"
+  >
+    <i-lucide 
+      class="input-date-picker__trigger-icon" 
+      name="calendar-days"
+      size="16"
+    />
+
+    <span class="input-date-picker__trigger-label">
+      @if (formMode === 'single' && formSingleDate) {
+        {{ formSingleDate | translocoDate: { dateStyle: 'medium' } }}
+      }
+      @else if (formMode === 'range' && formDateRange) {
+        @if (formDateRange.start && formDateRange.end) {
+          {{ formDateRange.start | translocoDate: { dateStyle: 'medium' } }} - {{ formDateRange.end | translocoDate: { dateStyle: 'medium' } }}
+        }
+      }
+      @else {
+        {{ placeholder() }}
+      }
+    </span>
+
+    <i-lucide 
+      class="input-date-picker__trigger-indicator" 
+      name="chevrons-up-down"
+      size="16"
+    />
+  </button>
+
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="open()"
+    [cdkConnectedOverlayOffsetY]="2"
+    (overlayOutsideClick)="hide()"
+    (detach)="hide()"
+  >
+    <app-command @popAnimation>
+      <app-calendar
+        [(value)]="value"
+        [mode]="mode()"
+        [max]="max()"
+        [min]="min()"
+      />
+    </app-command>
+  </ng-template>
+</div>
+
+@if (formErrors && formControl?.touched) {
+  <app-input-errors [errors]="formErrors"/>
+}
+@else if (formHelp) {
+  <app-input-help>
+    {{ formHelp }}
+  </app-input-help>
+}

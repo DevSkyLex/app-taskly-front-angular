@@ -9,8 +9,8 @@ export const environment = {
     ],
   },
   translations: {
-    languages: ['fr', 'en'],
-    defaultLanguage: 'fr',
+    languages: ['fr-FR', 'en-US'],
+    defaultLanguage: 'fr-FR',
     reRenderOnLangChange: true
   },
   storage: {

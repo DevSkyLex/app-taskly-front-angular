@@ -1,180 +1,181 @@
-import { transition, trigger, useAnimation } from '@angular/animations';
-import { Component, computed, forwardRef, inject, Injector, input, InputSignal, model, ModelSignal, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  computed,
+  forwardRef,
+  inject,
+  Injector,
+  input,
+  InputSignal,
+  model,
+  ModelSignal,
+  OnInit,
+  signal,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
+import { CalendarMode, DateRange } from '@shared/components/calendar/calendar.component';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, ValidationErrors } from '@angular/forms';
-import { AnimationTiming, AppAnimations } from '@app/shared/animations/app.animations';
 import { noop } from 'rxjs';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import { AnimationTiming, AppAnimations } from '@shared/animations/app.animations';
 
-export type InputComboxOption<T> = {
-  value: T;
-  label: string;
-};
+type ValueType<M extends CalendarMode> = M extends 'single' 
+  ? Date | null 
+  : DateRange;
 
 @Component({
-  selector: 'app-input-select',
+  selector: 'app-input-date-picker',
   standalone: false,
-  templateUrl: './input-select.component.html',
-  styleUrl: './input-select.component.scss',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => InputSelectComponent),
-    multi: true,
-  }],
+  templateUrl: './input-date-picker.component.html',
+  styleUrl: './input-date-picker.component.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputDatePickerComponent),
+      multi: true,
+    },
+  ],
   animations: [
     trigger('popAnimation', [
       transition(':enter', [
         useAnimation(AppAnimations.popIn, {
-          params: { 
+          params: {
             timing: AnimationTiming.FAST,
-            origin: 'top' 
+            origin: 'top',
           },
         }),
       ]),
       transition(':leave', [
         useAnimation(AppAnimations.popOut, {
-          params: { 
+          params: {
             timing: AnimationTiming.FAST,
-            origin: 'top'
+            origin: 'top',
           },
         }),
       ]),
     ]),
   ],
 })
-export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
+export class InputDatePickerComponent<M extends CalendarMode = 'single'> implements OnInit, ControlValueAccessor {
   //#region Propriétés
   /**
    * Propriété value
    * @readonly
-   * 
-   * Valeur de la select
-   * 
+   *
+   * Valeur du sélecteur de date / plage de date
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
-   * @type {ModelSignal<T[]>} value
+   *
+   * @type {ModelSignal<Date | null | DateRange>} value
    */
-  public readonly value: ModelSignal<T[]> =
-    model<T[]>([]);
+  public readonly value: ModelSignal<ValueType<M>> = model<ValueType<M>>(
+    null as ValueType<M>
+  );
 
-  /**
-   * Propriété multiple
+    /**
+   * Propriété min
    * @readonly
-   * 
-   * Indique si la select
-   * accepte plusieurs options
-   * 
+   *
+   * Date minimale autorisée
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
-   * @type {InputSignal<boolean>} multiple
+   *
+   * @type {InputSignal<Date | null>} min
    */
-  public readonly multiple: InputSignal<boolean> =
-    input<boolean>(false);
+    public readonly min: InputSignal<Date | null> = 
+    input<Date | null>(null);
 
   /**
    * Propriété max
    * @readonly
-   * 
-   * Nombre maximum d'options sélectionnables
-   * 
+   *
+   * Date maximale autorisée
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
-   * @type {InputSignal<number>} max
+   *
+   * @type {InputSignal<Date>} max
    */
-  public readonly max: InputSignal<number> =
-    input<number>(Infinity);
-
-  /**
-   * Propriété options
-   * @readonly
-   * 
-   * Liste des options
-   * 
-   * @access public
-   * @memberof InputSelectComponent
-   * @since 1.0.0
-   * 
-   * @type {ModelSignal<InputComboxOption<T>[]>} options
-   */
-  public readonly options: ModelSignal<InputComboxOption<T>[]> =
-    model<InputComboxOption<T>[]>([]);
+  public readonly max: InputSignal<Date | null> = 
+    input<Date | null>(null);
 
   /**
    * Propriété disabled
    * @readonly
-   * 
+   *
    * Indique si la select
    * est désactivé
-   * 
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {ModelSignal<boolean>} disabled
    */
-  public readonly disabled: ModelSignal<boolean> =
+  public readonly disabled: ModelSignal<boolean> = 
     model<boolean>(false);
 
   /**
    * Propriété required
    * @readonly
-   * 
+   *
    * Indique si la select
    * est obligatoire
-   * 
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {ModelSignal<boolean>} required
    */
-  public readonly required: ModelSignal<boolean> =
+  public readonly required: ModelSignal<boolean> = 
     model<boolean>(false);
 
   /**
    * Propriété name
    * @readonly
-   * 
-   * Nom de la select
-   * 
+   *
+   * Nom du sélecteur de date / plage de date
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {InputSignal<string>} name
    */
-  public readonly name: InputSignal<string> =
+  public readonly name: InputSignal<string> = 
     input<string>('');
 
   /**
    * Propriété placeholder
    * @readonly
-   * 
-   * Placeholder de la select
-   * 
+   *
+   * Placeholder du sélecteur de date / plage de date
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {InputSignal<string>} placeholder
    */
-  public readonly placeholder: InputSignal<string> =
-    input<string>('Sélectionner une option');
+  public readonly placeholder: InputSignal<string> = 
+    input<string>('Sélectionner une date');
 
   /**
    * Propriété id
    * @readonly
-   * 
-   * Identifiant de la select
-   * 
+   *
+   * Identifiant du sélecteur de date / plage de date
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {InputSignal<string>} id
    */
   public readonly id: InputSignal<string> =
@@ -182,28 +183,28 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
 
   /**
    * Propriété onChange
-   * 
+   *
    * Évènement déclenché lors de la
-   * sélection d'une option
-   * 
+   * sélection d'une date ou d'une plage
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
-   * @type {(value: T | null) => void} onChange
+   *
+   * @type {(value: ValueType<M>) => void} onChange
    */
-  public onChange: (value: T | null) => void = noop;
+  public onChange: (value: ValueType<M>) => void = noop;
 
   /**
    * Propriété onTouched
-   * 
+   *
    * Évènement déclenché lors de la
-   * sortie de la select
-   * 
+   * sortie du sélecteur de date / plage de date
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {() => void} onTouched
    */
   public onTouched: () => void = noop;
@@ -211,44 +212,42 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
   /**
    * Propriété open
    * @readonly
-   * 
-   * État d'ouverture de la select
-   * 
+   *
+   * État d'ouverture du sélecteur de date / plage de date
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {WritableSignal<boolean>} open
    */
-  public readonly open: WritableSignal<boolean> = 
-    signal<boolean>(false);
+  public readonly open: WritableSignal<boolean> = signal<boolean>(false);
 
   /**
    * Propriété injector
    * @readonly
-   * 
+   *
    * Injecteur de dépendances
-   * 
+   *
    * @access private
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {Injector} injector
    */
-  private readonly injector: Injector = 
-    inject<Injector>(Injector);
+  private readonly injector: Injector = inject<Injector>(Injector);
 
   /**
    * Propriété ngControl
    * @readonly
-   * 
+   *
    * Contrôle de formulaire
    * Angular
-   * 
+   *
    * @access private
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {WritableSignal<NgControl | null>} ngControl
    */
   private readonly ngControl: WritableSignal<NgControl | null> =
@@ -257,63 +256,86 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
   /**
    * Propriété help
    * @readonly
-   * 
+   *
    * Texte d'aide du champ de sélection
-   * 
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {InputSignal<string | null>} help
    */
   public readonly help: InputSignal<string | null> = 
     input<string | null>(null);
 
   /**
-   * Propriété control
+   * Propriété mode
    * @readonly
    * 
-   * Contrôle de formulaire
+   * Mode du sélecteur de date / plage de date
    * 
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
    * 
+   * @type {InputSignal<CalendarMode>} mode
+   */
+  public readonly mode: InputSignal<M> = 
+    input<M>('single' as M);
+
+  /**
+   * Propriété control
+   * @readonly
+   *
+   * Contrôle de formulaire
+   *
+   * @access public
+   * @memberof InputDatePickerComponent
+   * @since 1.0.0
+   *
    * @type {Signal<FormControl | null>} control
    */
   public readonly control: Signal<FormControl | null> = computed(() => {
     const ngControl: NgControl | null = this.ngControl();
-    return ngControl ? ngControl.control as FormControl : null;
+    return ngControl ? (ngControl.control as FormControl) : null;
+  });
+
+  public readonly singleDate: Signal<Date | null> = computed(() => {
+    return this.value() as Date | null;
+  });
+
+  public readonly rangeDate: Signal<DateRange> = computed(() => {
+    return this.value() as DateRange;
   });
 
   /**
-   * Propriété errors 
+   * Propriété errors
    * @readonly
-   * 
+   *
    * Liste des erreurs de validation
    * du champ de saisie
-   * 
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {Signal<ValidationErrors | null>} errors
    */
   public readonly errors: Signal<ValidationErrors | null> = computed(() => {
     /**
      * Contrôle de formulaire
      * réactif
-     * 
-     * @see InputSelectComponent#control
+     *
+     * @see InputDatePickerComponent#control
      */
     const control: FormControl | null = this.control();
 
     /**
      * Valeur du champ de saisie
-     * 
-     * @see InputSelectComponent#value
+     *
+     * @see InputDatePickerComponent#value
      */
-    const value: T[] = this.value();
+    const value: Date | null | DateRange = this.value();
 
     /**
      * Erreurs de validation
@@ -325,68 +347,52 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
   /**
    * Propriété label
    * @readonly
-   * 
+   *
    * Libellé du champ de saisie
-   * 
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @type {InputSignal<string | null>} label
    */
-  public readonly label: InputSignal<string | null> =
+  public readonly label: InputSignal<string | null> = 
     input<string | null>(null);
-  
-  /**
-   * Propriété selectedOptions
-   * @readonly
-   * 
-   * Liste des options sélectionnées
-   * 
-   * @access public
-   * @memberof InputSelectComponent
-   * @since 1.0.0
-   * 
-   * @type {Signal<InputComboxOption<T>[]>} selectedOptions
-   */
-  public readonly selectedOptions: Signal<InputComboxOption<T>[]> = computed(() => {
-    return this.options().filter(option => this.value().includes(option.value));
-  });
   //#endregion
 
   //#region Méthodes
   /**
    * Méthode ngOnInit
-   * 
+   *
    * Méthode du cycle de vie du composant
    * appelée après la construction du composant
-   * 
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @returns {void} - Ne retourne rien
    */
   public ngOnInit(): void {
     /**
-     * Configuration du contrôle de 
+     * Configuration du contrôle de
      * formulaire
-     * 
-     * @see InputSelectComponent#setupControl
+     *
+     * @see InputDatePickerComponent#setupControl
      */
     this.setupControl();
   }
 
-    /**
+  /**
    * Méthode setupControl
-   * 
+   *
    * Permet de configurer le contrôle de
    * formulaire réactif (si présent)
-   * 
+   *
    * @access private
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @returns {void} - Ne retourne rien
    */
   private setupControl(): void {
@@ -401,53 +407,53 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
 
   /**
    * Méthode writeValue
-   * 
+   *
    * Permet aux contrôles de formulaire
    * réactifs d'écrire une valeur dans
    * la select
-   * 
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
-   * @param {T | null} value - Valeur à écrire
-   * 
+   *
+   * @param {Date | null | DateRange | null} value - Valeur à écrire
+   *
    * @returns {void} - Ne retourne rien
    */
-  public writeValue(value: T[]): void {
+  public writeValue(value: ValueType<M>): void {
     this.value.set(value);
   }
 
   /**
    * Méthode registerOnChange
-   * 
+   *
    * Permet d'enregistrer une fonction de
    * rappel lors de la sélection d'une option
-   * 
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
-   * @param {(value: T | null) => void} fn - Fonction de rappel
-   * 
+   *
+   * @param {(value: ValueType<M>) => void} fn - Fonction de rappel
+   *
    * @returns {void} - Ne retourne rien
    */
-  public registerOnChange(fn: (value: T | null) => void): void {
+  public registerOnChange(fn: (value: ValueType<M>) => void): void {
     this.onChange = fn;
   }
 
   /**
    * Méthode registerOnTouched
-   * 
+   *
    * Permet d'enregistrer une fonction de
-   * rappel lors de la sortie de la select
-   * 
+   * rappel lors de la sortie du sélecteur de date / plage de date
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @param {() => void} fn - Fonction de rappel
-   * 
+   *
    * @returns {void} - Ne retourne rien
    */
   public registerOnTouched(fn: () => void): void {
@@ -456,15 +462,15 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
 
   /**
    * Méthode setDisabledState
-   * 
+   *
    * Permet de désactiver la select
-   * 
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @param {boolean} disabled - Indique si la select est désactivée
-   * 
+   *
    * @returns {void} - Ne retourne rien
    */
   public setDisabledState(disabled: boolean): void {
@@ -472,73 +478,15 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
   }
 
   /**
-   * Méthode select
-   * 
-   * Permet de sélectionner une 
-   * option
-   * 
-   * @access public
-   * @memberof InputSelectComponent
-   * @since 1.0.0
-   * 
-   * @param {T} value - Valeur de l'option
-   * 
-   * @returns {void} - Ne retourne rien
-   */
-  public select(value: T): void {
-    this.value.update((values: T[]) => {
-      if (this.multiple()) {
-        if (values.includes(value)) {
-          return values.filter(v => v !== value);
-        } else {
-          const max: number = this.max();
-
-          if (values.length < max) {
-            return [...values, value];
-          } else {
-            return values;
-          }
-        }
-      } else {
-        return [value];
-      }
-    });
-
-    if (!this.multiple()) {
-      this.hide();
-    }
-
-    this.onChange(value);
-  }
-
-  /**
-   * Méthode isSelected
-   * 
-   * Permet de vérifier si une option
-   * est sélectionnée
-   * 
-   * @access public
-   * @memberof InputSelectComponent
-   * @since 1.0.0
-   * 
-   * @param {T} value - Valeur de l'option
-   * 
-   * @returns {boolean} - Retourne vrai si l'option est sélectionnée
-   */
-  public isSelected(value: T): boolean {
-    return this.value().includes(value);
-  }
-
-  /**
    * Méthode toggle
-   * 
-   * Bascule l'état d'ouverture de 
+   *
+   * Bascule l'état d'ouverture de
    * la select
-   * 
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @returns {void} - Ne retourne rien
    */
   public toggle(): void {
@@ -547,13 +495,13 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
 
   /**
    * Méthode show
-   * 
-   * Affiche le menu de la select
-   * 
+   *
+   * Affiche le menu du sélecteur de date / plage de date
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @returns {void} - Ne retourne rien
    */
   public show(): void {
@@ -562,13 +510,13 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
 
   /**
    * Méthode hide
-   * 
-   * Masque le menu de la select
-   * 
+   *
+   * Masque le menu du sélecteur de date / plage de date
+   *
    * @access public
-   * @memberof InputSelectComponent
+   * @memberof InputDatePickerComponent
    * @since 1.0.0
-   * 
+   *
    * @returns {void} - Ne retourne rien
    */
   public hide(): void {

@@ -111,6 +111,11 @@ import { CardHeaderComponent } from '@shared/components/card/card-header/card-he
 import { CardFooterComponent } from '@shared/components/card/card-footer/card-footer.component';
 import { FormRowComponent } from '@shared/components/form/form-row/form-row.component';
 import { TranslocoModule, TranslocoPipe } from '@jsverse/transloco';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { TranslocoDatePipe, TranslocoLocaleModule } from '@jsverse/transloco-locale';
+import { InputDatePickerComponent } from './components/input/input-date-picker/input-date-picker.component';
+import { InputFileComponent } from './components/input/input-file/input-file.component';
+import { InputCheckboxComponent } from './components/input/input-checkbox/input-checkbox.component';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -151,11 +156,15 @@ const Components: Type<any>[] = [
   InputTextComponent,
   InputSelectComponent,
   InputPhoneComponent,
+  InputFileComponent,
   InputStatusIndicatorComponent,
+  InputDatePickerComponent,
+  InputCheckboxComponent,
   CardComponent,
   CardBodyComponent,
   CardHeaderComponent,
   CardFooterComponent,
+  CalendarComponent
 ];
 
 @NgModule({
@@ -174,6 +183,7 @@ const Components: Type<any>[] = [
     NgxMaskDirective,
     NgxMaskPipe,
     TranslocoModule,
+    TranslocoLocaleModule,
     LucideAngularModule.pick({
       Bell,
       BellOff,

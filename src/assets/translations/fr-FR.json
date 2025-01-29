@@ -1,4 +1,15 @@
 {
+  "common": {
+    "week-days": {
+      "monday": "Lundi",
+      "tuesday": "Mardi",
+      "wednesday": "Mercredi",
+      "thursday": "Jeudi",
+      "friday": "Vendredi",
+      "saturday": "Samedi",
+      "sunday": "Dimanche"
+    }
+  },
   "validations": {
     "required": "Ce champ est obligatoire.",
     "email": "Ce champ doit être une adresse email valide.",
@@ -32,6 +43,11 @@
               "placeholder": "Votre numéro de téléphone",
               "help": "Veuillez saisir votre numéro de téléphone."
             },
+            "birthDate": {
+              "label": "Date de naissance",
+              "placeholder": "Sélectionnez votre date de naissance",
+              "help": "Veuillez saisir votre date de naissance."
+            },
             "password": {
               "label": "Mot de passe",
               "placeholder": "Mot de passe",
@@ -45,6 +61,23 @@
           },
           "buttons": {
             "register": "S'inscrire"
+          }
+        },
+        "auth-login-form": {
+          "fields": {
+            "email": {
+              "label": "Adresse e-mail",
+              "placeholder": "exemple@domaine.fr",
+              "help": "Veuillez saisir votre adresse email."
+            },
+            "password": {
+              "label": "Mot de passe",
+              "placeholder": "Mot de passe",
+              "help": "Veuillez saisir votre mot de passe."
+            }
+          },
+          "buttons": {
+            "login": "Se connecter"
           }
         }
       }

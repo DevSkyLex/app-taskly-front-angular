@@ -1,0 +1,83 @@
+@use 'abstracts/functions' as fn;
+
+:host {
+  --gap: #{fn.get-spacing('2xs')};
+  
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.input-file {
+  &__field {
+    display: none;
+  }
+  
+  &__dropzone {
+    --border-radius: #{fn.get-border-radius('md')};
+    --padding: #{fn.get-spacing('xl')};
+    --border-color: #{fn.get-color('neutral', '200')};
+    --gap: #{fn.get-spacing('md')};
+    --animation-duration: #{fn.get-animation-timing('normal')};
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+    gap: var(--gap);
+    background-color: transparent;
+    width: 100%;
+    cursor: pointer;
+    transition: border-color var(--animation-duration),
+                background-color var(--animation-duration),
+                transform var(--animation-duration);
+
+    &[data-input-file-dragging="true"] {
+      --border-color: #{fn.get-color('primary', '500')};
+      --background-color: #{fn.get-color('primary', '100', .05)};
+
+      border-color: var(--border-color);
+      background-color: var(--background-color);
+      transform: scale(1.01);
+    }
+
+    &-icon {
+      --text-color: #{fn.get-color('neutral', '500')};
+      color: var(--text-color);
+    }
+
+    &__content {
+      --gap: #{fn.get-spacing('xs')};
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--gap);
+
+      &-title {
+        --font-size: #{fn.get-font-size('md')};
+        --font-weight: #{fn.get-font-weight('semibold')};
+
+        font-size: var(--font-size);
+        font-weight: var(--font-weight);
+      } 
+
+      &-text {
+        --font-size: #{fn.get-font-size('sm')};
+        --text-color: #{fn.get-color('neutral', '500')};
+
+        font-size: var(--font-size);
+        color: var(--text-color);
+      }
+
+      &-button {
+        --margin-top: #{fn.get-spacing('md')};
+        margin-top: var(--margin-top);
+      }
+    }
+  }
+}
