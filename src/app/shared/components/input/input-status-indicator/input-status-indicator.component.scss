@@ -1,0 +1,13 @@
+@use 'abstracts/functions' as fn;
+
+.input-status-indicator {
+  &--invalid {
+    --text-color: #{fn.get-color('danger', '500')};
+    color: var(--text-color);
+  }
+
+  &--disabled {
+    --text-color: #{fn.get-color('neutral', '500')};
+    color: var(--text-color);
+  }
+}

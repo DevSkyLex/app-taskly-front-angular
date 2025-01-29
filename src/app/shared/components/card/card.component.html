@@ -1,0 +1,22 @@
+<div class="card" role="card"> 
+  @let headerTemplate = header()?.template();
+  @if (headerTemplate) {
+    <div class="card__header">
+      <ng-container *ngTemplateOutlet="headerTemplate"/>
+    </div>
+  }
+
+  @let bodyTemplate = body()?.template();
+  @if (bodyTemplate) {
+    <div class="card__body">
+      <ng-container *ngTemplateOutlet="bodyTemplate"/>
+    </div>
+  }
+
+  @let footerTemplate = footer()?.template();
+  @if (footerTemplate) {
+    <div class="card__footer">
+      <ng-container *ngTemplateOutlet="footerTemplate"/>
+    </div>
+  }
+</div>

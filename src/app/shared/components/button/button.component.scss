@@ -2,7 +2,6 @@
 
 :host {
   display: flex;
-  width: max-content;
 
   .btn {
     --border-radius: #{fn.get-border-radius('md')};

@@ -1,117 +1,180 @@
 @use 'abstracts/functions' as fn;
 
-.input-phone {
+:host {
   --background-color: #{fn.get-color('neutral', '000')};
-  --border-color: #{fn.get-color('neutral', '200')};
   --border-radius: #{fn.get-border-radius('md')};
+  --border-color: #{fn.get-color('neutral', '200')};
 
+  --focus-border-color: #{fn.get-color('primary', '500')};
+  --focus-outline-color: #{fn.get-color('primary', '500', .1)};
+  --focus-outline-width: 3px;
+
+  --gap: #{fn.get-spacing('2xs')};
+  
   display: flex;
-  background-color: var(--background-color);
+  flex-direction: column;
+  gap: var(--gap);
 
-  &__field {
-    --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('md')};
-    --font-size: #{fn.get-font-size('sm')};
-
-    padding: var(--padding);
-    font-size: var(--font-size);
-    flex: 1;
-    border: none;
-    border-top-right-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
-    border-right: 1px solid var(--border-color);
-    border-block: 1px solid var(--border-color);
-
-    &:focus-visible {
-      outline: none;
-    }
+  &:is(.ng-invalid.ng-dirty) {
+    --focus-border-color: #{fn.get-color('danger', '500')};
+    --focus-outline-color: #{fn.get-color('danger', '500', .1)};
   }
 
-  &__format {
+  .input-phone {
     display: flex;
-    align-items: stretch;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
 
-    &__trigger {
-      --padding: #{fn.get-spacing('sm')};
+    &:is(:focus-within) {
+      --border-color: var(--focus-border-color);
+
+      outline: var(--focus-outline-width) solid var(--focus-outline-color);
+      outline-offset: 0;
+    }
+
+    & > * {
+      --animation-duration: #{fn.get-animation-timing('normal')};
+
+      border-block: 1px solid var(--border-color);
+      transition: border-color var(--animation-duration),
+                  outline-color var(--animation-duration);
+
+      &:first-child {
+        border-top-left-radius: var(--border-radius);
+        border-bottom-left-radius: var(--border-radius);
+        border-left: 1px solid var(--border-color);
+        border-block: 1px solid var(--border-color);
+      }
+
+      &:last-child {
+        border-top-right-radius: var(--border-radius);
+        border-bottom-right-radius: var(--border-radius);
+        border-right: 1px solid var(--border-color);
+        border-block: 1px solid var(--border-color);
+      }
+    }
+
+    &__field {
+      --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('md')};
       --font-size: #{fn.get-font-size('sm')};
-      --font-weight: #{fn.get-font-weight('medium')};
-      --animation-duration: #{fn.get-animation-timing('fast')};
-      --outline-width: 3px;
-      --border-color: #{fn.get-color('neutral', '200')};
-      --background-color: #{fn.get-color('neutral', '000')};
-      --text-color: #{fn.get-color('neutral', '950')};
-      --gap: #{fn.get-spacing('md')};
-  
-      white-space: nowrap;
-      border-top-left-radius: var(--border-radius);
-      border-bottom-left-radius: var(--border-radius);
-      border: 1px solid var(--border-color);
-      width: 100%;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      gap: var(--gap);
-      display: flex;
-      align-items: center;
-      position: relative;
-      font-size: var(--font-size);
-      cursor: pointer;
+
       padding: var(--padding);
-      font-weight: var(--font-weight);
-      transition: background-color var(--animation-duration),
-                  border-color var(--animation-duration),
-                  color var(--animation-duration),
-                  opacity var(--animation-duration);
-  
-      &:is(:hover, :focus-visible) {
-        --background-color: #{fn.get-color('neutral', '050')};
-        --border-color: #{fn.get-color('neutral', '300')};
-  
-        background-color: var(--background-color);
-        border-color: var(--border-color);
-      }
-  
+      font-size: var(--font-size);
+      flex: 1;
+      border: none;
+
       &:focus-visible {
-        --outline-color: #{fn.get-color('neutral', '200', .5)};
-        outline: var(--outline-width) solid var(--outline-color);
+        outline: none;
       }
-  
-      &-indicator {
-        --margin-left: auto;
-        --text-color:#{fn.get-color('neutral', '500')};
-    
+
+      &::placeholder {
+        --font-size: #{fn.get-font-size('sm')};
+        --text-color: #{fn.get-color('neutral', '400')};
         color: var(--text-color);
-        margin-left: var(--margin-left);
-      }
-
-      &-flag {
-        --height: 1em;
-        --width: 1.5em;
-        height: var(--height);
-        width: var(--width);
-        object-fit: cover;
-        object-position: center;
+        font-size: var(--font-size);
       }
     }
-  
-    &__option {
-      --gap: .75em;
-  
+
+    &__status {
+      --padding-inline: #{fn.get-spacing('md')};
+      padding-inline: var(--padding-inline);
+      display: grid;
+      place-content: center;
+    }
+
+    &__format {
       display: flex;
-      align-items: center;
-      gap: var(--gap);
-      width: 100%;
+      align-items: stretch;
 
-      &-flag {
-        --height: 1em;
-        --width: 1.5em;
-        height: var(--height);
-        width: var(--width);
-        object-fit: cover;
-        object-position: center;
-      }
+      &__trigger {
+        --padding: #{fn.get-spacing('sm')};
+        --font-size: #{fn.get-font-size('sm')};
+        --font-weight: #{fn.get-font-weight('medium')};
+        --animation-duration: #{fn.get-animation-timing('fast')};
+        --outline-width: 3px;
+        --background-color: #{fn.get-color('neutral', '000')};
+        --text-color: #{fn.get-color('neutral', '950')};
+        --gap: #{fn.get-spacing('md')};
+        --border-color: #{fn.get-color('neutral', '200')};
+        
+        white-space: nowrap;
+        border: none;
+        border-top-left-radius: var(--border-radius);
+        border-bottom-left-radius: var(--border-radius);
+        border-right: 1px solid var(--border-color);
+        width: 100%;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        gap: var(--gap);
+        display: flex;
+        align-items: center;
+        position: relative;
+        font-size: var(--font-size);
+        cursor: pointer;
+        padding: var(--padding);
+        font-weight: var(--font-weight);
+        transition: background-color var(--animation-duration),
+                    border-color var(--animation-duration),
+                    color var(--animation-duration),
+                    opacity var(--animation-duration);
+    
+        &:is(:hover, :focus-visible) {
+          --background-color: #{fn.get-color('neutral', '050')};
+          --border-color: #{fn.get-color('neutral', '300')};
+    
+          background-color: var(--background-color);
+          border-color: var(--border-color);
+        }
+    
+        &:focus-visible {
+          outline: none;
+        }
+    
+        &-indicator {
+          --margin-left: auto;
+          --text-color:#{fn.get-color('neutral', '500')};
+      
+          color: var(--text-color);
+          margin-left: var(--margin-left);
+        }
 
-      &-check {
-        margin-left: auto;
+        &-flag {
+          --height: 1em;
+          --width: 1.5em;
+          --border-radius: #{fn.get-border-radius('sm')};
+
+          height: var(--height);
+          width: var(--width);
+          border-radius: var(--border-radius);
+          object-fit: cover;
+          object-position: center;
+        }
       }
     }
+  }
+}
+
+.input-phone__format__option {
+  --gap: .75em;
+
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  width: 100%;
+
+  &-flag {
+    --height: 1em;
+    --width: 1.5em;
+    --border-radius: #{fn.get-border-radius('sm')};
+
+    border-radius: var(--border-radius);
+    height: var(--height);
+    width: var(--width);
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &-check {
+    margin-left: auto;
   }
 }

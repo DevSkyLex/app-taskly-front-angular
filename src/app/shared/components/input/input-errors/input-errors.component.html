@@ -1,0 +1,14 @@
+@let errors = violations();
+
+<div class="input-errors">
+  @if (errors) {
+    <ul class="input-errors__list">
+      @for (error of errors; track $index) {
+        <li class="input-errors__list-item">
+          @let message = 'validations.' + error.key;
+          <span>{{ message | transloco: error.params }}</span>
+        </li>
+      }
+    </ul>
+  }
+</div>

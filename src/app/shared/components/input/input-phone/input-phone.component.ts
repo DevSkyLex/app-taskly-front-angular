@@ -1,7 +1,9 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { Component, computed, forwardRef, inject, Injector, input, InputSignal, model, ModelSignal, signal, Signal, WritableSignal } from '@angular/core';
-import { FormControl, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { Component, computed, effect, forwardRef, inject, Injector, input, InputSignal, model, ModelSignal, signal, Signal, WritableSignal } from '@angular/core';
+import { AbstractControl, FormControl, NG_VALUE_ACCESSOR, NgControl, ValidationErrors } from '@angular/forms';
 import { AnimationTiming, AppAnimations } from '@app/shared/animations/app.animations';
+import { AppValidators } from '@app/shared/validators/app.validators';
+import { TranslocoService } from '@jsverse/transloco';
 import { noop } from 'rxjs';
 
 export type InputPhoneFormat = {
@@ -61,20 +63,20 @@ export class InputPhoneComponent {
    */
   public readonly formats: Signal<InputPhoneFormat[]> = signal<InputPhoneFormat[]>([
     {
-      countryCode: 'US',
-      countryName: 'United States',
-      dialCode: '+1',
-      example: '(201) 555-0123',
-      regex: /^\(\d{3}\) \d{3}-\d{4}$/,
-      mask: '(000) 000-0000'
-    },
-    {
       countryCode: 'FR',
       countryName: 'France',
       dialCode: '+33',
       example: '06 12 34 56 78',
       regex: /^(\d{2}) \d{2} \d{2} \d{2} \d{2}$/,
       mask: '00 00 00 00 00'
+    },
+    {
+      countryCode: 'US',
+      countryName: 'United States',
+      dialCode: '+1',
+      example: '(201) 555-0123',
+      regex: /^\(\d{3}\) \d{3}-\d{4}$/,
+      mask: '(000) 000-0000'
     },
     {
       countryCode: 'GB',
@@ -93,13 +95,21 @@ export class InputPhoneComponent {
       mask: '000 00000000'
     },
     {
-      countryCode: 'IN',
-      countryName: 'India',
-      dialCode: '+91',
-      example: '091234 56789',
-      regex: /^(\d{5}) \d{5}$/,
-      mask: '00000 00000'
-    }
+      countryCode: 'ES',
+      countryName: 'Spain',
+      dialCode: '+34',
+      example: '612 34 56 78',
+      regex: /^(\d{3}) \d{2} \d{2} \d{2}$/,
+      mask: '000 00 00 00'
+    },
+    {
+      countryCode: 'IT',
+      countryName: 'Italy',
+      dialCode: '+39',
+      example: '312 345 6789',
+      regex: /^(\d{3}) \d{3} \d{4}$/,
+      mask: '000 000 0000'
+    },
   ]);  
 
   /**
@@ -271,6 +281,36 @@ export class InputPhoneComponent {
     signal<NgControl | null>(null);
 
   /**
+   * Propriété help
+   * @readonly
+   * 
+   * Texte d'aide du champ de saisie
+   * 
+   * @access public
+   * @memberof InputPhoneComponent
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<string | null>} help
+   */
+  public readonly help: InputSignal<string | null> = 
+    input<string | null>(null);
+
+  /**
+   * Propriété label
+   * @readonly
+   * 
+   * Libellé du champ de saisie
+   * 
+   * @access public
+   * @memberof InputPhoneComponent
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<string | null>} label
+   */
+  public readonly label: InputSignal<string | null> =
+    input<string | null>(null);
+
+  /**
    * Propriété control
    * @readonly
    * 
@@ -287,6 +327,22 @@ export class InputPhoneComponent {
     return ngControl ? ngControl.control as FormControl : null;
   });
 
+  /**
+   * Propriété errors 
+   * @readonly
+   * 
+   * Liste des erreurs de validation
+   * du champ de saisie
+   * 
+   * @access public
+   * @memberof InputPhoneComponent
+   * @since 1.0.0
+   * 
+   * @type {Signal<ValidationErrors | null>} errors
+   */
+  public readonly errors: WritableSignal<ValidationErrors | null> = 
+    signal<ValidationErrors | null>(null);
+  
   /**
    * Propriété open
    * @readonly
@@ -317,6 +373,34 @@ export class InputPhoneComponent {
    */
   public readonly format: WritableSignal<InputPhoneFormat> =
     signal<InputPhoneFormat>(this.formats()[0]);
+  //#endregion
+
+  //#region Constructeur
+  /**
+   * Constructeur
+   * @constructor
+   * 
+   * Initialise le composant
+   * 
+   * @access public
+   * @memberof InputPhoneComponent
+   * @since 1.0.0
+   */
+  public constructor() {
+    effect(() => {
+      const control: FormControl | null = this.control();
+      if (control) {
+        control.setValidators([AppValidators.phone(
+          this.control() as AbstractControl,
+          this.format().regex
+        )]);
+        
+        control.statusChanges.subscribe(() => {
+          this.errors.set(control.errors);
+        });
+      }
+    });
+  }
   //#endregion
 
   //#region Méthodes
@@ -466,8 +550,7 @@ export class InputPhoneComponent {
    * @returns {void} - Ne retourne rien
    */
   public writeValue(value: string): void {
-    const formattedValue: string = this.formatValue(value);
-    this.value.set(formattedValue);
+    this.value.set(value);
   }
 
   /**
@@ -563,41 +646,7 @@ export class InputPhoneComponent {
    */
   public onInput(event: Event): void {
     let value: string = (event.target as HTMLInputElement).value;
-    value = this.formatValue(value);
     this.onChange(value);
-  }
-
-  /**
-   * Méthode formatValue
-   * 
-   * Permet de formater la valeur du champ
-   * de saisie en fonction du format de numéro
-   * de téléphone sélectionné
-   * 
-   * @access public
-   * @memberof InputPhoneComponent
-   * @since 1.0.0
-   * 
-   * @param {string} value - Valeur du champ de saisie
-   * 
-   * @returns {string} - Valeur formatée
-   */
-  public formatValue(value: string): string {
-    const mask: string = this.format().mask || '';
-    const maskChars: string[] = mask.split('');
-    const valueChars: string[] = value.split('');
-    const formattedValue: string[] = [];
-
-    for (let i = 0, j = 0; i < maskChars.length; i++) {
-      if (maskChars[i] === '0') {
-        formattedValue.push(valueChars[j] || '');
-        j++;
-      } else {
-        formattedValue.push(maskChars[i]);
-      }
-    }
-
-    return formattedValue.join('');
   }
 
   /**

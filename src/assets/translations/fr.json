@@ -1,1 +1,53 @@
-{}
+{
+  "validations": {
+    "required": "Ce champ est obligatoire.",
+    "email": "Ce champ doit être une adresse email valide.",
+    "minlength": "Ce champ doit contenir au moins {{requiredLength}} caractères.",
+    "maxlength": "Ce champ doit contenir au maximum {{requiredLength}} caractères.",
+    "phone": "Ce champ doit être un numéro de téléphone valide.",
+    "passwordMatch": "Les mots de passe ne correspondent pas."
+  },
+  "features": {
+    "auth": {
+      "forms": {
+        "auth-register-form": {
+          "fields": {
+            "firstName": {
+              "label": "Prénom",
+              "placeholder": "John",
+              "help": "Veuillez saisir votre prénom."
+            },
+            "lastName": {
+              "label": "Nom",
+              "placeholder": "Doe",
+              "help": "Veuillez saisir votre nom."
+            },
+            "email": {
+              "label": "Adresse e-mail",
+              "placeholder": "exemple@domaine.fr",
+              "help": "Veuillez saisir votre adresse email."
+            },
+            "phone": {
+              "label": "Téléphone",
+              "placeholder": "Votre numéro de téléphone",
+              "help": "Veuillez saisir votre numéro de téléphone."
+            },
+            "password": {
+              "label": "Mot de passe",
+              "placeholder": "Mot de passe",
+              "help": "Veuillez saisir votre mot de passe."
+            },
+            "passwordConfirmation": {
+              "label": "Confirmation du mot de passe",
+              "placeholder": "Confirmation du mot de passe",
+              "help": "Veuillez confirmer votre mot de passe."
+            }
+          },
+          "buttons": {
+            "register": "S'inscrire"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,14 @@
+@let formControl = control();
+@let formLabel = label();
+@let formHelp = help();
+@let formErrors = errors();
+
+@if (formLabel) {
+  <app-input-label [required]="required()">
+    {{ formLabel }}
+  </app-input-label>
+}
+
 <div class="input-text">
   <input 
     class="input-text__field"
@@ -11,4 +22,25 @@
     (input)="onInput($event)"
     (blur)="onBlur($event)"
   >
+
+  <div class="input-text__status">
+    @if (formControl) {
+      <app-input-status-indicator 
+        [status]="formControl.status"
+        [visible]="formControl.touched"
+      />
+    }
+  </div>
 </div>
+
+
+@if (formErrors && formControl?.touched) {
+  <app-input-errors [errors]="formErrors"/>
+}
+@else if (formHelp) {
+  <app-input-help>
+    {{ formHelp }}
+  </app-input-help>
+}
+
+

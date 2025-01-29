@@ -1,0 +1,15 @@
+@use 'abstracts/functions' as fn;
+
+:host {
+  .input-errors {
+    --text-color: #{fn.get-color('danger', '500')};
+    --font-size: #{fn.get-font-size('sm')};
+
+    color: var(--text-color);
+    font-size: var(--font-size);
+
+    &__list {
+      list-style: none;
+    }
+  }
+}

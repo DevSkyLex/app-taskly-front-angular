@@ -1,0 +1,16 @@
+@use 'abstracts/functions' as fn;
+
+:host-context(.form) {
+  :host:not(:first-child) {
+    --margin-top: #{fn.get-spacing('lg')};
+    margin-top: var(--margin-top);
+  }
+}
+
+.form-row {
+  --gap: #{fn.get-spacing('lg')};
+  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--gap);
+}

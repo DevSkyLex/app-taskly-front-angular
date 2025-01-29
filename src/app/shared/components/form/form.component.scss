@@ -1,0 +1,8 @@
+@use 'abstracts/functions' as fn;
+
+:host {
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+}

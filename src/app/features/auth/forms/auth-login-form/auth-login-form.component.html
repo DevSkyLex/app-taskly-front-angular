@@ -1,0 +1,35 @@
+<app-form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <app-form-row>
+    <app-form-control>
+      <app-input-label>
+        Adresse email
+      </app-input-label>
+
+      <app-input-text 
+        formControlName="email" 
+        placeholder="Adresse email"
+      />
+
+      <app-input-help>
+        Votre adresse email
+      </app-input-help>
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-input-label>
+        Mot de passe
+      </app-input-label>
+
+      <app-input-text 
+        formControlName="password" 
+        placeholder="Mot de passe"
+      />
+
+      <app-input-help>
+        Votre mot de passe
+      </app-input-help>
+    </app-form-control>
+  </app-form-row>
+</app-form>

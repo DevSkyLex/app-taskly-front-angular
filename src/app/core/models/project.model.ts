@@ -55,8 +55,8 @@ export interface Project extends Entity, Timestampable, SoftDeleteable {
 }
 
 /**
- * Type NewProject
- * @type NewProject
+ * Type NewProjectPayload
+ * @type NewProjectPayload
  * 
  * Type de données pour l'ajout d'un projet
  * 
@@ -64,7 +64,7 @@ export interface Project extends Entity, Timestampable, SoftDeleteable {
  * 
  * @author Valentin FORTIN <contact@valentin-fortin.pro>
  */
-export type NewProject = Omit<Project, 
+export type NewProjectPayload = Omit<Project, 
   | "id"
   | "createdAt" 
   | "updatedAt" 
@@ -72,8 +72,8 @@ export type NewProject = Omit<Project,
 >;
 
 /**
- * Type UpdateProject
- * @type UpdateProject
+ * Type UpdateProjectPayload
+ * @type UpdateProjectPayload
  * 
  * Type de données pour la mise à jour d'un projet
  * 
@@ -81,7 +81,7 @@ export type NewProject = Omit<Project,
  * 
  * @author Valentin FORTIN <contact@valentin-fortin.pro>
  */
-export type UpdateProject = Partial<Omit<Project, 
+export type UpdateProjectPayload = Partial<Omit<Project, 
   | "id"
   | "createdAt" 
   | "updatedAt" 

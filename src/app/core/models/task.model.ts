@@ -172,8 +172,8 @@ export interface Task extends Entity, Timestampable {
 }
 
 /**
- * Type NewTask
- * @type NewTask
+ * Type NewTaskPayload
+ * @type NewTaskPayload
  * 
  * Type de données pour ajouter une tâche
  * 
@@ -181,15 +181,15 @@ export interface Task extends Entity, Timestampable {
  * 
  * @author Valentin FORTIN <contact@valentin-fortin.pro>
  */
-export type NewTask = Omit<Task, 
+export type NewTaskPayload = Omit<Task, 
   | 'id' 
   | 'createdAt' 
   | 'updatedAt'
 >;
 
 /**
- * Type UpdateTask
- * @type UpdateTask
+ * Type UpdateTaskPayload
+ * @type UpdateTaskPayload
  * 
  * Type de données pour mettre à jour une tâche
  * 
@@ -197,7 +197,7 @@ export type NewTask = Omit<Task,
  * 
  * @author Valentin FORTIN <contact@valentin-fortin.pro>
  */
-export type UpdateTask = Partial<Omit<Task, 
+export type UpdateTaskPayload = Partial<Omit<Task, 
   | 'id' 
   | 'createdAt' 
   | 'updatedAt'

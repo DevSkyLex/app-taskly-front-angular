@@ -1,12 +1,14 @@
 <app-input-text
   placeholder="Search"
 />
-<app-form-control>
+<form [formGroup]="formGroup">
+<!-- <app-form-control>
   <app-input-label [required]="true">
     Select a Pokémon
   </app-input-label>
   
   <app-input-select
+    [max]="5"
     [multiple]="true"
     [options]="[
       { value: 'bulbasaur', label: 'Bulbasaur' },
@@ -45,7 +47,7 @@
   <app-input-help>
     Select multiple Pokémon
   </app-input-help>
-</app-form-control>
+</app-form-control> -->
 
 <app-form-control>
   <app-input-label>
@@ -54,9 +56,11 @@
 
   <app-input-phone
     [placeholder]="'Phone number'"
+    [formControlName]="'phone'"
   />
 
   <app-input-help>
     We will call you back
   </app-input-help>
 </app-form-control>
+</form>

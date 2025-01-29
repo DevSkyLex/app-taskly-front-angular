@@ -1,6 +1,6 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, computed, forwardRef, inject, Injector, input, InputSignal, model, ModelSignal, OnInit, Signal, signal, WritableSignal } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, ValidationErrors } from '@angular/forms';
 import { AnimationTiming, AppAnimations } from '@app/shared/animations/app.animations';
 import { noop } from 'rxjs';
 
@@ -255,6 +255,21 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
     signal<NgControl | null>(null);
 
   /**
+   * Propriété help
+   * @readonly
+   * 
+   * Texte d'aide du champ de sélection
+   * 
+   * @access public
+   * @memberof InputSelectComponent
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<string | null>} help
+   */
+  public readonly help: InputSignal<string | null> = 
+    input<string | null>(null);
+
+  /**
    * Propriété control
    * @readonly
    * 
@@ -271,6 +286,57 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
     return ngControl ? ngControl.control as FormControl : null;
   });
 
+  /**
+   * Propriété errors 
+   * @readonly
+   * 
+   * Liste des erreurs de validation
+   * du champ de saisie
+   * 
+   * @access public
+   * @memberof InputSelectComponent
+   * @since 1.0.0
+   * 
+   * @type {Signal<ValidationErrors | null>} errors
+   */
+  public readonly errors: Signal<ValidationErrors | null> = computed(() => {
+    /**
+     * Contrôle de formulaire
+     * réactif
+     * 
+     * @see InputSelectComponent#control
+     */
+    const control: FormControl | null = this.control();
+
+    /**
+     * Valeur du champ de saisie
+     * 
+     * @see InputSelectComponent#value
+     */
+    const value: T[] = this.value();
+
+    /**
+     * Erreurs de validation
+     * du champ de saisie
+     */
+    return control ? control.errors : null;
+  });
+
+  /**
+   * Propriété label
+   * @readonly
+   * 
+   * Libellé du champ de saisie
+   * 
+   * @access public
+   * @memberof InputSelectComponent
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<string | null>} label
+   */
+  public readonly label: InputSignal<string | null> =
+    input<string | null>(null);
+  
   /**
    * Propriété selectedOptions
    * @readonly

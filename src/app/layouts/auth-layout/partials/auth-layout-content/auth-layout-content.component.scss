@@ -1,0 +1,7 @@
+@use 'abstracts/functions' as fn;
+
+.content {
+  display: grid;
+  place-content: center;
+  height: 100%;
+}

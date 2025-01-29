@@ -1,0 +1,15 @@
+@if (visible()) {
+  <span [class]="classes()">
+    @switch (status()) {
+      @case ('INVALID') {
+        <i-lucide name="octagon-alert" size="16" />
+      }
+      @case ('DISABLED') {
+        <i-lucide name="pencil-off" size="16" />
+      }
+      @case ('PENDING') {
+        <app-loader variant="primary" size="16"/>
+      }
+    }
+  </span>
+}

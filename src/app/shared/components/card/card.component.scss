@@ -1,0 +1,29 @@
+@use 'abstracts/functions' as fn;
+
+.card {
+  --card-border-color: #{fn.get-color('neutral', '200')};
+  --border-radius: #{fn.get-border-radius('lg')};
+  --background-color: #{fn.get-color('neutral', '000')};
+
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--background-color);
+
+  & > * {
+    --padding: #{fn.get-spacing('xl')};
+    padding: var(--padding);
+  }
+
+  &__header {
+    --border-color: var(--card-border-color);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  &__footer {
+    --border-color: var(--card-border-color);
+    border-top: 1px solid var(--border-color);
+  }
+}
+

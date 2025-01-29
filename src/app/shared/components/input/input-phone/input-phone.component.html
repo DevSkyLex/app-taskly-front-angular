@@ -1,3 +1,14 @@
+@let formControl = control();
+@let formLabel = label();
+@let formHelp = help();
+@let formErrors = errors();
+
+@if (formLabel) {
+  <app-input-label [required]="required()">
+    {{ formLabel }}
+  </app-input-label>
+}
+
 <div class="input-phone">
   <div class="input-phone__format">
     <button
@@ -66,8 +77,9 @@
 
   <input
     class="input-phone__field"
-    type="phone"
+    type="tel"
     [name]="name()"
+    [mask]="format().mask"
     [placeholder]="placeholder()"
     [value]="value()"
     [required]="required()"
@@ -76,4 +88,24 @@
     (input)="onInput($event)"
     (blur)="onBlur($event)"
   />
+
+  <div class="input-phone__status">
+    @if (formControl) {
+      <app-input-status-indicator 
+        [status]="formControl.status"
+        [visible]="formControl.touched"
+      />
+    }
+  </div>
 </div>
+
+@if (formErrors && formControl?.touched) {
+  <app-input-errors [errors]="formErrors"/>
+}
+@else if (formHelp) {
+  <app-input-help>
+    {{ formHelp }}
+  </app-input-help>
+}
+
+

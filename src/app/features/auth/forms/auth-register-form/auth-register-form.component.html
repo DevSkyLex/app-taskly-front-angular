@@ -1,0 +1,81 @@
+<app-form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <app-form-row>
+    <app-form-control>
+      <app-input-text
+        formControlName="firstName"
+        type="text"
+        [placeholder]="'features.auth.forms.auth-register-form.fields.firstName.placeholder' | transloco"
+        [label]="'features.auth.forms.auth-register-form.fields.firstName.label' | transloco"
+        [help]="'features.auth.forms.auth-register-form.fields.firstName.help' | transloco"
+      />
+    </app-form-control>
+
+    <app-form-control>
+      <app-input-text
+        formControlName="lastName"
+        type="text"
+        [placeholder]="'features.auth.forms.auth-register-form.fields.lastName.placeholder' | transloco"
+        [label]="'features.auth.forms.auth-register-form.fields.lastName.label' | transloco"
+        [help]="'features.auth.forms.auth-register-form.fields.lastName.help' | transloco"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-input-text
+        formControlName="email"
+        type="email"
+        [required]="true"
+        [placeholder]="'features.auth.forms.auth-register-form.fields.email.placeholder' | transloco"
+        [label]="'features.auth.forms.auth-register-form.fields.email.label' | transloco"
+        [help]="'features.auth.forms.auth-register-form.fields.email.help' | transloco"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-input-phone
+        formControlName="phone"
+        [placeholder]="'features.auth.forms.auth-register-form.fields.phone.placeholder' | transloco"
+        [label]="'features.auth.forms.auth-register-form.fields.phone.label' | transloco"
+        [help]="'features.auth.forms.auth-register-form.fields.phone.help' | transloco"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-input-text
+        formControlName="password"
+        type="password"
+        [required]="true"
+        [placeholder]="'features.auth.forms.auth-register-form.fields.password.placeholder' | transloco"
+        [label]="'features.auth.forms.auth-register-form.fields.password.label' | transloco"
+        [help]="'features.auth.forms.auth-register-form.fields.password.help' | transloco"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-input-text
+        formControlName="passwordConfirmation"
+        type="password"
+        [required]="true"
+        [placeholder]="'features.auth.forms.auth-register-form.fields.passwordConfirmation.placeholder' | transloco"
+        [label]="'features.auth.forms.auth-register-form.fields.passwordConfirmation.label' | transloco"
+        [help]="'features.auth.forms.auth-register-form.fields.passwordConfirmation.help' | transloco"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
+      <app-button type="submit" variant="primary" [fullWidth]="true">
+        {{ 'features.auth.forms.auth-register-form.buttons.register' | transloco }}
+      </app-button>
+    </app-form-control>
+  </app-form-row>
+</app-form>

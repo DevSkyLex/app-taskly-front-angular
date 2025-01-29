@@ -48,6 +48,7 @@ import {
   PanelRightClose,
   PanelRightOpen,
   Pencil,
+  PencilOff,
   Phone,
   Plus,
   Rocket,
@@ -96,12 +97,20 @@ import { ProfileNavComponent } from '@shared/components/profile/profile-nav/prof
 import { GanttComponent } from '@shared/components/gantt/gantt.component';
 import { InputTextComponent } from '@shared/components/input/input-text/input-text.component';
 import { InputSelectComponent } from '@shared/components/input/input-select/input-select.component';
-import { FormComponent } from './components/form/form.component';
-import { FormControlComponent } from './components/form/form-control/form-control.component';
-import { InputLabelComponent } from './components/input/input-label/input-label.component';
-import { InputErrorComponent } from './components/input/input-error/input-error.component';
-import { InputHelpComponent } from './components/input/input-help/input-help.component';
-import { InputPhoneComponent } from './components/input/input-phone/input-phone.component';
+import { FormComponent } from '@shared/components/form/form.component';
+import { FormControlComponent } from '@shared/components/form/form-control/form-control.component';
+import { InputLabelComponent } from '@shared/components/input/input-label/input-label.component';
+import { InputErrorsComponent } from '@shared/components/input/input-errors/input-errors.component';
+import { InputHelpComponent } from '@shared/components/input/input-help/input-help.component';
+import { InputPhoneComponent } from '@shared/components/input/input-phone/input-phone.component';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { InputStatusIndicatorComponent } from '@shared/components/input/input-status-indicator/input-status-indicator.component';
+import { CardComponent } from '@shared/components/card/card.component';
+import { CardBodyComponent } from '@shared/components/card/card-body/card-body.component';
+import { CardHeaderComponent } from '@shared/components/card/card-header/card-header.component';
+import { CardFooterComponent } from '@shared/components/card/card-footer/card-footer.component';
+import { FormRowComponent } from '@shared/components/form/form-row/form-row.component';
+import { TranslocoModule, TranslocoPipe } from '@jsverse/transloco';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -135,12 +144,18 @@ const Components: Type<any>[] = [
   GanttComponent,
   FormComponent,
   FormControlComponent,
+  FormRowComponent,
   InputLabelComponent,
-  InputErrorComponent,
+  InputErrorsComponent,
   InputHelpComponent,
   InputTextComponent,
   InputSelectComponent,
   InputPhoneComponent,
+  InputStatusIndicatorComponent,
+  CardComponent,
+  CardBodyComponent,
+  CardHeaderComponent,
+  CardFooterComponent,
 ];
 
 @NgModule({
@@ -148,7 +163,6 @@ const Components: Type<any>[] = [
     ...Components,
     ...Directives,
     ...Pipes,
-    
   ],
   imports: [
     CommonModule,
@@ -157,6 +171,9 @@ const Components: Type<any>[] = [
     CdkTableModule,
     CdkAccordionModule,
     ReactiveFormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+    TranslocoModule,
     LucideAngularModule.pick({
       Bell,
       BellOff,
@@ -168,6 +185,7 @@ const Components: Type<any>[] = [
       CalendarDays,
       Check,
       ChevronDown,
+      PencilOff,
       ChevronFirst,
       ChevronLast,
       ChevronLeft,
