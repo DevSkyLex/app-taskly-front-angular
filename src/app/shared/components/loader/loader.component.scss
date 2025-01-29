@@ -3,7 +3,7 @@
 .loader {
   --loader-width: 20px;
   --loader-weight: calc(var(--loader-width) / 5);
-  --loader-color: #000;
+  --loader-color: currentColor;
 
   width: var(--loader-width);
   aspect-ratio: 1;

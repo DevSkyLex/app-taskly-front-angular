@@ -77,7 +77,7 @@
       }
 
       &:focus-visible {
-        --outline-color: #{fn.get-color('primary', '500', .5)};
+        --outline-color: #{fn.get-color('primary', '500', .1)};
         outline: var(--outline-width) solid var(--outline-color);
       }
     }
@@ -100,7 +100,7 @@
       }
 
       &:focus-visible {
-        --outline-color: #{fn.get-color('neutral', '100', .5)};
+        --outline-color: #{fn.get-color('neutral', '100', .1)};
         outline: var(--outline-width) solid var(--outline-color);
       }
     }
@@ -123,7 +123,7 @@
       }
 
       &:focus-visible {
-        --outline-color: #{fn.get-color('neutral', '200', .5)};
+        --outline-color: #{fn.get-color('neutral', '200', .1)};
         outline: var(--outline-width) solid var(--outline-color);
       }
     }
@@ -146,7 +146,7 @@
       }
 
       &:focus-visible {
-        --outline-color: #{fn.get-color('neutral', '100', .5)};
+        --outline-color: #{fn.get-color('neutral', '100', .1)};
         outline: var(--outline-width) solid var(--outline-color);
       }
     }
@@ -169,7 +169,7 @@
       }
 
       &:focus-visible {
-        --outline-color: #{fn.get-color('danger', '500', .25)};
+        --outline-color: #{fn.get-color('danger', '500', .1)};
         outline: var(--outline-width) solid var(--outline-color);
       }
     }

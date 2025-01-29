@@ -1,6 +1,7 @@
 import { Component, computed, input, InputSignal, Signal } from '@angular/core';
 
 export type LoaderVariant =
+  | 'inherit'
   | 'primary'
   | 'secondary'
   | 'success'
@@ -46,7 +47,7 @@ export class LoaderComponent {
    * @type {InputSignal<LoaderVariant>} variant
    */
   public readonly variant: InputSignal<LoaderVariant> = 
-    input<LoaderVariant>('dark');
+    input<LoaderVariant>('inherit');
 
   /**
    * Propriété classes
