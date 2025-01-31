@@ -8,6 +8,17 @@
       "friday": "Vendredi",
       "saturday": "Samedi",
       "sunday": "Dimanche"
+    },
+    "file": {
+      "length": "{{count}} fichier(s) sélectionné(s)",
+      "size": {
+        "bytes": "{{count}} octet",
+        "bytes_plural": "{{count}} octets",
+        "kb": "{{count}} Ko",
+        "mb": "{{count}} Mo",
+        "gb": "{{count}} Go",
+        "tb": "{{count}} To"
+      }
     }
   },
   "validations": {

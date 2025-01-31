@@ -2,6 +2,7 @@
 @let formLabel = label();
 @let formHelp = help();
 @let formErrors = errors();
+@let formFiles = files();
 
 @if (formLabel) {
   <app-input-label [for]="id()" [required]="required()">
@@ -20,11 +21,17 @@
     <i-lucide class="input-file__dropzone-icon" name="upload" [size]="32"/>
     <div class="input-file__dropzone__content">
       <span class="input-file__dropzone__content-title">
-        Glissez et déposez un fichier ici
+        <strong>Glissez et déposez un fichier ici</strong> ou
+        cliquez sur "Parcourir les fichiers"
       </span>
 
       <p class="input-file__dropzone__content-text">
-        {{ files().length ? files().length + ' fichier(s) sélectionné(s)' : 'ou cliquez pour sélectionner un fichier' }}
+        @if (multiple()) {
+          {{ 'common.file.length' | transloco: { count: formFiles.length } }}
+        }
+        @else {
+          {{ 'common.file.size.' + totalSize().unit | transloco: { count: totalSize().value } }}
+        }
       </p>
 
       <app-button
@@ -38,6 +45,31 @@
       </app-button>
     </div>
   </div>
+
+  @if (multiple() && (formFiles.length > 0)) {
+    <div class="input-file__files">
+      <ul class="input-file__list">
+        @for (file of formFiles; track $index) {
+          <li class="input-file__list-style">
+            <div class="input-file__file">
+              <i-lucide class="input-file__file-icon" name="file" [size]="24"/>
+
+              <div class="input-file__file__content">
+                <span class="input-file__file-name">{{ file.name }}</span>
+                <span class="input-file__file-size">
+                  {{ 'common.file.size.' + file.size.unit | transloco: { count: file.size.value } }}
+                </span>
+              </div>
+
+              <app-button (click)="onRemoveFile(file.name)" variant="outlined" size="icon-sm" class="input-file__file-remove">
+                <i-lucide class="input-file__file-remove-icon" name="trash-2" [size]="16"/>
+              </app-button>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  }
 
   <input 
     #input

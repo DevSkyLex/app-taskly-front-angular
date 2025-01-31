@@ -7,7 +7,7 @@
   flex-direction: column;
   gap: var(--gap);
 
-  .input-checkbox {
+  .input-switch {
     --gap: #{fn.get-spacing('xs')};
     
     display: flex;
@@ -21,7 +21,7 @@
     &:focus-visible {
       outline: none;
 
-      .input-checkbox__trigger {
+      .input-switch__trigger {
         --border-color: #{fn.get-color('primary', '500')};
         --outline-color: #{fn.get-color('primary', '500', .1)};
 
@@ -30,24 +30,29 @@
       }
     }
 
-    &:has(&__field:checked) .input-checkbox__trigger {
+    &:has(&__field:checked) .input-switch__trigger {
       --border-color: #{fn.get-color('primary', '500')};
       --background-color: #{fn.get-color('primary', '500')};
       --text-color: #{fn.get-color('neutral', '000')};
+
+      &-indicator {
+        transform: translateX(100%);
+      }
     }
 
     &__trigger {
-      --size: 18px;
+      --size: 20px;
+      --padding: 2px;
       --animation-duration: #{fn.get-animation-timing('normal')};
       --border-color: #{fn.get-color('neutral', '200')};
-      --border-radius: #{fn.get-border-radius('sm')};
-      --background-color: #{fn.get-color('neutral', '000')};
+      --border-radius: #{fn.get-border-radius('full')};
+      --background-color: #{fn.get-color('neutral', '200')};
       --text-color: #{fn.get-color('neutral', '950')};
 
-      width: var(--size);
-      height: var(--size);
+      width: 38px;
+      height: max-content;
       display: grid;
-      place-items: center;
+      padding: var(--padding);
       border: 1px solid var(--border-color);
       background-color: var(--background-color);
       border-radius: var(--border-radius);
@@ -56,6 +61,17 @@
       transition: border-color var(--animation-duration),
                   outline-color var(--animation-duration),
                   background-color var(--animation-duration);
+
+      &-indicator {
+        --background-color:#{fn.get-color('neutral', '000')};
+        --animation-duration: #{fn.get-animation-timing('fast')};
+
+        width: 16px;
+        height: 16px;
+        border-radius: var(--border-radius);
+        background-color: var(--background-color);
+        transition: transform var(--animation-duration);
+      }
     }
 
     &__field {

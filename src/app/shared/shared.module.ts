@@ -71,6 +71,7 @@ import {
   TriangleAlert,
   Upload,
   User,
+  File,
   X,
 } from 'lucide-angular';
 import { TabComponent } from '@shared/components/tab/tab.component';
@@ -123,6 +124,7 @@ import { TocComponent } from '@shared/components/toc/toc.component';
 import { TocItemComponent } from '@shared/components/toc/toc-item/toc-item.component';
 import { TitleDirective } from '@shared/directives/title.directive';
 import { TextDirective } from '@shared/directives/text.directive';
+import { InputSwitchComponent } from './components/input/input-switch/input-switch.component';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
@@ -169,6 +171,7 @@ const Components: Type<any>[] = [
   InputStatusIndicatorComponent,
   InputDatePickerComponent,
   InputCheckboxComponent,
+  InputSwitchComponent,
   CardComponent,
   CardBodyComponent,
   CardHeaderComponent,
@@ -258,6 +261,7 @@ const Components: Type<any>[] = [
       ShieldCheck,
       Tag,
       Text,
+      File,
       Trash2,
       TrendingDown,
       TrendingUp,

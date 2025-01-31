@@ -1,0 +1,37 @@
+@let formControl = control();
+@let formLabel = label();
+@let formHelp = help();
+@let formErrors = errors();
+
+<button type="button" role="checkbox" (click)="toggle()" class="input-switch">
+  <div  class="input-switch__trigger">
+    <span class="input-switch__trigger-indicator"></span>
+  </div>
+
+  <input 
+    class="input-switch__field"
+    [name]="name()"
+    type="checkbox"
+    [checked]="checked()"
+    [required]="required()"
+    [disabled]="disabled()"
+    [readOnly]="readonly()"
+    (blur)="onBlur($event)"
+  >
+
+  @if (formLabel) {
+    <app-input-label [for]="id()" [required]="required()">
+      {{ formLabel }}
+    </app-input-label>
+  }  
+</button>
+
+
+@if (formErrors && formControl?.touched) {
+  <app-input-errors [errors]="formErrors"/>
+}
+@else if (formHelp) {
+  <app-input-help>
+    {{ formHelp }}
+  </app-input-help>
+}

@@ -9,13 +9,16 @@
 }
 
 .input-file {
+  display: flex;
+  flex-direction: column;
+
   &__field {
     display: none;
   }
   
   &__dropzone {
     --border-radius: #{fn.get-border-radius('md')};
-    --padding: #{fn.get-spacing('xl')};
+    --padding: #{fn.get-spacing('xl')} #{fn.get-fluid-spacing('lg')};
     --border-color: #{fn.get-color('neutral', '200')};
     --gap: #{fn.get-spacing('md')};
     --animation-duration: #{fn.get-animation-timing('normal')};
@@ -60,10 +63,11 @@
 
       &-title {
         --font-size: #{fn.get-font-size('md')};
-        --font-weight: #{fn.get-font-weight('semibold')};
+        --line-height: #{fn.get-line-height('relaxed')};
 
+        text-align: center;
         font-size: var(--font-size);
-        font-weight: var(--font-weight);
+        line-height: var(--line-height);
       } 
 
       &-text {
@@ -78,6 +82,77 @@
         --margin-top: #{fn.get-spacing('md')};
         margin-top: var(--margin-top);
       }
+    }
+  }
+
+  &__list {
+    --gap: #{fn.get-spacing('sm')};
+    
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
+
+  &__files {
+    --margin-top: #{fn.get-spacing('md')};
+    --border-radius: #{fn.get-border-radius('md')};
+    --border-color: #{fn.get-color('neutral', '200')};
+    --background-color: #{fn.get-color('neutral', '050')};
+    --padding: #{fn.get-spacing('sm')};
+
+    display: flex;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    padding: var(--padding);
+    background-color: var(--background-color);
+    flex-direction: column;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: var(--margin-top);
+  }
+
+  &__file {
+    --border-radius: #{fn.get-border-radius('md')};
+    --border-color:#{fn.get-color('neutral', '200')};
+    --background-color: #{fn.get-color('neutral', '000')};
+    --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('md')};
+    --gap: #{fn.get-spacing('md')};
+    --font-size: #{fn.get-font-size('sm')};
+
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    display: flex;
+    font-size: var(--font-size);
+    gap: var(--gap);
+
+    &-remove {
+      --margin-left: auto;
+      align-self: center;
+      margin-left: var(--margin-left);
+    }
+
+    &__content {
+      --gap: #{fn.get-spacing('xs')};
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--gap);
+    }
+
+    &-name {
+
+    }
+
+    &-size {
+      --text-color: #{fn.get-color('neutral', '500')};
+      --font-size: #{fn.get-font-size('xs')};
+
+      color: var(--text-color);
+      font-size: var(--font-size);
     }
   }
 }

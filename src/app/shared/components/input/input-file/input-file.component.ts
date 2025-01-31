@@ -26,11 +26,13 @@ import { noop } from 'rxjs';
 
 export type FileInfo = {
   name: string;
-  size: {
-    value: number;
-    unit: string;
-  };
+  size: FileSize;
   type: string;
+};
+
+export type FileSize = {
+  value: number;
+  unit: string;
 };
 
 @Component({
@@ -338,12 +340,21 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
 
     return Array.from(files).map((file: File) => ({
       name: file.name,
-      size: {
-        value: file.size,
-        unit: 'octets',
-      },
-      type: file.type,
+      size: this.formatFileSize(file.size),
+      type: file.type || '*/*',
     }));
+  });
+
+  public readonly totalSize: Signal<FileSize> = computed(() => {
+    const files: FileList | null = this.value();
+
+    if (!files) {
+      return { value: 0, unit: 'bytes' };
+    }
+
+    const totalSize = Array.from(files).reduce((size, file) => size + file.size, 0);
+
+    return this.formatFileSize(totalSize);
   });
   //#endregion
 
@@ -368,6 +379,31 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
      * @see InputFileComponent#setupControl
      */
     this.setupControl();
+  }
+
+  /**
+   * Méthode formatFileSize
+   * 
+   * Formate la taille du fichier
+   * 
+   * @access private
+   * @memberof InputFileComponent
+   * @since 1.0.0
+   * 
+   * @param {number} size - Taille du fichier
+   * 
+   * @returns {FileSize} - Taille du fichier formatée
+   */
+  private formatFileSize(size: number): FileSize {
+    if (size === 0) return { value: 0, unit: 'bytes' };
+
+    const units: string[] = ['bytes_plural', 'kb', 'mb', 'gb', 'tb'];
+
+    const exponent = Math.floor(Math.log(size) / Math.log(1024));
+    const value = parseFloat((size / Math.pow(1024, exponent)).toFixed(2));
+    const unit = units[exponent];
+
+    return { value, unit };
   }
 
   /**
@@ -425,6 +461,21 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
     this.dragging.set(false);
   }
 
+  public onRemoveFile(name: string): void {
+    const files: FileList | null = this.value();
+
+    if (!files) {
+      return;
+    }
+
+    const newFiles: File[] = Array.from(files).filter((file: File) => file.name !== name);
+
+    const dataTransfer = new DataTransfer();
+    newFiles.forEach(file => dataTransfer.items.add(file));
+    this.value.set(newFiles.length ? dataTransfer.files : null);
+    this.onChange(newFiles.length ? dataTransfer.files : null);
+  }
+
   /**
    * Méthode writeValue
    *
@@ -458,7 +509,11 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
   public onFileChange(event: Event): void {
     const files: FileList | null = (event.target as HTMLInputElement).files;
 
-    this.value.set(files);
+    if (this.multiple()) {
+      this.value.set(files);
+      this.onChange(files);
+    }
+
     this.onChange(files);
   }
 
