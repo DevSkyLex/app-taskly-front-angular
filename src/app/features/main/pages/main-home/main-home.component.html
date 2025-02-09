@@ -1,89 +1,39 @@
-<app-input-text
-  placeholder="Search"
-/>
-<app-form-control>
-  <app-input-label [required]="true">
-    Select a Pokémon
-  </app-input-label>
-  
-  <app-input-select
-    [multiple]="true"
-    [options]="[
-      { value: 'bulbasaur', label: 'Bulbasaur' },
-      { value: 'ivysaur', label: 'Ivysaur' },
-      { value: 'venusaur', label: 'Venusaur' },
-      { value: 'charmander', label: 'Charmander' },
-      { value: 'charmeleon', label: 'Charmeleon' },
-      { value: 'charizard', label: 'Charizard' },
-      { value: 'squirtle', label: 'Squirtle' },
-      { value: 'wartortle', label: 'Wartortle' },
-      { value: 'blastoise', label: 'Blastoise' },
-      { value: 'caterpie', label: 'Caterpie' },
-      { value: 'metapod', label: 'Metapod' },
-      { value: 'butterfree', label: 'Butterfree' },
-      { value: 'weedle', label: 'Weedle' },
-      { value: 'kakuna', label: 'Kakuna' },
-      { value: 'beedrill', label: 'Beedrill' },
-      { value: 'pidgey', label: 'Pidgey' },
-      { value: 'pidgeotto', label: 'Pidgeotto' },
-      { value: 'pidgeot', label: 'Pidgeot' },
-      { value: 'rattata', label: 'Rattata' },
-      { value: 'raticate', label: 'Raticate' },
-      { value: 'spearow', label: 'Spearow' },
-      { value: 'fearow', label: 'Fearow' },
-      { value: 'ekans', label: 'Ekans' },
-      { value: 'arbok', label: 'Arbok' },
-      { value: 'pikachu', label: 'Pikachu' },
-      { value: 'raichu', label: 'Raichu' },
-      { value: 'sandshrew', label: 'Sandshrew' },
-      { value: 'sandslash', label: 'Sandslash' },
-      { value: 'nidoran-f', label: 'Nidoran♀' },
-      { value: 'nidorina', label: 'Nidorina' }
-    ]"
-  />
-
-  <app-input-help>
-    Select multiple Pokémon
-  </app-input-help>
-</app-form-control>
+<app-button label="Ajouter une tache" (click)="addTask()"></app-button>
 
 <app-form-control>
-  <app-input-label>
-    Your phone number
-  </app-input-label>
-
-  <app-input-phone
-    [placeholder]="'Phone number'"
-  />
-
-  <app-input-help>
-    We will call you back
-  </app-input-help>
-
-  <app-input-error>
-    Please enter a valid phone number
-  ></app-input-error>
-
-  <app-input-checkbox [required]="true">
-    I agree to the terms and conditions of the website
-  </app-input-checkbox>
-
-
-  <app-input-file
-    [required]="true"
-  >
-    Upload your CV
-  </app-input-file>
-
-  <app-input-date [required]="true">
-    Select a date of birth
-  </app-input-date>
-
-  <app-input-textarea
-    [placeholder]="'Enter your message'"
-  >
-    Enter your message
-  </app-input-textarea>
-
-
+  <div class="home-container">
+    <div class="dashboard-tiles">
+      <div class="tile tile-projects">
+        <h3>Projets actifs</h3>
+        <p>{{ activeProjects }} projets en cours</p>
+      </div>
+      <div class="tile tile-team">
+        <h3>Équipe</h3>
+        <p>{{ teamMembers }} membres actifs</p>
+      </div>
+      <div class="tile tile-deadline">
+        <h3>Prochaine échéance</h3>
+        <p>{{ nextDeadline }}</p>
+      </div>
+      <div class="tile tile-stats">
+        <h3>Statistiques</h3>
+        <p>{{ completedTasks }} tâches terminées</p>
+      </div>
+    </div>
+    
+    <div class="task-tiles">
+      <div class="tile" *ngFor="let task of tasks">
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+        <p class="assigned-to">Assigné à : {{ task.assignedTo }}</p> 
+      </div>
+    </div>
+  </div>
 </app-form-control>
+
+<footer class="footer">
+  <p>&copy; 2025 Taskly. All rights reserved.</p>
+  <nav>
+    <a href="/terms">Conditions</a> | <a href="/contact">Contact</a>
+  </nav>
+</footer>

@@ -72,6 +72,17 @@ export interface Task extends Entity, Timestampable {
   description: string;
 
   /**
+   * Propriété assignedTo
+   * 
+   * Utilisateur assigné à la tâche
+   * 
+   * @memberof Task
+   * @since 1.0.0
+   * 
+   * @type {string} assignedTo
+   */
+
+  /**
    * Propriété status
    * 
    * Statut de la tâche

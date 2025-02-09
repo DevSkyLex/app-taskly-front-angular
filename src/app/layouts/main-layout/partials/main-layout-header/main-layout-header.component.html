@@ -10,6 +10,15 @@
   </section>
 
   <section class="header__section">
+      <!-- Barre de recherche -->
+      <app-input-text placeholder="Rechercher un projet, une tâche...">
+      <i-lucide name="search" size="16"/>
+      </app-input-text>
+
+
+      <app-separator orientation="vertical"/>
+
+    <!-- Notifications -->
     <app-button variant="outlined" size="sm" [loading]="false">
       <i-lucide name="bell" size="16"/>
       <span>Notifications</span>
@@ -20,6 +29,7 @@
     <app-profile-nav
       [username]="'devSkyLex'"
       [email]="'contact@valentin-fortin.pro'"
+    
     />
   </section>
 </header>
