@@ -63,3 +63,27 @@
     }
   }
 }
+/* input-checkbox.component.scss */
+
+:host {
+    display: block;
+    margin: 1rem 0;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox {
+    position: relative;
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    transition: border-color 0.3s ease;
+}

@@ -1,0 +1,17 @@
+<div class="input-container">
+    
+    <textarea
+      [id]="id()"
+      [rows]="['rows']"
+      [cols]="['cols']"
+      [name]="name()"
+      [placeholder]="placeholder()"
+      [value]="value()"
+      [required]="required()"
+      [disabled]="disabled()"
+      [readOnly]="readonly()"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+    ></textarea>
+  </div>
+  

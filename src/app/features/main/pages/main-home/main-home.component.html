@@ -1,0 +1,39 @@
+<app-button label="Ajouter une tache" (click)="addTask()"></app-button>
+
+<app-form-control>
+  <div class="home-container">
+    <div class="dashboard-tiles">
+      <div class="tile tile-projects">
+        <h3>Projets actifs</h3>
+        <p>{{ activeProjects }} projets en cours</p>
+      </div>
+      <div class="tile tile-team">
+        <h3>Équipe</h3>
+        <p>{{ teamMembers }} membres actifs</p>
+      </div>
+      <div class="tile tile-deadline">
+        <h3>Prochaine échéance</h3>
+        <p>{{ nextDeadline }}</p>
+      </div>
+      <div class="tile tile-stats">
+        <h3>Statistiques</h3>
+        <p>{{ completedTasks }} tâches terminées</p>
+      </div>
+    </div>
+    
+    <div class="task-tiles">
+      <div class="tile" *ngFor="let task of tasks">
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+        <p class="assigned-to">Assigné à : {{ task.assignedTo }}</p> 
+      </div>
+    </div>
+  </div>
+</app-form-control>
+
+<footer class="footer">
+  <p>&copy; 2025 Taskly. All rights reserved.</p>
+  <nav>
+    <a href="/terms">Conditions</a> | <a href="/contact">Contact</a>
+  </nav>
+</footer>

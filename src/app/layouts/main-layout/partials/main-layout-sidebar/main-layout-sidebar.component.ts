@@ -96,14 +96,13 @@ export class MainLayoutSidebarComponent {
           label: 'Tableau de bord',
           icon: 'layout-dashboard',
           items: [
-            {
-              label: 'Tableau de bord 1',
-              to: '/dashboard'
-            },
-            {
-              label: 'Tableau de bord 2',
-              to: '/dashboard2'
-            }
+            { label: 'Tableau de bord 1', to: '/dashboard'},
+            { label: 'Tableau de bord 2', to: '/dashboard2'},
+            { label: 'Vue d’ensemble', to: '/dashboard/overview' },
+            { label: 'Projets en cours', to: '/dashboard/projects' },
+            { label: 'Statistiques', to: '/dashboard/stats' },
+            { label: 'Calendrier', to: '/dashboard/calendar' },
+            { label: 'Tâches', to: '/dashboard/tasks' }
           ]
         },
         {
@@ -113,14 +112,32 @@ export class MainLayoutSidebarComponent {
           items: [
             {
               label: 'Utilisateurs',
-              to: '/admin/users'
+              icon: 'users',
+              items: [
+                { label: 'Gérer les utilisateurs', to: '/admin/users' },
+                { label: 'Créer un utilisateur', to: '/admin/users/create' }
+              ]
             },
             {
               label: 'Rôles',
-              to: '/admin/roles'
+              icon: 'shield',
+              items: [
+                { label: 'Gérer les rôles', to: '/admin/roles' },
+                { label: 'Créer un rôle', to: '/admin/roles/create' }
+              ]
             }
           ]
         },
+        {
+          label: 'Paramètres',
+          to: '/admin',
+          icon: 'settings',
+        items: [
+          { label: 'Préférences', to: '/settings/preferences', icon: 'settings' },
+          { label: 'Notifications', to: '/settings/notifications', icon: 'bell' },
+          { label: 'Gamification', to: '/settings/gamification', icon: 'award' }
+        ]
+      }
       ]
     },
     {
