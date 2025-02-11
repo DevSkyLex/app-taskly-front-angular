@@ -1,7 +1,7 @@
 import { Component, computed, inject, Injector, input, InputSignal, model, ModelSignal, Signal, signal, WritableSignal } from '@angular/core';
-import { FormControl, NgControl, ValidationErrors } from '@angular/forms';
-import { Component, computed, forwardRef, inject, Injector, input, InputSignal, model, ModelSignal, OnInit, signal, Signal, WritableSignal } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { FormControl, ValidationErrors } from '@angular/forms';
+
+import { NgControl } from '@angular/forms';
 import { noop } from 'rxjs';
 
 @Component({
@@ -12,6 +12,20 @@ import { noop } from 'rxjs';
   styleUrl: './input-checkbox.component.scss'
 })
 export class InputCheckboxComponent {
+label /**
+ * Propriété checked
+ * @readonly
+ *
+ * Indique si le champ checkbox est coché
+ *
+ * @access public
+ * @memberof InputCheckboxComponent
+ * @since 1.0.0
+ *
+ * @type {ModelSignal<boolean>} checked
+ */() {
+throw new Error('Method not implemented.');
+}
   //#region Propriétés
   /**
    * Propriété checked
@@ -121,79 +135,9 @@ export class InputCheckboxComponent {
    */
   public onChange: (checked: boolean) => void = noop;
 
-  /**
-   * Propriété onTouched
-   * 
-   * Événement déclenché lors de la
-   * modification de la valeur du champ
-   * de saisie
-   * 
-   * @access public
-   * @memberof InputCheckboxComponent
-   * @since 1.0.0
-   * 
-  templateUrl: './input-checkbox.component.html',
-  styleUrl: './input-checkbox.component.scss',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => InputCheckboxComponent),
-    multi: true,
-  }],
-})
-export class InputCheckboxComponent implements OnInit, ControlValueAccessor {
-  // #region Propriétés principales
-  /**
-   * Propriété value : valeur du champ de saisie
-   * @readonly
-   * @access public
-   * @type {ModelSignal<string>} value
-   */
-  public readonly value: ModelSignal<boolean> = 
-  model<boolean>(false);
 
-  /**
-   * Propriété disabled : champ de saisie désactivé
-   * @readonly
-   * @access public
-   * @type {ModelSignal<boolean>} disabled
-   */
-  public readonly disabled: ModelSignal<boolean> = 
-  model<boolean>(false);
-
-  /**
-   * Propriété required : champ de saisie obligatoire
-   * @readonly
-   * @access public
-   * @type {ModelSignal<boolean>} required
-   */
-  public readonly required: ModelSignal<boolean> = 
-  model<boolean>(false);
-
-  /**
-   * Propriété id : identifiant du champ de saisie
-   * @readonly
-   * @access public
-   * @type {InputSignal<string>} id
-   */
-  public readonly id: InputSignal<string> =
-  input<string>(`input-${crypto.randomUUID()}`);
-
-  /**
-   * Propriété label : libellé du champ de saisie
-   * @readonly
-   * @access public
-   * @type {InputSignal<string>} label
-   */
-  public readonly label: InputSignal<string> =
-  input<string>('');
 
   //#region Événements
-  /**
-   * Propriété onChange : événement déclenché lors de la modification de la valeur du champ de saisie
-   * @access public
-   * @type {(value: string) => void} onChange
-   */
-  public onChange: (value: boolean) => void = noop;
 
   /**
    * Propriété onTouched : événement déclenché lors de la perte de focus du champ de saisie
@@ -299,70 +243,9 @@ export class InputCheckboxComponent implements OnInit, ControlValueAccessor {
      */
     return control ? control.errors : null;
   });
-
-  /**
-   * Propriété label
-   * @readonly
-   * 
-   * Libellé du champ de saisie
-   * 
-   * @access public
-   * @memberof InputCheckboxComponent
-   * @since 1.0.0
-   * 
-   * @type {InputSignal<string | null>} label
-   */
-  public readonly label: InputSignal<string | null> =
-    input<string | null>(null);
   //#endregion
 
-  //#region Méthodes
-  /**
-   * Méthode ngOnInit
-   * 
-   * Méthode du cycle de vie du composant
-   * appelée après la construction du composant
-   * 
-   * @access public
-   * @memberof InputCheckboxComponent
-   * @since 1.0.0
-   * 
-   * @returns {void} - Ne retourne rien
-   */
-  public ngOnInit(): void {
-    /**
-     * Configuration du contrôle de 
-     * formulaire
-     * 
-     * @see InputCheckboxComponent#setupControl
-     */
-   * Propriété injector : injecteur de dépendances
-   * @readonly
-   * @access private
-   * @type {Injector} injector
-   */
-  private readonly injector: Injector = inject<Injector>(Injector);
-
-  /**
-   * Propriété ngControl : contrôle de formulaire Angular
-   * @readonly
-   * @access private
-   * @type {WritableSignal<NgControl | null>} ngControl
-   */
-  private readonly ngControl: WritableSignal<NgControl | null> = signal<NgControl | null>(null);
-
-  /**
-   * Propriété control : contrôle de formulaire réactif
-   * @readonly
-   * @access public
-   * @type {Signal<FormControl | null>} control
-   */
-  public readonly control: Signal<FormControl | null> = computed(() => {
-    const ngControl = this.ngControl();
-    return ngControl ? (ngControl.control as FormControl) : null;
-  });
-  // #endregion
-
+ 
   // #region Méthodes
   /**
    * Méthode ngOnInit : Initialisation du composant
@@ -385,17 +268,7 @@ export class InputCheckboxComponent implements OnInit, ControlValueAccessor {
    * 
    * @returns {void} - Ne retourne rien
    */
-  private setupControl(): void {
-    const ngControl: NgControl | null = this.injector.get(NgControl, null);
 
-    if (ngControl) {
-      ngControl.valueAccessor = this;
-    }
-
-   * Méthode setupControl : Configuration du contrôle de formulaire
-   * @access private
-   * @return {void}
-   */
   private setupControl(): void {
     const ngControl = this.injector.get(NgControl, null);
     if (ngControl) ngControl.valueAccessor = this;
@@ -421,31 +294,6 @@ export class InputCheckboxComponent implements OnInit, ControlValueAccessor {
     this.checked.set(checked);
   }
 
-  /**
-   * Méthode registerOnChange
-   * 
-   * Permet d'enregistrer une fonction
-   * de rappel à appeler lors de la 
-   * modification de la valeur du champ
-   * de saisie
-   * 
-   * @access public
-   * @memberof InputCheckboxComponent
-   * @since 1.0.0
-   * 
-   * @param {(checked: boolean) => void} fn - Fonction de rappel
-   * 
-   * @returns {void} - Ne retourne rien
-   */
-  public registerOnChange(fn: (checked: boolean) => void): void {
-   * Méthode writeValue : Écriture de la valeur du champ de saisie
-   * @access public
-   * @param {boolean} value - Valeur du champ de saisie
-   * @return {void}
-   */
-  public writeValue(value: boolean): void {
-    this.value.set(value);
-  }
 
   /**
    * Méthode registerOnChange : Enregistrement de la fonction de rappel lors de la modification de la valeur du champ de saisie
@@ -538,23 +386,6 @@ export class InputCheckboxComponent implements OnInit, ControlValueAccessor {
     this.onTouched();
   }
   //#endregion
-   * Méthode onInput : Gestion de l'événement de saisie
-   * @access public
-   * @param {Event} event - Événement de saisie
-   * @return {void}
-   */
-  public onInput(event: Event): void {
-    const value = (event.target as HTMLInputElement).checked;
-    this.value.set(value);
-    this.onChange(value);
-  }
 
-  /**
-   * Méthode onBlur : Gestion de l'événement de perte de focus
-   * @access public
-   * @return {void}
-   */
-  public onBlur(): void {
-    this.onTouched();
-  }
+  
 }

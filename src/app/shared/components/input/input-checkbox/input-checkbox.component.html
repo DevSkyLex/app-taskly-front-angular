@@ -24,11 +24,11 @@
     (blur)="onBlur($event)"
   >
 
-  @if (formLabel) {
+  <!-- @if (formLabel !== '') {
     <app-input-label [for]="id()" [required]="required()">
       {{ formLabel }}
     </app-input-label>
-  }  
+  }   -->
 </button>
 
 
@@ -46,8 +46,7 @@
       [id]="id()"
       [required]="required()"
       [disabled]="disabled()"
-      [value]="value()"
-      (blur)="onBlur()"
+  
     />
   </div>
   

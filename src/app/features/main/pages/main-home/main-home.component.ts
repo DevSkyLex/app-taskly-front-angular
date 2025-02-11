@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from "@angular/core";
+import { Component } from '@angular/core';
+import { OnInit } from "@angular/core";
 import { TaskService } from "@app/core/services/api/task.service";
 
 
@@ -10,22 +9,12 @@ import { TaskService } from "@app/core/services/api/task.service";
   templateUrl: './main-home.component.html',
   styleUrl: './main-home.component.scss'
 })
-export class MainHomeComponent {
-  public readonly formBuilder: FormBuilder = 
-    inject<FormBuilder>(FormBuilder);
 
-  public readonly formGroup = this.formBuilder.group({
-    phone: [null, [Validators.required]],
-  });
-
-  public ngOnInit(): void {
-    // Désactiver le contrôle phone
-    this.formGroup.controls.phone.enable();
 export class MainHomeComponent implements OnInit {
-  activeProjects: number = 5;  // Exemple de donnée dynamique
-  teamMembers: number = 12;    // Exemple de donnée dynamique
-  nextDeadline: string = '15 février 2025';  // Exemple de donnée dynamique
-  completedTasks: number = 45;  // Exemple de donnée dynamique
+  activeProjects: number = 5;  
+  teamMembers: number = 12;   
+  nextDeadline: string = '15 février 2025'; 
+  completedTasks: number = 45;  
   tasks = [
     { title: 'Tâche 1', description: 'Lorem ipsum dolor sit amet', assignedTo: 'Alice' },
     { title: 'Tâche 2', description: 'Consectetur adipiscing elit', assignedTo: 'Bob' },

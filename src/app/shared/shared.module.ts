@@ -101,12 +101,8 @@ import { ProfileNavComponent } from '@shared/components/profile/profile-nav/prof
 import { GanttComponent } from '@shared/components/gantt/gantt.component';
 import { InputTextComponent } from '@shared/components/input/input-text/input-text.component';
 import { InputSelectComponent } from '@shared/components/input/input-select/input-select.component';
-import { FormComponent } from '@shared/components/form/form.component';
-import { FormControlComponent } from '@shared/components/form/form-control/form-control.component';
-import { InputLabelComponent } from '@shared/components/input/input-label/input-label.component';
+
 import { InputErrorsComponent } from '@shared/components/input/input-errors/input-errors.component';
-import { InputHelpComponent } from '@shared/components/input/input-help/input-help.component';
-import { InputPhoneComponent } from '@shared/components/input/input-phone/input-phone.component';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { InputStatusIndicatorComponent } from '@shared/components/input/input-status-indicator/input-status-indicator.component';
 import { CardComponent } from '@shared/components/card/card.component';
@@ -118,8 +114,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { CalendarComponent } from '@shared/components/calendar/calendar.component';
 import { TranslocoLocaleModule } from '@jsverse/transloco-locale';
 import { InputDatePickerComponent } from '@shared/components/input/input-date-picker/input-date-picker.component';
-import { InputFileComponent } from '@shared/components/input/input-file/input-file.component';
-import { InputCheckboxComponent } from '@shared/components/input/input-checkbox/input-checkbox.component';
+;
 import { PaginatorComponent } from '@shared/components/paginator/paginator.component';
 import { TocComponent } from '@shared/components/toc/toc.component';
 import { TocItemComponent } from '@shared/components/toc/toc-item/toc-item.component';
@@ -129,7 +124,6 @@ import { InputSwitchComponent } from './components/input/input-switch/input-swit
 import { FormComponent } from './components/form/form.component';
 import { FormControlComponent } from './components/form/form-control/form-control.component';
 import { InputLabelComponent } from './components/input/input-label/input-label.component';
-import { InputErrorComponent } from './components/input/input-error/input-error.component';
 import { InputHelpComponent } from './components/input/input-help/input-help.component';
 import { InputPhoneComponent } from './components/input/input-phone/input-phone.component';
 import { InputCheckboxComponent } from './components/input/input-checkbox/input-checkbox.component';
