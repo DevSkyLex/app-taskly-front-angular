@@ -1,7 +1,5 @@
-import { Component, computed, inject, Injector, input, InputSignal, model, ModelSignal, Signal, signal, WritableSignal } from '@angular/core';
-import { FormControl, ValidationErrors } from '@angular/forms';
-
-import { NgControl } from '@angular/forms';
+import { Component, computed, ElementRef, inject, Injector, input, InputSignal, model, ModelSignal, Signal, signal, viewChild, WritableSignal } from '@angular/core';
+import { FormControl, NgControl, ValidationErrors } from '@angular/forms';
 import { noop } from 'rxjs';
 
 @Component({
@@ -12,20 +10,6 @@ import { noop } from 'rxjs';
   styleUrl: './input-checkbox.component.scss'
 })
 export class InputCheckboxComponent {
-label /**
- * Propriété checked
- * @readonly
- *
- * Indique si le champ checkbox est coché
- *
- * @access public
- * @memberof InputCheckboxComponent
- * @since 1.0.0
- *
- * @type {ModelSignal<boolean>} checked
- */() {
-throw new Error('Method not implemented.');
-}
   //#region Propriétés
   /**
    * Propriété checked
@@ -135,13 +119,17 @@ throw new Error('Method not implemented.');
    */
   public onChange: (checked: boolean) => void = noop;
 
-
-
-  //#region Événements
-
   /**
-   * Propriété onTouched : événement déclenché lors de la perte de focus du champ de saisie
+   * Propriété onTouched
+   * 
+   * Événement déclenché lors de la
+   * modification de la valeur du champ
+   * de saisie
+   * 
    * @access public
+   * @memberof InputCheckboxComponent
+   * @since 1.0.0
+   * 
    * @type {() => void} onTouched
    */
   public onTouched: () => void = noop;
@@ -243,16 +231,43 @@ throw new Error('Method not implemented.');
      */
     return control ? control.errors : null;
   });
+
+  /**
+   * Propriété label
+   * @readonly
+   * 
+   * Libellé du champ de saisie
+   * 
+   * @access public
+   * @memberof InputCheckboxComponent
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<string | null>} label
+   */
+  public readonly label: InputSignal<string | null> =
+    input<string | null>(null);
   //#endregion
 
- 
-  // #region Méthodes
+  //#region Méthodes
   /**
-   * Méthode ngOnInit : Initialisation du composant
+   * Méthode ngOnInit
+   * 
+   * Méthode du cycle de vie du composant
+   * appelée après la construction du composant
+   * 
    * @access public
-   * @return {void}
+   * @memberof InputCheckboxComponent
+   * @since 1.0.0
+   * 
+   * @returns {void} - Ne retourne rien
    */
   public ngOnInit(): void {
+    /**
+     * Configuration du contrôle de 
+     * formulaire
+     * 
+     * @see InputCheckboxComponent#setupControl
+     */
     this.setupControl();
   }
 
@@ -268,10 +283,13 @@ throw new Error('Method not implemented.');
    * 
    * @returns {void} - Ne retourne rien
    */
-
   private setupControl(): void {
-    const ngControl = this.injector.get(NgControl, null);
-    if (ngControl) ngControl.valueAccessor = this;
+    const ngControl: NgControl | null = this.injector.get(NgControl, null);
+
+    if (ngControl) {
+      ngControl.valueAccessor = this;
+    }
+
     this.ngControl.set(ngControl);
   }
 
@@ -294,14 +312,23 @@ throw new Error('Method not implemented.');
     this.checked.set(checked);
   }
 
-
   /**
-   * Méthode registerOnChange : Enregistrement de la fonction de rappel lors de la modification de la valeur du champ de saisie
+   * Méthode registerOnChange
+   * 
+   * Permet d'enregistrer une fonction
+   * de rappel à appeler lors de la 
+   * modification de la valeur du champ
+   * de saisie
+   * 
    * @access public
-   * @param {(value: boolean) => void} fn - Fonction de rappel
-   * @return {void}
+   * @memberof InputCheckboxComponent
+   * @since 1.0.0
+   * 
+   * @param {(checked: boolean) => void} fn - Fonction de rappel
+   * 
+   * @returns {void} - Ne retourne rien
    */
-  public registerOnChange(fn: (value: boolean) => void): void {
+  public registerOnChange(fn: (checked: boolean) => void): void {
     this.onChange = fn;
   }
 
@@ -320,10 +347,6 @@ throw new Error('Method not implemented.');
    * @param {() => void} fn - Fonction de rappel
    * 
    * @returns {void} - Ne retourne rien
-   * Méthode registerOnTouched : Enregistrement de la fonction de rappel lors de la perte de focus du champ de saisie
-   * @access public
-   * @param {() => void} fn - Fonction de rappel
-   * @return {void}
    */
   public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
@@ -342,10 +365,6 @@ throw new Error('Method not implemented.');
    * @param {boolean} disabled - Indique si le champ de saisie est désactivé
    * 
    * @returns {void} - Ne retourne rien
-   * Méthode setDisabledState : Définition de l'état du champ de saisie
-   * @access public
-   * @param {boolean} disabled - Champ de saisie désactivé
-   * @return {void}
    */
   public setDisabledState(disabled: boolean): void {
     this.disabled.set(disabled);
@@ -378,14 +397,10 @@ throw new Error('Method not implemented.');
    * @memberof InputCheckboxComponent
    * @since 1.0.0
    * 
-   * @param {Event} event - Événement
-   * 
    * @returns {void} - Ne retourne rien
    */
-  public onBlur(event: Event): void {
+  public onBlur(): void {
     this.onTouched();
   }
   //#endregion
-
-  
 }

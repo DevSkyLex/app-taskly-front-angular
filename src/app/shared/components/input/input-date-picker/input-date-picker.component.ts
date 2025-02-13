@@ -161,10 +161,10 @@ export class InputDatePickerComponent<M extends CalendarMode = 'single'> impleme
    * @memberof InputDatePickerComponent
    * @since 1.0.0
    *
-   * @type {InputSignal<string>} placeholder
+   * @type {InputSignal<string | null>} placeholder
    */
-  public readonly placeholder: InputSignal<string> = 
-    input<string>('Sélectionner une date');
+  public readonly placeholder: InputSignal<string | null> = 
+    input<string | null>(null);
 
   /**
    * Propriété id

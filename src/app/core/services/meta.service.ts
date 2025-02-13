@@ -1,6 +1,6 @@
 import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Data, NavigationEnd, Router } from '@angular/router';
 import { environment } from '@env/environment';
 import { filter } from 'rxjs';
 
@@ -145,11 +145,52 @@ export class MetaService {
    * @returns {void} - Ne retourne rien
    */
   private updateBreadcrumbs(): void {
-    const breadcrumbs: Breadcrumbs = this.generateBreadcrumbs(
-      this.activatedRoute.root
-    );
+    let route: ActivatedRoute = this.activatedRoute.root;
+    let breadcrumbs: Breadcrumb[] = [];
+    let url: string = '';
 
+    while (route.firstChild) {
+      route = route.firstChild;
+  
+      const routeData: Data = route.snapshot?.data;
+      const breadcrumbData: Breadcrumbs = routeData ? routeData['breadcrumb'] : undefined;
+  
+      if (Array.isArray(breadcrumbData)) {
+        const resolvedBreadcrumbs = breadcrumbData.map((breadcrumb: Breadcrumb) => {
+          return {
+            label: breadcrumb.label,
+            url: this.resolveUrl(breadcrumb.url, route)
+          };
+        });
+        breadcrumbs = resolvedBreadcrumbs;
+      }
+    }
+  
     this._breadcrumbs.set(breadcrumbs);
+  }
+
+  /**
+   * Méthode resolveUrl
+   * 
+   * Résout l'URL de la route
+   * 
+   * @access private
+   * @memberof MetaService
+   * @since 1.0.0
+   * 
+   * @param {string} url - URL
+   * @param {ActivatedRoute} route - Route
+   * 
+   * @returns {string} - URL résolue
+   */
+  private resolveUrl(url: string, route: ActivatedRoute): string {
+    let resolvedUrl = url;
+
+    Object.keys(route.snapshot.params).forEach(paramKey => {
+      resolvedUrl = resolvedUrl.replace(`:${paramKey}`, route.snapshot.params[paramKey]);
+    });
+
+    return resolvedUrl;
   }
 
   /**
@@ -166,55 +207,8 @@ export class MetaService {
   private updateTitle(): void {
     let route: ActivatedRoute = this.activatedRoute;
     while (route.firstChild) route = route.firstChild;
-    const title: string = route.snapshot.data['title'];
+    const title: string = route.snapshot?.data?.['title'];
     if (title) this.title = title;
-  }
-
-  /**
-   * Méthode generateBreadcrumbs
-   * 
-   * Génère le fil d'Ariane
-   * 
-   * @access private
-   * @memberof MetaService
-   * @since 1.0.0
-   * 
-   * @param {ActivatedRoute} route - Route active
-   * @param {string} url - URL
-   * @param {Breadcrumbs} breadcrumbs - Fil d'Ariane
-   * 
-   * @returns {Breadcrumbs} - Fil d'Ariane
-   */
-  private generateBreadcrumbs(
-    route: ActivatedRoute, 
-    url: string = '', 
-    breadcrumbs: Breadcrumbs = []
-  ): Breadcrumbs {
-    const children: ActivatedRoute[] = route.children;
-
-    if (children.length === 0) 
-      return breadcrumbs;
-
-    for (const child of children) {
-      const routeURL: string = child.snapshot.url.map(segment => segment.path)
-        .join('/');
-
-      if (routeURL !== '')
-        url += `/${routeURL}`;
-
-      const label: string = child.snapshot.data['breadcrumb'];
-
-      if (label) {
-        breadcrumbs.push({ 
-          label: label, 
-          url: url 
-        });
-      }
-
-      return this.generateBreadcrumbs(child, url, breadcrumbs);
-    }
-
-    return breadcrumbs;
   }
 
   /**

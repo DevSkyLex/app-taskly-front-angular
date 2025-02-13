@@ -26,6 +26,7 @@ export class TextDirective {
    * 
    * @type {InputSignal<TextVariant>} variant
    */
-  public readonly variant: InputSignal<TextVariant> = input<TextVariant>('dark');
+  public readonly variant: InputSignal<TextVariant> = 
+    input<TextVariant>('dark');
   //#endregion
 }

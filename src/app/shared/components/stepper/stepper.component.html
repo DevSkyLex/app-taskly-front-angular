@@ -1,0 +1,60 @@
+<div class="stepper">
+  <header class="stepper__header">
+    @for (step of steps(); track $index) {
+      <button 
+        (click)="select($index)" 
+        [attr.data-stepper-selected]="selected() === step"
+        [attr.data-stepper-completed]="step.completed()"
+        [attr.data-stepper-valid]="step.valid()"
+        type="button" 
+        class="stepper__header__step"
+      >
+        @if (step.icon(); as icon) {
+          <i-lucide [name]="icon" [size]="16" class="stepper__header__step-indicator"/>
+        }
+        @else if (step.completed()) {
+          @if (step.valid()) {
+            <i-lucide name="check" size="16" class="stepper__header__step-indicator"/>
+          } 
+          @else {
+            <i-lucide name="alert-circle" size="16" class="stepper__header__step-indicator"/>
+          }
+        }
+        @else {
+          <span class="stepper__header__step-indicator">
+            {{ $index + 1 }}
+          </span>
+        }
+
+        <span class="stepper__header__step-label">
+          {{ step.label() }}
+        </span>
+        
+        @if (step.description(); as description) {
+          <p class="stepper__header__step-description">
+            {{ description }}
+          </p>
+        }
+      </button>
+    }
+  </header>
+
+  @if (selected()?.stepControl; as control) {
+    <ng-container *ngTemplateOutlet="withControl; context: { control: control }"/>
+  } 
+  @else {
+    <ng-container *ngTemplateOutlet="withoutControl"/>
+  }
+</div>
+
+<ng-template #withControl let-formControl="control">
+  <section class="stepper__content">
+    <ng-container [ngTemplateOutlet]="selected()?.template() || null"/>
+  </section>
+</ng-template>
+
+<ng-template #withoutControl>
+  <section class="stepper__content">
+    <ng-container [ngTemplateOutlet]="selected()?.template() || null"/>
+  </section>
+</ng-template>

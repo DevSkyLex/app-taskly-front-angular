@@ -135,7 +135,7 @@
     }
 
     &__content {
-      --gap: #{fn.get-spacing('xs')};
+      --gap: #{fn.get-spacing('2xs')};
 
       display: flex;
       flex-direction: column;
@@ -155,57 +155,4 @@
       font-size: var(--font-size);
     }
   }
-}
-/* input-file.component.scss */
-
-:host {
-    display: block;
-    width: 100%;
-    margin: 1rem 0;
-}
-
-.input-file-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.input-file-label {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover,
-    &:focus {
-        background-color: #0056b3;
-    }
-}
-
-.input-file {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-@media (max-width: 600px) {
-    .input-file-label {
-        width: 100%;
-        text-align: center;
-    }
 }

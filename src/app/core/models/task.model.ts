@@ -13,9 +13,9 @@ import { Project } from "@core/models/project.model";
  * @author Valentin FORTIN <contact@valentin-fortin.pro>
  */
 export enum TaskStatus {
-  TODO = 'todo',
-  IN_PROGRESS = 'in_progress',
-  DONE = 'done'
+  TODO = 'TODO',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DONE = 'DONE'
 }
 
 /**
@@ -29,10 +29,10 @@ export enum TaskStatus {
  * @author Valentin FORTIN <contact@valentin-fortin.pro>
  */
 export enum TaskPriority {
-  LOW = 'low',
-  MEDIUM = 'medium',
-  HIGH = 'high',
-  URGENT = 'urgent'
+  LOW = 'LOW',
+  MEDIUM = 'MEDIUM',
+  HIGH = 'HIGH',
+  CRITICAL = 'CRITICAL'
 }
 
 /**
@@ -153,32 +153,6 @@ export interface Task extends Entity, Timestampable {
    * @type {Task[]} children
    */
   children: Task[];
-
-  /**
-   * Propriété root
-   * 
-   * Indique si la tâche est une 
-   * racine
-   * 
-   * @memberof Task
-   * @since 1.0.0
-   * 
-   * @type {string} root
-   */
-  root: string;
-
-  /**
-   * Propriété leaf
-   * 
-   * Indique si la tâche est 
-   * une feuille
-   * 
-   * @memberof Task
-   * @since 1.0.0
-   * 
-   * @type {boolean} leaf
-   */
-  leaf: boolean;
   //#endregion
 }
 

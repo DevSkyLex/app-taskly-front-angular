@@ -1,17 +1,45 @@
-<div class="input-container">
-    
-    <textarea
-      [id]="id()"
-      [rows]="['rows']"
-      [cols]="['cols']"
-      [name]="name()"
-      [placeholder]="placeholder()"
-      [value]="value()"
-      [required]="required()"
-      [disabled]="disabled()"
-      [readOnly]="readonly()"
-      (input)="onInput($event)"
-      (blur)="onBlur()"
-    ></textarea>
-  </div>
-  
+@let formControl = control();
+@let formLabel = label();
+@let formHelp = help();
+@let formErrors = errors();
+
+@if (formLabel) {
+  <app-input-label [for]="id()" [required]="required()">
+    {{ formLabel }}
+  </app-input-label>
+}
+
+<div class="input-textarea">
+  <textarea 
+    class="input-textarea__field"
+    [id]="id()"
+    [name]="name()"
+    [placeholder]="placeholder()"
+    [value]="value()"
+    [required]="required()"
+    [disabled]="disabled()"
+    [readOnly]="readonly()"
+    [rows]="rows()"
+    [cols]="cols()"
+    (input)="onInput($event)"
+    (blur)="onBlur($event)"
+  ></textarea>
+
+  @if (formControl && formControl.touched) {
+    <div class="input-textarea__status">
+      <app-input-status-indicator 
+        [status]="formControl.status"
+      />
+    </div>
+  }
+</div>
+
+
+@if (formErrors && formControl?.touched) {
+  <app-input-errors [errors]="formErrors"/>
+}
+@else if (formHelp) {
+  <app-input-help>
+    {{ formHelp }}
+  </app-input-help>
+}

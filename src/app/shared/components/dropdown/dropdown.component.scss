@@ -1,0 +1,13 @@
+@use 'abstracts/functions' as fn;
+
+.dropdown {
+  &__trigger {
+    &-indicator {
+      --margin-left: auto;
+      --text-color:#{fn.get-color('neutral', '500')};
+
+      color: var(--text-color);
+      margin-left: var(--margin-left);
+    }
+  }
+}

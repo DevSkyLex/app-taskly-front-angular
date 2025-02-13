@@ -24,7 +24,8 @@ export class ProjectService {
    * 
    * @type {string} API_URL
    */
-  private static readonly API_URL: string = environment.api.taskly.url;
+  private static readonly API_URL: string = 
+    environment.api.taskly.url;
 
   /**
    * Propriété httpClient

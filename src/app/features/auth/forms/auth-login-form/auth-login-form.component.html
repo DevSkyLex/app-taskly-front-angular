@@ -27,6 +27,15 @@
 
   <app-form-row>
     <app-form-control>
+      <app-input-checkbox
+        formControlName="rememberMe"
+        [label]="'features.auth.forms.auth-login-form.fields.rememberMe.label' | transloco"
+      />
+    </app-form-control>
+  </app-form-row>
+
+  <app-form-row>
+    <app-form-control>
       <app-button type="submit" variant="primary" [fullWidth]="true">
         {{ 'features.auth.forms.auth-login-form.buttons.login' | transloco }}
       </app-button>

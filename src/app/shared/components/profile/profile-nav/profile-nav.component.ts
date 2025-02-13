@@ -1,5 +1,7 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { Component, input, InputSignal, signal, WritableSignal } from '@angular/core';
+import { Component, inject, input, InputSignal, signal, WritableSignal } from '@angular/core';
+import { User } from '@app/core/models/user.model';
+import { Store } from '@ngrx/store';
 import { AnimationTiming, AppAnimations } from '@shared/animations/app.animations';
 
 @Component({
@@ -46,52 +48,40 @@ export class ProfileNavComponent {
     signal<boolean>(false);
 
   /**
-   * Propriété avatar
+   * Propriété user
    * @readonly
    * 
-   * Source de l'avatar
+   * Utilisateur connecté
    * 
    * @access public
    * @memberof ProfileNavComponent
    * @since 1.0.0
    * 
-   * @type {InputSignal<string | null>} avatar
+   * @type {InputSignal<User>} user
    */
-  public readonly avatar: InputSignal<string | null> =
-    input<string | null>(null);
+  public readonly user: InputSignal<User> =
+    input.required<User>();
 
   /**
-   * Propriété username
+   * Propriété store
    * @readonly
    * 
-   * Nom d'utilisateur
+   * Store de l'application
    * 
-   * @access public
+   * @access private
    * @memberof ProfileNavComponent
    * @since 1.0.0
    * 
-   * @type {InputSignal<string>} username
+   * @type {Store} store
    */
-  public readonly username: InputSignal<string> =
-    input.required<string>();
-
-  /**
-   * Propriété email
-   * @readonly
-   * 
-   * Adresse email
-   * 
-   * @access public
-   * @memberof ProfileNavComponent
-   * @since 1.0.0
-   * 
-   * @type {InputSignal<string | null>} email
-   */
-  public readonly email: InputSignal<string | null> =
-    input<string | null>(null);
+  private readonly store: Store =
+    inject<Store>(Store);
   //#endregion
 
   //#region Méthodes
+  public logout(): void {
+  }
+
   /**
    * Méthode toggle
    * 
@@ -136,5 +126,7 @@ export class ProfileNavComponent {
   public hide(): void {
     this.open.set(false);
   }
+
+
   //#endregion
 }

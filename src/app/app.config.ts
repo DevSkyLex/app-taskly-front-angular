@@ -31,6 +31,9 @@ import { projectReducer } from '@core/stores/project/project.reducer';
 import { ProjectEffects } from '@core/stores/project/project.effects';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { provideTranslocoLocale } from '@jsverse/transloco-locale';
+import { AuthEffects } from './core/stores/auth/auth.effects';
+import { authReducer } from './core/stores/auth/auth.reducer';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -38,7 +41,9 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([])),
+    provideHttpClient(withFetch(), withInterceptors([
+      AuthInterceptor,
+    ])),
     provideNgxWebstorage(
       withLocalStorage(),
       withSessionStorage(),
@@ -64,10 +69,12 @@ export const appConfig: ApplicationConfig = {
       }
     }),
     provideStore({
-      project: projectReducer
+      auth: authReducer,
+      project: projectReducer,
     }),
     provideEffects([
-      ProjectEffects
+      AuthEffects,
+      ProjectEffects,
     ]),
     provideStoreDevtools({ 
       maxAge: 25, 

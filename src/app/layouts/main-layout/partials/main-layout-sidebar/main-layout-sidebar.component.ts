@@ -93,79 +93,34 @@ export class MainLayoutSidebarComponent {
       title: 'Général',
       items: [
         {
-          label: 'Tableau de bord',
+          label: 'Découvrir l\'application',
           icon: 'layout-dashboard',
-          items: [
-            { label: 'Tableau de bord 1', to: '/dashboard'},
-            { label: 'Tableau de bord 2', to: '/dashboard2'},
-            { label: 'Vue d’ensemble', to: '/dashboard/overview' },
-            { label: 'Projets en cours', to: '/dashboard/projects' },
-            { label: 'Statistiques', to: '/dashboard/stats' },
-            { label: 'Calendrier', to: '/dashboard/calendar' },
-            { label: 'Tâches', to: '/dashboard/tasks' }
-          ]
+          to: ''
         },
-        {
-          label: 'Administration',
-          to: '/admin',
-          icon: 'settings',
-          items: [
-            {
-              label: 'Utilisateurs',
-              icon: 'users',
-              items: [
-                { label: 'Gérer les utilisateurs', to: '/admin/users' },
-                { label: 'Créer un utilisateur', to: '/admin/users/create' }
-              ]
-            },
-            {
-              label: 'Rôles',
-              icon: 'shield',
-              items: [
-                { label: 'Gérer les rôles', to: '/admin/roles' },
-                { label: 'Créer un rôle', to: '/admin/roles/create' }
-              ]
-            }
-          ]
-        },
-        {
-          label: 'Paramètres',
-          to: '/admin',
-          icon: 'settings',
-        items: [
-          { label: 'Préférences', to: '/settings/preferences', icon: 'settings' },
-          { label: 'Notifications', to: '/settings/notifications', icon: 'bell' },
-          { label: 'Gamification', to: '/settings/gamification', icon: 'award' }
-        ]
-      }
       ]
     },
     {
-      title: 'Administration',
+      title: 'Entreprise',
       items: [
         {
-          label: 'Journalisation',
-          icon: 'scroll-text',
-          items: [
-            {
-              label: 'Audit',
-              to: '/audit'
-            }
-          ]
+          label: 'Les entreprises',
+          icon: 'building-2',
+          to: '/companies'
         },
         {
-          label: 'Sécurité',
-          icon: 'shield-check',
-          items: [
-            {
-              label: 'Profil',
-              to: '/profile'
-            },
-            {
-              label: 'Mot de passe',
-              to: '/password'
-            }
-          ]
+          label: 'Appareils connectés',
+          icon: 'radio',
+          to: '/devices'
+        },
+        {
+          label: 'Actionneurs',
+          icon: 'arrow-big-up-dash',
+          to: '/actuators'
+        },
+        {
+          label: 'Audits',
+          icon: 'scroll-text',
+          to: '/companies/audits'
         }
       ]
     }

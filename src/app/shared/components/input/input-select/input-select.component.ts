@@ -58,6 +58,21 @@ export class InputSelectComponent<T> implements OnInit, ControlValueAccessor {
     model<T[] | T>([]);
 
   /**
+   * Propriété searchable
+   * 
+   * Indique si la select
+   * dispose d'une fonction de recherche
+   * 
+   * @access public
+   * @memberof InputSelectComponent
+   * @since 1.0.0
+   * 
+   * @type {InputSignal<boolean>} searchable
+   */
+  public readonly searchable: 
+    InputSignal<boolean> = input<boolean>(false);
+
+  /**
    * Propriété multiple
    * @readonly
    * 

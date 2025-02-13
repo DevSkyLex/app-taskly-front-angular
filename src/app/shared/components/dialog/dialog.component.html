@@ -1,0 +1,29 @@
+<ng-template>
+  <div class="dialog" role="dialog" @popAnimation>
+    @if (header() || closable()) {
+      <section class="dialog__header">
+        @if (header(); as header) {
+          <div class="dialog__header__content">
+            <ng-container [ngTemplateOutlet]="header.template()"/>
+          </div>
+        }
+
+        @if (closable(); as closable) {
+          <app-button (click)="hide()" class="dialog__header__closable" variant="outlined" size="icon-sm">
+            <i-lucide name="x" [size]="16"/>
+          </app-button>
+        }
+      </section>
+    }
+
+    <section class="dialog__body">
+      <ng-container [ngTemplateOutlet]="body().template()"/>
+    </section>
+
+    @if (footer(); as footer) {
+      <section class="dialog__footer">
+        <ng-container [ngTemplateOutlet]="footer.template()"/>
+      </section>
+    }
+  </div>
+</ng-template>

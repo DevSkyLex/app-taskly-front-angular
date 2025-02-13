@@ -1,0 +1,48 @@
+@use 'abstracts/functions' as fn;
+
+.badge {
+  --background-color: #{fn.get-color('success', '050')};
+  --padding: #{fn.get-spacing('2xs')} #{fn.get-spacing('xs')};
+  --border-radius: #{fn.get-border-radius('md')};
+  --text-color: #{fn.get-color('success', '700')};
+  --gap: .5em;
+
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: var(--gap);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+
+  &--primary {
+    --background-color: #{fn.get-color('primary', '050')};
+    --text-color: #{fn.get-color('primary', '700')};
+  }
+
+  &--secondary {
+    --background-color: #{fn.get-color('neutral', '100')};
+    --text-color: #{fn.get-color('neutral', '700')};
+  }
+
+  &--success {
+    --background-color: #{fn.get-color('success', '050')};
+    --text-color: #{fn.get-color('success', '700')};
+  }
+
+  &--warning {
+    --background-color: #{fn.get-color('warning', '050')};
+    --text-color: #{fn.get-color('warning', '700')};
+  }
+
+  &--danger {
+    --background-color: #{fn.get-color('danger', '050')};
+    --text-color: #{fn.get-color('danger', '700')};
+  }
+
+  &--info {
+    --background-color: #{fn.get-color('info', '050')};
+    --text-color: #{fn.get-color('info', '700')};
+  }
+}

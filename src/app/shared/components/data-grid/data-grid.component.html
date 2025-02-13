@@ -1,0 +1,48 @@
+<div class="data-grid">
+  <section class="data-grid__grid">
+    @if (data().length > 0) {
+      @for (item of data(); track $index) {
+        <ng-container
+          [ngTemplateOutlet]="element().template"
+          [ngTemplateOutletContext]="{ $implicit: item }"
+        />
+      }
+    } @else {
+      <div class="data-grid__empty">
+        <i-lucide
+          class="data-grid__empty-icon"
+          name="x" 
+          [size]="48"
+        />
+        
+        <div class="data-grid__empty__content">
+          <span class="data-grid__empty__content-title">
+            Aucun élément trouvé
+          </span>
+
+          <p class="data-grid__empty__content-text">
+            Aucune élément ne correspond à votre recherche.
+          </p>
+        </div>
+
+        <app-button 
+          class="data-grid__empty__refresh"
+          variant="outlined" 
+          size="sm" 
+          (click)="onRefresh()"
+        >
+          <i-lucide name="rotate-cw" [size]="16" />
+          <span>Rafraîchir</span>
+        </app-button>
+      </div>
+    }
+  </section>
+
+  <section class="data-grid__pagination">
+    <app-paginator
+      [(currentPage)]="page"
+      [(pageSize)]="pageSize"
+      [totalItems]="totalItems()"
+    />
+  </section>
+</div>

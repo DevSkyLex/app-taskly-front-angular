@@ -36,8 +36,11 @@
           {{ formDateRange.start | translocoDate: { dateStyle: 'medium' } }} - {{ formDateRange.end | translocoDate: { dateStyle: 'medium' } }}
         }
       }
-      @else {
+      @else if (placeholder()) {
         {{ placeholder() }}
+      }
+      @else {
+        {{ 'shared.components.input.input-date-picker.placeholder' | transloco }}
       }
     </span>
 

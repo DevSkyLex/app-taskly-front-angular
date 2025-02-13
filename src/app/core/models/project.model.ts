@@ -2,6 +2,7 @@ import { Entity } from "@core/models/entity.model";
 import { SoftDeleteable } from "@core/models/softdeleteable.model";
 import { Timestampable } from "@core/models/timestampable.model";
 import { Task } from "@core/models/task.model";
+import { ProjectMember } from "./project-member.model";
 
 /**
  * Interface Project
@@ -51,6 +52,18 @@ export interface Project extends Entity, Timestampable, SoftDeleteable {
    * @type {Task[]} tasks
    */
   tasks: Task[];
+
+  /**
+   * Propriété members
+   * 
+   * Liste des membres du projet
+   * 
+   * @memberof Project
+   * @since 1.0.0
+   * 
+   * @type {ProjectMember[]} members
+   */
+  members: ProjectMember[];
   //#endregion
 }
 
@@ -64,11 +77,9 @@ export interface Project extends Entity, Timestampable, SoftDeleteable {
  * 
  * @author Valentin FORTIN <contact@valentin-fortin.pro>
  */
-export type NewProjectPayload = Omit<Project, 
-  | "id"
-  | "createdAt" 
-  | "updatedAt" 
-  | "deletedAt"
+export type NewProjectPayload = Pick<Project,
+  | "name"
+  | "description"
 >;
 
 /**
@@ -81,9 +92,7 @@ export type NewProjectPayload = Omit<Project,
  * 
  * @author Valentin FORTIN <contact@valentin-fortin.pro>
  */
-export type UpdateProjectPayload = Partial<Omit<Project, 
-  | "id"
-  | "createdAt" 
-  | "updatedAt" 
-  | "deletedAt"
+export type UpdateProjectPayload = Partial<Pick<Project,
+  | "name"
+  | "description"
 >>;

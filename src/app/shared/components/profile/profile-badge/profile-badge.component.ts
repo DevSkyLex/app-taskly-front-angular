@@ -1,4 +1,5 @@
-import { Component, input, InputSignal } from '@angular/core';
+import { Component, computed, input, InputSignal, Signal } from '@angular/core';
+import { User } from '@app/core/models/user.model';
 
 @Component({
   selector: 'app-profile-badge',
@@ -9,48 +10,52 @@ import { Component, input, InputSignal } from '@angular/core';
 export class ProfileBadgeComponent {
   //#region Propriétés
   /**
-   * Propriété avatar
+   * Propriété user
    * @readonly
    * 
-   * Source de l'avatar
+   * Utilisateur connecté
    * 
    * @access public
    * @memberof ProfileBadgeComponent
    * @since 1.0.0
    * 
-   * @type {InputSignal<string | null>} avatar
+   * @type {InputSignal<User>} user
    */
-  public readonly avatar: InputSignal<string | null> =
-    input<string | null>(null);
+  public readonly user: InputSignal<User> =
+    input.required<User>();
 
   /**
-   * Propriété username
+   * Propriété initials
    * @readonly
    * 
-   * Nom d'utilisateur
+   * Initiales de l'utilisateur
    * 
    * @access public
    * @memberof ProfileBadgeComponent
    * @since 1.0.0
    * 
-   * @type {InputSignal<string>} username
+   * @type {Signal<string>} initials
    */
-  public readonly username: InputSignal<string> =
-    input.required<string>();
+  public readonly initials: Signal<string> = computed(() => {
+    const user: User = this.user();
+    return user.firstName.charAt(0) + user.lastName.charAt(0);
+  });
 
   /**
-   * Propriété email
+   * Propriété fullName
    * @readonly
    * 
-   * Adresse email
+   * Nom complet de l'utilisateur
    * 
    * @access public
    * @memberof ProfileBadgeComponent
    * @since 1.0.0
    * 
-   * @type {InputSignal<string | null>} email
+   * @type {Signal<string>} fullName
    */
-  public readonly email: InputSignal<string | null> =
-    input<string | null>(null);
+  public readonly fullName: Signal<string> = computed(() => {
+    const user: User = this.user();
+    return `${user.firstName} ${user.lastName}`;
+  });
   //#endregion
 }

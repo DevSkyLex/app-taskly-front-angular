@@ -174,13 +174,6 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
    * @memberof InputFileComponent
    * @since 1.0.0
    *
-
-
-  //#region Événements
- 
-  /**
-   * Propriété onTouched : événement déclenché lors de la perte de focus du champ de saisie
-   * @access public
    * @type {() => void} onTouched
    */
   public onTouched: () => void = noop;
@@ -210,9 +203,6 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
    * @memberof InputFileComponent
    * @since 1.0.0
    *
-   * Propriété injector : injecteur de dépendances
-   * @readonly
-   * @access private
    * @type {Injector} injector
    */
   private readonly injector: Injector = inject<Injector>(Injector);
@@ -368,15 +358,26 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
   });
   //#endregion
 
-
-
-  // #region Méthodes
+  //#region Méthodes
   /**
-   * Méthode ngOnInit : Initialisation du composant
+   * Méthode ngOnInit
+   *
+   * Méthode du cycle de vie du composant
+   * appelée après la construction du composant
+   *
    * @access public
-   * @return {void}
+   * @memberof InputFileComponent
+   * @since 1.0.0
+   *
+   * @returns {void} - Ne retourne rien
    */
   public ngOnInit(): void {
+    /**
+     * Configuration du contrôle de
+     * formulaire
+     *
+     * @see InputFileComponent#setupControl
+     */
     this.setupControl();
   }
 
@@ -516,20 +517,34 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
     this.onChange(files);
   }
 
-
-
-
-  
   /**
-   * Méthode registerOnChange
+   * Méthode onBlur
    *
-   * Enregistre l'évènement de changement de valeur
+   * Gère l'évènement de perte de focus
+   * du champ de fichier
+   *
+   * @access public
+   * @memberof InputFileComponent
+   * @since 1.0.0
+   * 
+   * @param {Event} event - Évènement de perte de focus
+   *
+   * @returns {void} - Rien
+   */
+  public onBlur(event: Event): void {
+    this.onTouched();
+  }
+
+  /**
+   * Méthode registerOnTouched
+   *
+   * Enregistre l'évènement de toucher du champ
    *
    * @access public
    * @memberof InputFileComponent
    * @since 1.0.0
    *
-   * @param {(value: FileList | null) => void} fn - Fonction de changement de valeur
+   * @param {() => void} fn - Fonction de toucher du champ
    *
    * @returns {void} - Rien
    */
@@ -549,10 +564,6 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
    * @param {() => void} fn - Fonction de toucher du champ
    *
    * @returns {void} - Rien
-   * Méthode registerOnTouched : Enregistrement de la fonction de rappel lors de la perte de focus du champ de saisie
-   * @access public
-   * @param {() => void} fn - Fonction de rappel
-   * @return {void}
    */
   public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
@@ -575,14 +586,4 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
     this.disabled.set(isDisabled);
   }
   //#endregion
-
-
-  /**
-   * Méthode onBlur : Gestion de l'événement de perte de focus
-   * @access public
-   * @return {void}
-   */
-  public onBlur(): void {
-    this.onTouched();
-  }
 }

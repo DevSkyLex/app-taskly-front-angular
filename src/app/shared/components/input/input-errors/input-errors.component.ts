@@ -29,6 +29,18 @@ export class InputErrorsComponent {
   public readonly errors: InputSignal<ValidationErrors | null> = 
     input<ValidationErrors | null>(null);
 
+  /**
+   * Propriété violations
+   * @readonly
+   * 
+   * Définit les violations du contrôle
+   * 
+   * @access public
+   * @memberof InputErrorsComponent
+   * @since 1.0.0
+   * 
+   * @type {Signal<Violation[]>} violations
+   */
   public readonly violations: Signal<Violation[]> = computed(() => {
     const errors = this.errors();
 

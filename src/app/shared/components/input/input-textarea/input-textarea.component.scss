@@ -1,33 +1,87 @@
+@use 'abstracts/functions' as fn;
+
 :host {
-    display: block;
-    width: 100%;
-}
+  --background-color: #{fn.get-color('neutral', '000')};
+  --border-radius: #{fn.get-border-radius('md')};
+  --border-color: #{fn.get-color('neutral', '200')};
 
-textarea {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-    min-height: 100px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
+  --focus-border-color: #{fn.get-color('primary', '500')};
+  --focus-outline-color: #{fn.get-color('primary', '500', .1)};
+  --focus-outline-width: 3px;
 
-    &:focus {
-        border-color: #007bff;
+  --gap: #{fn.get-spacing('2xs')};
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+
+  &:is(.ng-invalid.ng-touched) {
+    --focus-border-color: #{fn.get-color('danger', '500')};
+    --focus-outline-color: #{fn.get-color('danger', '500', .1)};
+  }
+
+  .input-textarea {
+    display: flex;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+
+    &:is(:focus-within) {
+      --border-color: var(--focus-border-color);
+
+      outline: var(--focus-outline-width) solid var(--focus-outline-color);
+      outline-offset: 0;
+    }
+
+    & > * {
+      --animation-duration: #{fn.get-animation-timing('normal')};
+
+      border-block: 1px solid var(--border-color);
+      transition: border-color var(--animation-duration),
+                  outline-color var(--animation-duration);
+
+      &:first-child {
+        border-top-left-radius: var(--border-radius);
+        border-bottom-left-radius: var(--border-radius);
+        border-left: 1px solid var(--border-color);
+        border-block: 1px solid var(--border-color);
+      }
+
+      &:last-child {
+        border-top-right-radius: var(--border-radius);
+        border-bottom-right-radius: var(--border-radius);
+        border-right: 1px solid var(--border-color);
+        border-block: 1px solid var(--border-color);
+      }
+    }
+
+    &__field {
+      --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('md')};
+      --font-size: #{fn.get-font-size('md')};
+
+      padding: var(--padding);
+      font-size: var(--font-size);
+      min-width: auto;
+      flex: 1;
+      border: none;
+      appearance: none;
+
+      &:focus-visible {
         outline: none;
+      }
+
+      &::placeholder {
+        --font-size: #{fn.get-font-size('sm')};
+        --text-color: #{fn.get-color('neutral', '400')};
+        color: var(--text-color);
+        font-size: var(--font-size);
+      }
     }
 
-    &:disabled {
-        background-color: #f5f5f5;
-        cursor: not-allowed;
+    &__status {
+      --padding: #{fn.get-spacing('sm')} #{fn.get-spacing('md')};
+      padding: var(--padding);
+      display: flex;
+      justify-content: center;
     }
-}
-
-@media (max-width: 600px) {
-    textarea {
-        font-size: 0.875rem;
-        padding: 0.4rem;
-    }
+  }
 }

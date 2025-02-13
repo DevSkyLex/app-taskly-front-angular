@@ -22,6 +22,7 @@
 
   .input-text {
     display: flex;
+    width: 100%;
     background-color: var(--background-color);
     border-radius: var(--border-radius);
 
@@ -60,8 +61,10 @@
 
       padding: var(--padding);
       font-size: var(--font-size);
-      flex: 1;
+      min-width: 0;
+      flex-grow: 1;
       border: none;
+      appearance: none;
 
       &:focus-visible {
         outline: none;

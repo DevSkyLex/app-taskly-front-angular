@@ -43,8 +43,10 @@
     (overlayOutsideClick)="hide()"
     (detach)="hide()"
   >
-    <app-command @popAnimation>
-      <app-command-input placeholder="Recherche..."/>
+    <app-command [style]="{ minWidth: '100px' }" @popAnimation>
+      @if (searchable()) {
+        <app-command-input placeholder="Recherche..."/>
+      }
       <app-command-list>
         <app-command-empty>
           Aucune option trouvée.

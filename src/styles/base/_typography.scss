@@ -1,7 +1,6 @@
 @use 'abstracts/functions' as fn;
 
 .text {
-  --margin-bottom: .25em;
   --font-size: #{fn.get-font-size('md')};
   --font-weight: #{fn.get-font-weight('regular')};
   --line-height: #{fn.get-line-height('loose')};
@@ -9,7 +8,11 @@
   font-size: var(--font-size);
   font-weight: var(--font-weight);
   line-height: var(--line-height);
-  margin-bottom: var(--margin-bottom);
+
+  &:is(p) {
+    --margin-bottom: .75em;
+    margin-bottom: var(--margin-bottom);
+  }
 
   &--light {
     --text-color: #{fn.get-color('neutral', '000')};
@@ -24,6 +27,81 @@
   &--muted {
     --text-color: #{fn.get-color('neutral', '500')};
     color: var(--text-color);
+  }
+}
+
+.link {
+  --font-weight: #{fn.get-font-weight('medium')};
+  --animation-duration: #{fn.get-animation-timing('normal')};
+
+  font-weight: var(--font-weight);
+  
+  text-decoration: none;
+
+  &:is(:hover, :focus-visible) {
+    --text-decoration: underline;
+    transition: color var(--animation-duration);
+    text-decoration: var(--text-decoration);
+  }
+
+  &--primary {
+    --text-color: #{fn.get-color('primary', '500')};
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --text-color: #{fn.get-color('primary', '600')};
+      color: var(--text-color);
+    }
+  }
+
+  &--secondary {
+    --text-color: #{fn.get-color('secondary', '500')};
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --text-color: #{fn.get-color('secondary', '600')};
+      color: var(--text-color);
+    }
+  }
+
+  &--success {
+    --text-color: #{fn.get-color('success', '500')};
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --text-color: #{fn.get-color('success', '600')};
+      color: var(--text-color);
+    }
+  }
+
+  &--warning {
+    --text-color: #{fn.get-color('warning', '500')};
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --text-color: #{fn.get-color('warning', '600')};
+      color: var(--text-color);
+    }
+  }
+
+  &--danger {
+    --text-color: #{fn.get-color('danger', '500')};
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --text-color: #{fn.get-color('danger', '600')};
+      color: var(--text-color);
+    }
+  }
+
+  &--info {
+    --text-color: #{fn.get-color('info', '500')};
+    color: var(--text-color);
+
+    &:is(:hover, :focus-visible) {
+      --text-color: #{fn.get-color('info', '600')};
+      color: var(--text-color);
+    }
   }
 }
 

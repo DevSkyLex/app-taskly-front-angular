@@ -1,3 +1,6 @@
+<!-- @let user = user$ | async;
+@let profile = profile$ | async; -->
+
 <header class="header">
   <section class="header__section">
     <app-button (click)="sidebarService.toggle()" variant="outlined" size="icon-sm" [loading]="false">
@@ -16,26 +19,8 @@
   </section>
 
   <section class="header__section">
-      <!-- Barre de recherche -->
-      <app-input-text placeholder="Rechercher un projet, une tâche...">
-      <i-lucide name="search" size="16"/>
-      </app-input-text>
-
-
-      <app-separator orientation="vertical"/>
-
-    <!-- Notifications -->
-    <app-button variant="outlined" size="sm" [loading]="false">
-      <i-lucide name="bell" size="16"/>
-      <span>Notifications</span>
-    </app-button>
-    
-    <app-separator orientation="vertical"/>
-
-    <app-profile-nav
-      [username]="'devSkyLex'"
-      [email]="'contact@valentin-fortin.pro'"
-    
-    />
+    <!-- @if (user && profile) {
+      <app-profile-nav [user]="user"/>
+    } -->
   </section>
 </header>

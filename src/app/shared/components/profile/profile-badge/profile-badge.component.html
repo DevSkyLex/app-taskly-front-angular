@@ -1,19 +1,21 @@
+@let profile = user();
+
 <div class="profile-badge" role="group">
   <app-avatar 
     class="profile-badge__avatar"
-    [ariaLabel]="username() + ' avatar'"
-    [fallback]="username() | slice: 0:1"
-    [src]="avatar()"
+    [ariaLabel]="profile.email + ' avatar'"
+    [fallback]="initials()"
+    [src]="profile.avatar || null"
     [size]="36"
   />
 
   <div class="profile-badge__info">
     <span class="profile-badge__info-username">
-      {{ username() }}
+      {{ fullName() | titlecase }}
     </span>
 
     <span class="profile-badge__info-email">
-      {{ email() }}
+      {{ profile.email }}
     </span>
   </div>
 </div>

@@ -66,7 +66,7 @@
 
   &__content {
     --background-color: #{fn.get-color('neutral', '000')};
-    --padding: #{fn.get-spacing('2xl')};
+    --padding: #{fn.get-spacing('lg')};
 
     padding: var(--padding);
     background-color: var(--background-color);

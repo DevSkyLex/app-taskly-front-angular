@@ -1,4 +1,9 @@
-
+import { NgModule, Type } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkTableModule } from '@angular/cdk/table';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 import { 
   Bell,
   BellOff,
@@ -69,17 +74,23 @@ import {
   User,
   File,
   X,
+  ChartArea,
+  Database,
+  Signal,
+  Vibrate,
+  SquareKanban,
+  ArrowBigUpDash,
+  ToggleLeft,
+  Radio,
+  Ban,
+  Download,
+  MoveLeft,
 } from 'lucide-angular';
 import { TabComponent } from '@shared/components/tab/tab.component';
 import { TabGroupComponent } from '@shared/components/tab/tab-group/tab-group.component';
 import { TabLabelDirective } from '@shared/directives/tab-label.directive';
-import { CommonModule } from '@angular/common';
-import { NgModule, Type } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { CdkTableModule } from '@angular/cdk/table';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { TooltipComponent } from '@shared/components/tooltip/tooltip.component';
 import { TooltipDirective } from '@shared/directives/tooltip.directive';
 import { ButtonComponent } from '@shared/components/button/button.component';
@@ -98,11 +109,14 @@ import { CommandListComponent } from '@shared/components/command/command-list/co
 import { CommandSeparatorComponent } from '@shared/components/command/command-separator/command-separator.component';
 import { CommandShortcutComponent } from '@shared/components/command/command-shortcut/command-shortcut.component';
 import { ProfileNavComponent } from '@shared/components/profile/profile-nav/profile-nav.component';
-import { GanttComponent } from '@shared/components/gantt/gantt.component';
 import { InputTextComponent } from '@shared/components/input/input-text/input-text.component';
 import { InputSelectComponent } from '@shared/components/input/input-select/input-select.component';
-
+import { FormComponent } from '@shared/components/form/form.component';
+import { FormControlComponent } from '@shared/components/form/form-control/form-control.component';
+import { InputLabelComponent } from '@shared/components/input/input-label/input-label.component';
 import { InputErrorsComponent } from '@shared/components/input/input-errors/input-errors.component';
+import { InputHelpComponent } from '@shared/components/input/input-help/input-help.component';
+import { InputPhoneComponent } from '@shared/components/input/input-phone/input-phone.component';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { InputStatusIndicatorComponent } from '@shared/components/input/input-status-indicator/input-status-indicator.component';
 import { CardComponent } from '@shared/components/card/card.component';
@@ -114,29 +128,48 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { CalendarComponent } from '@shared/components/calendar/calendar.component';
 import { TranslocoLocaleModule } from '@jsverse/transloco-locale';
 import { InputDatePickerComponent } from '@shared/components/input/input-date-picker/input-date-picker.component';
-;
+import { InputFileComponent } from '@shared/components/input/input-file/input-file.component';
+import { InputCheckboxComponent } from '@shared/components/input/input-checkbox/input-checkbox.component';
 import { PaginatorComponent } from '@shared/components/paginator/paginator.component';
 import { TocComponent } from '@shared/components/toc/toc.component';
 import { TocItemComponent } from '@shared/components/toc/toc-item/toc-item.component';
 import { TitleDirective } from '@shared/directives/title.directive';
 import { TextDirective } from '@shared/directives/text.directive';
-import { InputSwitchComponent } from './components/input/input-switch/input-switch.component';
-import { FormComponent } from './components/form/form.component';
-import { FormControlComponent } from './components/form/form-control/form-control.component';
-import { InputLabelComponent } from './components/input/input-label/input-label.component';
-import { InputHelpComponent } from './components/input/input-help/input-help.component';
-import { InputPhoneComponent } from './components/input/input-phone/input-phone.component';
-import { InputCheckboxComponent } from './components/input/input-checkbox/input-checkbox.component';
-import { InputDateComponent } from './components/input/input-date/input-date.component';
-import { InputFileComponent } from './components/input/input-file/input-file.component';
-import { InputTimeComponent } from './components/input/input-time/input-time.component';
+import { InputSwitchComponent } from '@shared/components/input/input-switch/input-switch.component';
+import { ResizableHandleComponent } from '@shared/components/resizable/resizable-handle/resizable-handle.component';
+import { ResizablePanelComponent } from '@shared/components/resizable/resizable-panel/resizable-panel.component';
+import { ResizablePanelGroupComponent } from '@shared/components/resizable/resizable-panel-group/resizable-panel-group.component';
+import { StepperComponent } from '@shared/components/stepper/stepper.component';
+import { StepperStepComponent } from '@shared/components/stepper/stepper-step/stepper-step.component';
+import { StepperNextDirective, StepperPreviousDirective } from '@shared/directives/stepper.directive';
+import { DataTableColumnComponent } from '@shared/components/data-table/data-table-column/data-table-column.component';
+import { DataTableComponent } from '@shared/components/data-table/data-table.component';
+import { DataTableCellDirective, DataTableFooterCellDirective, DataTableHeaderCellDirective } from '@shared/directives/data-table.directive';
+import { BadgeComponent } from '@shared/components/badge/badge.component';
+import { DataGridComponent } from '@shared/components/data-grid/data-grid.component';
+import { DataGridItemDirective } from './directives/data-grid.directive';
 import { InputTextareaComponent } from './components/input/input-textarea/input-textarea.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { DialogBodyComponent } from './components/dialog/dialog-body/dialog-body.component';
+import { DialogHeaderComponent } from './components/dialog/dialog-header/dialog-header.component';
+import { DialogFooterComponent } from './components/dialog/dialog-footer/dialog-footer.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { DropdownTriggerComponent } from './components/dropdown/dropdown-trigger/dropdown-trigger.component';
+import { DropdownContentComponent } from './components/dropdown/dropdown-content/dropdown-content.component';
+import { LinkDirective } from './directives/link.directive';
 
 const Directives: Type<any>[] = [
   TabLabelDirective,
   TooltipDirective,
   TitleDirective,
-  TextDirective
+  TextDirective,
+  StepperNextDirective,
+  StepperPreviousDirective,
+  DataTableCellDirective,
+  DataTableFooterCellDirective,
+  DataTableHeaderCellDirective,
+  DataGridItemDirective,
+  LinkDirective,
 ];
 
 const Pipes: Type<any>[] = [
@@ -163,7 +196,6 @@ const Components: Type<any>[] = [
   CommandListComponent,
   CommandSeparatorComponent,
   CommandShortcutComponent,
-  GanttComponent,
   FormComponent,
   FormControlComponent,
   FormRowComponent,
@@ -174,6 +206,7 @@ const Components: Type<any>[] = [
   InputSelectComponent,
   InputPhoneComponent,
   InputFileComponent,
+  InputTextareaComponent,
   InputStatusIndicatorComponent,
   InputDatePickerComponent,
   InputCheckboxComponent,
@@ -186,12 +219,22 @@ const Components: Type<any>[] = [
   PaginatorComponent,
   TocComponent,
   TocItemComponent,
-  InputCheckboxComponent,
-  InputDateComponent,
-  InputFileComponent,
-  InputTextareaComponent,
-  InputTimeComponent,
-
+  ResizableHandleComponent,
+  ResizablePanelComponent,
+  ResizablePanelGroupComponent,
+  StepperComponent,
+  StepperStepComponent,
+  DataTableColumnComponent,
+  DataTableComponent,
+  BadgeComponent,
+  DataGridComponent,
+  DialogComponent,
+  DialogBodyComponent,
+  DialogHeaderComponent,
+  DialogFooterComponent,
+  DropdownComponent,
+  DropdownTriggerComponent,
+  DropdownContentComponent,
 ];
 
 @NgModule({
@@ -199,7 +242,6 @@ const Components: Type<any>[] = [
     ...Components,
     ...Directives,
     ...Pipes,
-
   ],
   imports: [
     CommonModule,
@@ -212,19 +254,30 @@ const Components: Type<any>[] = [
     NgxMaskPipe,
     TranslocoModule,
     TranslocoLocaleModule,
+    CdkStepperModule,
     LucideAngularModule.pick({
       Bell,
       BellOff,
       BookOpenCheck,
+      ChartArea,
+      Vibrate,
+      SquareKanban,
+      Database,
       Bot,
       Building,
       RefreshCw,
       ChevronsUpDown,
+      ArrowBigUpDash,
+      ToggleLeft,
+      Ban,
+      Download,
       Building2,
       CalendarDays,
+      MoveLeft,
       Check,
       ChevronDown,
       PencilOff,
+      Radio,
       Save,
       ChevronFirst,
       ChevronLast,
@@ -259,6 +312,7 @@ const Components: Type<any>[] = [
       PanelRightOpen,
       Pencil,
       Phone,
+      Signal,
       Plus,
       Rocket,
       RotateCw,

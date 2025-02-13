@@ -15,7 +15,6 @@
       class="input-phone__format__trigger"
       (click)="toggle()"
       type="button"
-      [id]="id()"
       cdkOverlayOrigin
       #trigger="cdkOverlayOrigin"
     >
@@ -81,6 +80,7 @@
     class="input-phone__field"
     type="tel"
     [name]="name()"
+    [id]="id()"
     [mask]="format().mask"
     [placeholder]="placeholder()"
     [value]="value()"
@@ -91,14 +91,13 @@
     (blur)="onBlur($event)"
   />
 
-  <div class="input-phone__status">
-    @if (formControl) {
+  @if (formControl && formControl.touched) {
+    <div class="input-phone__status">
       <app-input-status-indicator 
         [status]="formControl.status"
-        [visible]="formControl.touched"
       />
-    }
-  </div>
+    </div>
+  }
 </div>
 
 @if (formErrors && formControl?.touched) {

@@ -1,0 +1,52 @@
+@use 'abstracts/functions' as fn;
+
+.dialog {
+  --dialog-padding: #{fn.get-spacing('lg')};
+  --dialog-border-color: #{fn.get-color('neutral', '200')};
+  --dialog-border-radius: #{fn.get-border-radius('lg')};
+  --dialog-shadow-color: #{fn.get-color('neutral', '950', .1)};
+  --dialog-background-color: #{fn.get-color('neutral', '000')};
+  --dialog-min-width: 500px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: var(--dialog-min-width);
+  max-width: 100%;
+  border-radius: var(--dialog-border-radius);
+  background-color: var(--dialog-background-color);
+  box-shadow: 0 4px 6px -1px var(--dialog-shadow-color), 
+              0 2px 4px -2px var(--dialog-shadow-color);
+  
+  & > * {
+    padding-inline: var(--dialog-padding);
+    border-inline: 1px solid var(--dialog-border-color);
+
+    &:first-child {
+      border-top: 1px solid var(--dialog-border-color);
+      border-top-left-radius: var(--dialog-border-radius);
+      border-top-right-radius: var(--dialog-border-radius); 
+      padding-block: var(--dialog-padding);
+    }
+
+    &:last-child {
+      border-bottom: 1px solid var(--dialog-border-color);
+      border-bottom-left-radius: var(--dialog-border-radius);
+      border-bottom-right-radius: var(--dialog-border-radius);
+      padding-block: var(--dialog-padding);
+    }
+  }
+
+  &__header {
+    --gap: #{fn.get-spacing('md')};
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+
+    &__closable {
+      --margin-left: auto;
+      margin-left: var(--margin-left);
+    }
+  }
+}

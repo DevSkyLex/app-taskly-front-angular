@@ -10,7 +10,6 @@
 
   &__page {
     --padding: #{fn.get-spacing('xl')};
-
     padding: var(--padding);
     display: flex;
     flex-direction: column;

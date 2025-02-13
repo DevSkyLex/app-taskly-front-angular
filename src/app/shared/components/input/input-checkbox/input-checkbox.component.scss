@@ -17,10 +17,9 @@
     position: relative;
     gap: var(--gap);
     width: max-content;
+    outline: none;
 
     &:focus-visible {
-      outline: none;
-
       .input-checkbox__trigger {
         --border-color: #{fn.get-color('primary', '500')};
         --outline-color: #{fn.get-color('primary', '500', .1)};
@@ -62,28 +61,4 @@
       display: none;
     }
   }
-}
-/* input-checkbox.component.scss */
-
-:host {
-    display: block;
-    margin: 1rem 0;
-}
-
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-}
-
-.checkbox {
-    position: relative;
-    display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-right: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-    transition: border-color 0.3s ease;
 }

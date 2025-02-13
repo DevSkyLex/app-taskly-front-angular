@@ -1,0 +1,79 @@
+@use 'abstracts/functions' as fn;
+
+.data-grid {
+  --gap: #{fn.get-spacing('md')};
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+
+  &__grid {
+    --gap: #{fn.get-spacing('lg')};
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: var(--gap);
+  }
+
+  &__pagination {
+    --gap: #{fn.get-spacing('md')};
+    
+    display: flex;
+    justify-content: right;
+    gap: var(--gap);
+  }
+
+  &__empty {
+    --padding: #{fn.get-spacing('2xl')} #{fn.get-spacing('md')};
+    --border-color: #{fn.get-color('neutral', '200')};
+    --border-radius: #{fn.get-border-radius('md')};
+    --gap: #{fn.get-spacing('md')};
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    flex-direction: column;
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+    width: 100%;
+    gap: var(--gap);
+    grid-column: 1 / -1;
+
+    &-icon {
+      --text-color: #{fn.get-color('danger', '500')};
+      color: var(--text-color);
+    }
+
+    &__content {
+      --gap: #{fn.get-spacing('xs')};
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--gap);
+
+      &-title {
+        --font-size: #{fn.get-font-size('md')};
+        --font-weight: #{fn.get-font-weight('semibold')};
+
+        font-size: var(--font-size);
+        font-weight: var(--font-weight);
+      } 
+
+      &-text {
+        --font-size: #{fn.get-font-size('sm')};
+        --text-color: #{fn.get-color('neutral', '500')};
+
+        font-size: var(--font-size);
+        color: var(--text-color);
+      }
+    }
+
+    &__refresh {
+      --margin-top: #{fn.get-spacing('md')};
+      margin-top: var(--margin-top);
+    }
+  }
+}

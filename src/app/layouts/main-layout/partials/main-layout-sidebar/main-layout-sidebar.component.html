@@ -88,10 +88,16 @@
         @else {
           <a
             class="sidebar__group-list-link"
-            [routerLink]="item.route"
+            [routerLink]="item.to"
             routerLinkActive="sidebar__group-list-link--active"
+            [appTooltip]="item.label"
+            [appTooltipDisabled]="sidebarService.expanded()"
+            [appTooltipPlacement]="'right'"
           >
-            <span class="sidebar-label sidebar-collapse">{{ item.label }}</span>
+            @if (item.icon) { <i-lucide [name]="item.icon" [size]="18"/> }
+            <span class="sidebar-label sidebar-collapse">
+              {{ item.label }}
+            </span>
           </a>
         }
       }

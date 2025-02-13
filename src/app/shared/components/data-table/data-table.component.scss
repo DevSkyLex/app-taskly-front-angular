@@ -1,0 +1,190 @@
+@use 'abstracts/functions' as fn;
+
+.datatable {
+  --border-color: #{fn.get-color('neutral', '200')};
+  --background-color: #{fn.get-color('neutral', '000')};
+
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+
+  &-wrapper {
+    --gap: #{fn.get-spacing('md')};
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: var(--gap);
+
+    &__toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &-selection {
+        --font-size: #{fn.get-font-size('sm')};
+        font-size: var(--font-size);
+      }
+
+      &-paginator {
+        --gap: #{fn.get-spacing('md')};
+        gap: var(--gap);
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  &__cell {
+    --gap: #{fn.get-spacing('sm')};
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+
+  }
+
+  &__empty {
+    --padding: #{fn.get-spacing('2xl')} #{fn.get-spacing('md')};
+    --gap: #{fn.get-spacing('md')};
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: var(--padding);
+    width: 100%;
+    gap: var(--gap);
+
+    &-icon {
+      --text-color: #{fn.get-color('danger', '500')};
+      color: var(--text-color);
+    }
+
+    &__content {
+      --gap: #{fn.get-spacing('xs')};
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--gap);
+
+      &-title {
+        --font-size: #{fn.get-font-size('md')};
+        --font-weight: #{fn.get-font-weight('semibold')};
+
+        font-size: var(--font-size);
+        font-weight: var(--font-weight);
+      } 
+
+      &-text {
+        --font-size: #{fn.get-font-size('sm')};
+        --text-color: #{fn.get-color('neutral', '500')};
+
+        font-size: var(--font-size);
+        color: var(--text-color);
+      }
+    }
+
+    &__refresh {
+      --margin-top: #{fn.get-spacing('md')};
+      margin-top: var(--margin-top);
+    }
+  }
+
+  &__header__cell, &__footer__cell {
+    &:has(.datatable__cell-icon) {
+      cursor: pointer;
+    }
+
+    .datatable__cell-icon {
+      --margin-left: auto;
+      margin-left: var(--margin-left);
+    }
+  }
+
+  &__cell-icon {
+    &[data-datatable-column-sort="asc"] {
+      & > *:first-child {
+        --stroke-color: #{fn.get-color('neutral', '700')};
+        stroke: var(--stroke-color);
+      }
+    
+      & > *:last-child {
+        --stroke-color: #{fn.get-color('neutral', '300')};
+        stroke: var(--stroke-color);
+      }
+    }
+
+    &[data-datatable-column-sort="desc"] {
+      & > *:first-child {
+        --stroke-color: #{fn.get-color('neutral', '300')};
+        stroke: var(--stroke-color);
+      }
+    
+      & > *:last-child {
+        --stroke-color: #{fn.get-color('neutral', '700')};
+        stroke: var(--stroke-color);
+      }
+    }
+  }
+
+  &__header {
+    &__row {
+      --border-color: #{fn.get-color('neutral', '200')};
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    &__cell {
+      --text-weight: #{fn.get-font-weight('semibold')};
+      --text-color: #{fn.get-color('neutral', '700')};
+      --font-size: #{fn.get-font-size('sm')};
+      --padding: #{fn.get-spacing('xs')} #{fn.get-spacing('sm')};
+
+      font-weight: var(--text-weight);
+      color: var(--text-color);
+      font-size: var(--font-size);
+      padding: var(--padding);
+    }
+  }
+
+  &__body {
+    &__row:is(:nth-child(even)) {
+      --background-color: #{fn.get-color('neutral', '050', .5)};
+      --border-color: #{fn.get-color('neutral', '200')};
+
+      border: 1px solid var(--border-color);
+      background-color: var(--background-color);
+    }
+
+    &__cell {
+      --padding: #{fn.get-spacing('xs')} #{fn.get-spacing('sm')};
+      padding: var(--padding);;
+    }
+  }
+
+  &__footer {
+    &__row {
+      --border-color: #{fn.get-color('neutral', '200')};
+      border-top: 1px solid var(--border-color);
+    }
+
+    &__cell {
+      --text-weight: #{fn.get-font-weight('semibold')};
+      --text-color: #{fn.get-color('neutral', '700')};
+      --font-size: #{fn.get-font-size('sm')};
+      --padding: #{fn.get-spacing('xs')} #{fn.get-spacing('sm')};
+
+      font-weight: var(--text-weight);
+      color: var(--text-color);
+      font-size: var(--font-size);
+      padding: var(--padding);
+    }
+  }
+
+  &__header__row, &__footer__row {
+    text-align: left;
+  }
+}

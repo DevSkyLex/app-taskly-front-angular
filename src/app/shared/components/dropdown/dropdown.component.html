@@ -1,0 +1,33 @@
+<div class="dropdown">
+  <app-button 
+    class="dropdown__trigger"
+    variant="outlined" 
+    size="sm" 
+    (click)="toggle()"
+    cdkOverlayOrigin
+    #dropdownTrigger="cdkOverlayOrigin"
+  >
+    <div class="dropdown__trigger__content">
+      <ng-container [ngTemplateOutlet]="trigger().template()"/>
+    </div>
+
+    <i-lucide
+      class="dropdown__trigger-indicator"
+      name="chevrons-up-down"
+      [size]="16"
+    />
+  </app-button>
+
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="dropdownTrigger"
+    [cdkConnectedOverlayOpen]="visible()"
+    [cdkConnectedOverlayOffsetY]="2"
+    (overlayOutsideClick)="hide()"
+    (detach)="hide()"
+  >
+    <div class="dropdown__content" @popAnimation>
+      <ng-container [ngTemplateOutlet]="content().template()"/>
+    </div>
+  </ng-template>
+</div>

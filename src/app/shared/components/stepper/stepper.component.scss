@@ -1,0 +1,111 @@
+@use 'abstracts/functions' as fn;
+
+.stepper {
+  --step-selected-color: #{fn.get-color('primary', '500')};
+  --step-valid-color: #{fn.get-color('success', '500')};
+  --step-invalid-color: #{fn.get-color('danger', '500')};
+  --step-default-color: #{fn.get-color('neutral', '200')};
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: 
+    "header"
+    "content";
+    
+  &__header {
+    --margin-bottom: #{fn.get-spacing('xl')};
+
+    display: flex;
+    grid-area: header;
+    margin-bottom: var(--margin-bottom);
+
+    &__step {
+      --gap: #{fn.get-spacing('xs')};
+      --font-size: #{fn.get-font-size('md')};
+
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--gap);
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: var(--font-size);
+
+      &:is(:hover, :focus-visible) & {
+        &-indicator {
+          --border-color: #{fn.get-color('neutral', '300')};
+          border-color: var(--border-color);
+        }
+      }
+
+      &[data-stepper-valid="true"][data-stepper-completed="true"] 
+      & {
+        &-indicator {
+          --background-color: var(--step-valid-color);
+          --border-color: var(--step-valid-color);
+          --text-color: #{fn.get-color('neutral', '000')};
+
+          border-color: var(--border-color);
+          background-color: var(--background-color);
+          color: var(--text-color);
+        }
+      }
+
+      &[data-stepper-valid="false"][data-stepper-completed="true"] 
+      & {
+        &-indicator {
+          --background-color: var(--step-invalid-color);
+          --border-color: var(--step-invalid-color);
+          --text-color: #{fn.get-color('neutral', '000')};
+
+          border-color: var(--border-color);
+          background-color: var(--background-color);
+          color: var(--text-color);
+        }
+      }
+
+      &[data-stepper-selected="true"] & {
+        &-indicator {
+          --border-color: var(--step-selected-color);
+          border-color: var(--border-color);
+        }
+      }
+
+      &-indicator {
+        --size: 40px;
+        --font-weight: #{fn.get-font-weight('medium')};
+        --border-radius: #{fn.get-border-radius('full')};
+        --border-color: #{fn.get-color('neutral', '200')};
+        --animation-duration: #{fn.get-animation-timing('normal')};
+
+        width: var(--size);
+        height: var(--size);
+        display: grid;
+        place-content: center;
+        border-radius: var(--border-radius);
+        border: 2px solid var(--border-color);
+        font-weight: var(--font-weight);
+        transition: background-color var(--animation-duration),
+                    color var(--animation-duration),
+                    border-color var(--animation-duration);
+      }
+
+      &-label {
+        --font-weight: #{fn.get-font-weight('medium')};
+        font-weight: var(--font-weight);
+      }
+
+      &-description {
+        --font-size: #{fn.get-font-size('sm')};
+        --text-color: #{fn.get-color('neutral', '600')};
+
+        font-size: var(--font-size);
+        color: var(--text-color);
+      }
+    }
+  }
+}

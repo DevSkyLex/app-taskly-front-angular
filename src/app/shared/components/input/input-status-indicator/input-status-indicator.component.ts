@@ -25,21 +25,6 @@ export class InputStatusIndicatorComponent {
     input<FormControlStatus>('DISABLED');
 
   /**
-   * Propriété visible
-   * @readonly
-   * 
-   * Permet de définir la visibilité du composant
-   * 
-   * @access public
-   * @memberof InputStatusIndicatorComponent
-   * @since 1.0.0
-   * 
-   * @type {InputSignal<boolean>} visible
-   */
-  public readonly visible: InputSignal<boolean> =
-    input<boolean>(true);
-
-  /**
    * Propriété classes
    * @readonly
    * 

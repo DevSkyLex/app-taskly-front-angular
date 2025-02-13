@@ -60,7 +60,9 @@
 
       padding: var(--padding);
       font-size: var(--font-size);
-      flex: 1;
+      appearance: none;
+      min-width: 0;
+      flex-grow: 1;
       border: none;
 
       &:focus-visible {

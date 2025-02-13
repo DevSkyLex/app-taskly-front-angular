@@ -85,6 +85,9 @@
               "label": "Mot de passe",
               "placeholder": "Mot de passe",
               "help": "Veuillez saisir votre mot de passe."
+            },
+            "rememberMe": {
+              "label": "Se souvenir de moi"
             }
           },
           "buttons": {

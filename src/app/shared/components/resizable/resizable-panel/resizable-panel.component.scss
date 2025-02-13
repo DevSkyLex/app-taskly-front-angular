@@ -1,0 +1,6 @@
+@use 'abstracts/functions' as fn;
+
+.resizable-panel {
+  flex-grow: 1;
+  overflow: auto;
+}

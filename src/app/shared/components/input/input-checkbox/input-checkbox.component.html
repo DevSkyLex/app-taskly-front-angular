@@ -3,9 +3,9 @@
 @let formHelp = help();
 @let formErrors = errors();
 
-<button type="button" role="checkbox" (click)="toggle()" class="input-checkbox">
+<div (click)="toggle()" class="input-checkbox">
   <div  class="input-checkbox__trigger">
-    @if (checked()) {
+    @if (checked(); as checked) {
       <i-lucide 
         name="check" 
         size="16"
@@ -13,24 +13,24 @@
     }
   </div>
 
-  <input 
+  <input
     class="input-checkbox__field"
     [name]="name()"
+    [id]="id()"
     type="checkbox"
     [checked]="checked()"
     [required]="required()"
     [disabled]="disabled()"
     [readOnly]="readonly()"
-    (blur)="onBlur($event)"
+    (blur)="onBlur()"
   >
 
-  <!-- @if (formLabel !== '') {
+  @if (formLabel) {
     <app-input-label [for]="id()" [required]="required()">
       {{ formLabel }}
     </app-input-label>
-  }   -->
-</button>
-
+  }  
+</div>
 
 @if (formErrors && formControl?.touched) {
   <app-input-errors [errors]="formErrors"/>
@@ -40,13 +40,3 @@
     {{ formHelp }}
   </app-input-help>
 }
-<div class="checkbox-container">
-    <input
-      type="checkbox"
-      [id]="id()"
-      [required]="required()"
-      [disabled]="disabled()"
-  
-    />
-  </div>
-  

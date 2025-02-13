@@ -4,6 +4,7 @@ import { MainLayoutSidebarComponent } from '@layouts/main-layout/partials/main-l
 import { MainLayoutContentComponent } from '@layouts/main-layout/partials/main-layout-content/main-layout-content.component';
 import { RouterModule } from '@angular/router';
 import { SidebarService } from '@app/shared/services/sidebar.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main-layout',
@@ -11,7 +12,8 @@ import { SidebarService } from '@app/shared/services/sidebar.service';
     MainLayoutHeaderComponent,
     MainLayoutSidebarComponent,
     MainLayoutContentComponent,
-    RouterModule
+    RouterModule,
+    CommonModule
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',

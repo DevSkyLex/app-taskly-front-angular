@@ -12,9 +12,9 @@
     --collapsible-list-gap: #{fn.get-spacing('2xs')};
     --sidebar-collapse-animation-duration: 500ms;
 
-    --background-color: #{fn.get-color('neutral', '000')};
-    --text-color: #{fn.get-color('neutral', '700')};
-    --border-color: #{fn.get-color('neutral', '200')};
+    --background-color: #{fn.get-color('neutral', '950')};
+    --text-color: #{fn.get-color('neutral', '000')};
+    --border-color: #{fn.get-color('neutral', '900')};
 
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -29,6 +29,12 @@
     white-space: nowrap;
     gap: var(--sidebar-gap);
     transition: width var(--sidebar-collapse-animation-duration);
+
+    &-label {
+      display: flex;
+      align-items: center;
+      gap: var(--collapsible-label-gap);
+    }
 
     //#region Gestion de l'expansion de la barre latérale
     &-collapse {
@@ -52,6 +58,11 @@
           height: 2rem;
         }
 
+        &__group-list-link {
+          width: 2rem;
+          height: 2rem;
+        }
+
         &-collapse {
           visibility: hidden;
           opacity: 0;
@@ -68,7 +79,7 @@
 
     & > * {
       --padding: #{fn.get-spacing('sm')};
-      --border-color:#{fn.get-color('neutral', '200')};
+      --border-color:#{fn.get-color('neutral', '900')};
 
       padding: var(--padding);
 
@@ -92,7 +103,7 @@
       &-name {
         --font-size: #{fn.get-font-size('3xl')};
         --font-weight: #{fn.get-font-weight('semibold')};
-        --text-color:#{fn.get-color('neutral', '950')};
+        --text-color:#{fn.get-color('neutral', '000')};
 
         font-size: var(--font-size);
         font-weight: var(--font-weight);
@@ -131,6 +142,37 @@
         flex-direction: column;
         gap: var(--accordion-gap);
       }
+
+      &-list {
+        list-style: none;
+
+        &-link {
+          --padding: #{fn.get-spacing('xs')};
+          --border-radius: #{fn.get-border-radius('md')};
+          --animation-duration: #{fn.get-animation-timing('fast')};
+  
+          display: flex;
+          align-items: center;
+          border-radius: var(--border-radius);
+          padding: var(--padding);
+          gap: var(--collapsible-label-gap);
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          text-decoration: none;
+          color: inherit;
+          transition: background-color var(--animation-duration);
+  
+          &:is(:hover, :focus-visible) {
+            --background-color:#{fn.get-color('neutral', '900')};
+            background-color: var(--background-color);
+          }
+  
+          &:focus-visible {
+            outline: none;
+          }
+        }
+      }
     }
 
     &__collapsible {
@@ -147,10 +189,12 @@
 
       &__label {
         --font-size: #{fn.get-font-size('md')};
+        --text-color: #{fn.get-color('neutral', '000')};
 
         display: flex;
         align-items: center;
         gap: var(--collapsible-label-gap);
+        color: var(--text-color);
         font-size: var(--font-size);
       }
 
@@ -171,7 +215,7 @@
         transition: background-color var(--animation-duration);
 
         &:is(:hover, :focus-visible) {
-          --background-color:#{fn.get-color('neutral', '050')};
+          --background-color:#{fn.get-color('neutral', '900')};
           background-color: var(--background-color);
         }
 
@@ -198,7 +242,7 @@
         --padding-block: #{fn.get-spacing('2xs')};
         --padding-inline: #{fn.get-spacing('xs')};
         --margin-inline: #{fn.get-spacing('md')};
-        --border-color: #{fn.get-color('neutral', '200')};
+        --border-color: #{fn.get-color('neutral', '900')};
 
         padding-block: var(--padding-block);
         padding-inline: var(--padding-inline);
@@ -213,6 +257,7 @@
           --padding: #{fn.get-spacing('xs')} #{fn.get-spacing('sm')};
           --border-radius: #{fn.get-border-radius('md')};
           --font-size: #{fn.get-font-size('sm')};
+          --text-color: #{fn.get-color('neutral', '000')};
           --animation-duration: #{fn.get-animation-timing('fast')};
 
           padding: var(--padding);
@@ -222,11 +267,11 @@
           align-items: center;
           cursor: pointer;
           text-decoration: none;
-          color: inherit;
+          color: var(--text-color);
           animation-duration: var(--animation-duration);
 
           &:is(:hover, :focus-visible) {
-            --background-color:#{fn.get-color('neutral', '050')};
+            --background-color:#{fn.get-color('neutral', '900')};
             background-color: var(--background-color);
           }
 

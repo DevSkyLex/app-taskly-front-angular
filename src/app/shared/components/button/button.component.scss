@@ -200,17 +200,30 @@
 
     &--icon-sm {
       --padding: #{fn.get-spacing('xs')};
+      --font-size: #{fn.get-font-size('sm')};
+
       padding: var(--padding);
+      font-size: var(--font-size);
+      line-height: 1;
+
     }
 
     &--icon-md {
       --padding: #{fn.get-spacing('sm')};
+      --font-size: #{fn.get-font-size('md')};
+
       padding: var(--padding);
+      font-size: var(--font-size);
+      line-height: 1;
     }
 
     &--icon-lg {
       --padding: #{fn.get-spacing('md')};
+      --font-size: #{fn.get-font-size('lg')};
+
+      font-size: var(--font-size);
       padding: var(--padding);
+      line-height: 1;
     }
 
     &--full-width {

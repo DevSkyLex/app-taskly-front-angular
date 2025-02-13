@@ -12,6 +12,7 @@
 <div class="input-text">
   <input 
     class="input-text__field"
+    [id]="id()"
     [name]="name()"
     [type]="type()"
     [placeholder]="placeholder()"
@@ -23,14 +24,13 @@
     (blur)="onBlur($event)"
   >
 
-  <div class="input-text__status">
-    @if (formControl) {
+  @if (formControl && formControl.touched) {
+    <div class="input-text__status">
       <app-input-status-indicator 
         [status]="formControl.status"
-        [visible]="formControl.touched"
       />
-    }
-  </div>
+    </div>
+  }
 </div>
 
 

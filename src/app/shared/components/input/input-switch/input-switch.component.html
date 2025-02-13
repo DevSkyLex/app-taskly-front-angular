@@ -3,7 +3,7 @@
 @let formHelp = help();
 @let formErrors = errors();
 
-<button type="button" role="checkbox" (click)="toggle()" class="input-switch">
+<div (click)="toggle()" class="input-switch">
   <div  class="input-switch__trigger">
     <span class="input-switch__trigger-indicator"></span>
   </div>
@@ -11,6 +11,7 @@
   <input 
     class="input-switch__field"
     [name]="name()"
+    [id]="id()"
     type="checkbox"
     [checked]="checked()"
     [required]="required()"
@@ -24,7 +25,7 @@
       {{ formLabel }}
     </app-input-label>
   }  
-</button>
+</div>
 
 
 @if (formErrors && formControl?.touched) {

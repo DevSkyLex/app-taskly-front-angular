@@ -48,9 +48,9 @@ export interface User extends Entity, Timestampable {
    * @memberof User
    * @since 1.0.0
    * 
-   * @type {string | undefined} firstName
+   * @type {string} firstName
    */
-  firstName?: string;
+  firstName: string;
 
   /**
    * Propriété lastName
@@ -60,21 +60,21 @@ export interface User extends Entity, Timestampable {
    * @memberof User
    * @since 1.0.0
    * 
-   * @type {string | undefined} lastName
+   * @type {string} lastName
    */
-  lastName?: string;
+  lastName: string;
 
   /**
-   * Propriété phone
+   * Propriété avatar
    * 
-   * Numéro de téléphone de l'utilisateur
+   * Avatar de l'utilisateur
    * 
    * @memberof User
    * @since 1.0.0
    * 
-   * @type {string | undefined} phone
+   * @type {string | undefined} avatar
    */
-  phone?: string;
+  avatar?: string;
 
   /**
    * Propriété roles
@@ -105,6 +105,7 @@ export type NewUserPayload = Omit<User,
   | 'createdAt' 
   | 'updatedAt'
   | 'roles'
+  | 'avatar'
 >;
 
 /**
@@ -118,12 +119,26 @@ export type NewUserPayload = Omit<User,
  * @author Valentin FORTIN <contact@valentin-fortin.pro>
  */
 export type UpdateUserPayload = Partial<Omit<User, 
-  | 'id' 
+  | 'id'
+  | 'avatar'
   | 'createdAt' 
   | 'updatedAt'
   | 'email'
   | 'roles'
 >>;
+
+/**
+ * Type UpdateUserAvatarPayload
+ * @type UpdateUserAvatarPayload
+ * 
+ * Définit les propriétés d'un avatar d'un utilisateur 
+ * à mettre à jour
+ * 
+ * @version 1.0.0
+ * 
+ * @author Valentin FORTIN <contact@valentin-fortin.pro>
+ */
+export type UpdateUserAvatarPayload = { avatar: File };
 
 
 

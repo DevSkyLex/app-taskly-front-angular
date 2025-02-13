@@ -1,0 +1,154 @@
+@let rows = data();
+
+<div class="datatable-wrapper">
+  <section class="datatable-wrapper__table">
+    <table cdk-table class="datatable" [dataSource]="dataSource()">
+      <!-- Colonne de sélection -->
+      <ng-container cdkColumnDef="select" sticky>
+        <!-- Tout sélectionner/déselectionner -->
+        <th class="datatable__header__cell" cdk-header-cell *cdkHeaderCellDef>
+          <app-input-checkbox 
+            (checkedChange)="toggleAllSelection(rows)"
+            [checked]="isAllSelected(rows)"
+          />
+        </th>
+
+        <!-- Sélectionner une ligne -->
+        <td class="datatable__body__cell" cdk-cell *cdkCellDef="let row">
+          <app-input-checkbox 
+            (checkedChange)="toggleSelection(row)"
+            [checked]="isSelected(row)"
+          />
+        </td>
+
+        <!-- Tout selectionner/déselectionner -->
+        <td class="datatable__footer__cell" cdk-footer-cell *cdkFooterCellDef>
+          <app-input-checkbox 
+            (checkedChange)="toggleAllSelection(rows)"
+            [checked]="isAllSelected(rows)"
+          />
+        </td>
+      </ng-container>
+
+      <!-- Colonnes -->
+      @for (column of columns(); track $index) {
+        <ng-container [cdkColumnDef]="column.name()" [sticky]="column.sticky()" [stickyEnd]="column.stickyEnd()">
+          <!-- En-tête -->
+          <th class="datatable__header__cell" (click)="onHeaderClick(column)" cdk-header-cell *cdkHeaderCellDef>
+            <div class="datatable__cell">
+              <ng-container *ngTemplateOutlet="column.header()?.template || null"/>
+
+              @if (column.sortable()) {
+                <ng-container 
+                  [ngTemplateOutlet]="sortIndicator"
+                  [ngTemplateOutletContext]="{ $implicit: column }"
+                />
+              }
+            </div>
+          </th>
+
+          <!-- Corps -->
+          <td class="datatable__body__cell" cdk-cell *cdkCellDef="let row">
+            <div class="datatable__cell">
+              <ng-container *ngTemplateOutlet="column.cell()?.template || null; context: { $implicit: row }"/>
+            </div>
+          </td>
+
+          <!-- Pied -->
+          <td class="datatable__footer__cell" (click)="onFooterClick(column)" cdk-footer-cell *cdkFooterCellDef>
+            <div class="datatable__cell">
+              <ng-container *ngTemplateOutlet="column.footer()?.template || null"/>
+
+              @if (column.sortable()) {
+                <ng-container
+                  [ngTemplateOutlet]="sortIndicator"
+                  [ngTemplateOutletContext]="{ $implicit: column }"
+                />
+              }
+            </div>
+          </td>
+        </ng-container>
+      }
+
+      <tr class="datatable__body__row" *cdkNoDataRow>
+        <td class="datatable__body__cell" [attr.colspan]="'100%'">
+          <div class="datatable__cell">
+            <div class="datatable__empty">
+              <i-lucide
+                class="datatable__empty-icon"
+                name="x" 
+                [size]="48"
+              />
+              
+              <div class="datatable__empty__content">
+                <span class="datatable__empty__content-title">
+                  Aucun élément trouvé
+                </span>
+
+                <p class="datatable__empty__content-text">
+                  Aucune élément ne correspond à votre recherche.
+                </p>
+              </div>
+
+              <app-button 
+                class="datatable__empty__refresh"
+                variant="outlined" 
+                size="sm" 
+                (click)="onRefresh()"
+              >
+                <i-lucide name="rotate-cw" [size]="16" />
+                <span>Rafraîchir</span>
+              </app-button>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr cdk-header-row class="datatable__header__row" *cdkHeaderRowDef="displayedColumns()"></tr>
+      <tr cdk-row class="datatable__body__row" (click)="onRowClick(row)" *cdkRowDef="let row; columns: displayedColumns()"></tr>
+      <tr cdk-footer-row class="datatable__footer__row" *cdkFooterRowDef="displayedColumns()"></tr>
+    </table>
+  </section>
+
+  <ng-template [ngTemplateOutlet]="toolbar"/>
+</div>
+
+<ng-template #sortIndicator let-column>
+  <svg 
+    [attr.data-datatable-column-sort]="column.sortDirection()"
+    class="datatable__cell-icon"
+    xmlns="http://www.w3.org/2000/svg" 
+    width="16" 
+    height="16" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2" 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+  >
+    <path d="m7 9 5-5 5 5"/>
+    <path d="m7 15 5 5 5-5"/>
+  </svg>
+</ng-template>
+
+<ng-template #toolbar>
+  <section class="datatable-wrapper__toolbar">
+    <span class="datatable-wrapper__toolbar-selection">
+      <strong>{{ selectionModel.selected.length }}</strong> élément(s) sélectionné(s)
+    </span>
+
+    @if (paginated()) {
+      <div class="datatable-wrapper__toolbar-paginator">
+        <app-paginator
+          [(pageSize)]="pageSize"
+          [totalItems]="totalItems()"
+          (currentPageChange)="onPageChange($event)"
+          [(currentPage)]="page"
+        />
+      </div>
+    }
+  </section>
+</ng-template>
+
+
