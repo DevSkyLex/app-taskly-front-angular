@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, RouterSta
 import { Store } from "@ngrx/store";
 import { Router } from "@angular/router";
 import { selectIsAuthenticated } from "../stores/auth/auth.selectors";
-import { map } from "rxjs";
+import { first, map } from "rxjs";
 
 @Injectable({
   providedIn: "root"

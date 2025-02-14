@@ -85,3 +85,8 @@ export const selectSuccess = createSelector(
   selectOperation,
   (operation) => operation.success
 );
+
+export const selectUser = createSelector(
+  selectAuthState,
+  (state) => state.user
+);

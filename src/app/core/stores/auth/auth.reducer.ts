@@ -75,6 +75,7 @@ export const authReducer = createReducer(
   })),
   on(AuthActions.refreshFailure, (state, { error }) => ({
     ...state,
+    isAuthenticated: false,
     operation: {
       loading: false,
       error: error,

@@ -7,7 +7,7 @@ import {
   ofType,
 } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { catchError, map, mergeMap, Observable, of } from 'rxjs';
+import { catchError, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import * as ProjectActions from '@core/stores/project/project.actions';
 
 @Injectable()
@@ -58,11 +58,12 @@ export class ProjectEffects {
   public loadProjects$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(ProjectActions.loadProjects),
-      mergeMap(() =>
-        this.projectService.findAll().pipe(
-          map((data) =>
-            ProjectActions.loadProjectsSuccess({ data: data.member })
-          ),
+      switchMap((action) =>
+        this.projectService.findAll(action.options).pipe(
+          map((data) => ProjectActions.loadProjectsSuccess({ 
+            data: data.member,
+            total: data.totalItems
+          })),
           catchError((error) =>
             of(
               ProjectActions.loadProjectsFailure({
@@ -183,7 +184,7 @@ export class ProjectEffects {
     this.actions$.pipe(
       ofType(ProjectActions.addProject),
       mergeMap((action) =>
-        this.projectService.create(action).pipe(
+        this.projectService.create(action.payload).pipe(
           map((data) => ProjectActions.addProjectSuccess({ data: data })),
           catchError((error) =>
             of(

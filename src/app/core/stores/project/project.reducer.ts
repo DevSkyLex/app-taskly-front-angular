@@ -14,9 +14,10 @@ export const projectReducer = createReducer(
     }
   })),
 
-  on(ProjectActions.loadProjectsSuccess, (state, { data }) => {
+  on(ProjectActions.loadProjectsSuccess, (state, { data, total }) => {
     return projectAdapter.setAll(data, {
       ...state,
+      total: total,
       operation: {
         loading: false,
         error: null,

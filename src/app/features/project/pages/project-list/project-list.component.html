@@ -1,0 +1,43 @@
+<div class="project-list">
+  <div class="project-list__toolbar">
+    <div class="project-list__toolbar__part">
+    
+    </div>
+
+    <div class="project-list__toolbar__part">
+      <app-button variant="outlined" size="md" (click)="add.show()">
+        <i-lucide name="plus" [size]="16"/>
+        <span>Créer un projet</span>
+      </app-button>
+    </div>
+  </div>
+
+  <div class="project-list__projects">
+    <app-data-grid
+      [data]="(projects$ | async) || []"
+      [(page)]="page"
+      [(pageSize)]="pageSize"
+      (pageChange)="onPageChange($event)"
+      (pageSizeChange)="onPageSizeChange($event)"
+      [totalItems]="(projectsCount$ | async) || 0"
+    >
+      <ng-template appDataGridItem let-element>
+        <app-project-card [project]="element"/>
+      </ng-template>
+    </app-data-grid>
+  </div>
+</div>
+
+<app-dialog #add="dialog">
+  <app-dialog-header>
+    <h2 appTitle>Créer un projet</h2>
+  </app-dialog-header>
+
+  <app-dialog-body>
+    <p appText variant="muted">
+      Veuillez saisir les informations du projet à créer.
+    </p>
+
+    <app-project-add-form (submitted)="add.hide()"/>
+  </app-dialog-body>
+</app-dialog>

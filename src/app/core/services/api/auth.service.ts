@@ -93,7 +93,7 @@ export class AuthService {
    */
   public refresh(): Observable<AuthResponse> {
     const url: string = `${AuthService.API_URL}/auth/refresh`;
-    return this.httpClient.post<AuthResponse>(url, {
+    return this.httpClient.post<AuthResponse>(url, null, {
       withCredentials: true,
     });
   }

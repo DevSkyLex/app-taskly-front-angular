@@ -5,10 +5,11 @@
   flex-direction: column;
   height: 100%;
   
-  .project-list {
+  .main-dashboard {
     --background-color: #{fn.get-color('neutral', '000')};
     --border-color: #{fn.get-color('neutral', '200')};
     --padding: #{fn.get-spacing('xl')};
+    --gap: #{fn.get-spacing('md')};
     
     display: flex;
     height: 100%;
@@ -16,13 +17,16 @@
     border-top: 1px solid var(--border-color);
     padding: var(--padding);
     background-color: var(--background-color);
+    gap: var(--gap);
 
-    &__toolbar {
-      --margin-bottom: #{fn.get-spacing('lg')};
+    &__stats {
+      --margin-bottom: #{fn.get-spacing('2xl')};
+      --gap: #{fn.get-spacing('md')};
 
-      display: flex;
+      display: grid;
       margin-bottom: var(--margin-bottom);
-      justify-content: space-between;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--gap);
     }
   }
 }

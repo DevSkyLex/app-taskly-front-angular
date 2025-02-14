@@ -2,13 +2,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MainRoutingModule } from '@features/main/main-routing.module';
-import { MainHomeComponent } from '@features/main/pages/main-home/main-home.component';
+import { MainDashboardComponent } from '@app/features/main/pages/main-dashboard/main-dashboard.component';
 import { SharedModule } from '@shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 
 @NgModule({
   declarations: [
-    MainHomeComponent
+    MainDashboardComponent,
+    DashboardCardComponent
   ],
   imports: [
     CommonModule,

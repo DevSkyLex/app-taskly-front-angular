@@ -51,7 +51,11 @@ export interface Project extends Entity, Timestampable, SoftDeleteable {
    * 
    * @type {Task[]} tasks
    */
-  tasks: Task[];
+  tasks: Pick<Task, 
+    | "id" 
+    | "title" 
+    | "status"
+  >[];
 
   /**
    * Propriété members
@@ -63,7 +67,11 @@ export interface Project extends Entity, Timestampable, SoftDeleteable {
    * 
    * @type {ProjectMember[]} members
    */
-  members: ProjectMember[];
+  members: Pick<ProjectMember,
+    | "id"
+    | "role"
+    | "member"
+  >[];
   //#endregion
 }
 

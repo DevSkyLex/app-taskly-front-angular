@@ -93,35 +93,20 @@ export class MainLayoutSidebarComponent {
       title: 'Général',
       items: [
         {
-          label: 'Découvrir l\'application',
+          label: 'Tableau de bord',
           icon: 'layout-dashboard',
           to: ''
         },
       ]
     },
     {
-      title: 'Entreprise',
+      title: 'Gestion',
       items: [
         {
-          label: 'Les entreprises',
+          label: 'Mes projets',
           icon: 'building-2',
-          to: '/companies'
+          to: '/projects'
         },
-        {
-          label: 'Appareils connectés',
-          icon: 'radio',
-          to: '/devices'
-        },
-        {
-          label: 'Actionneurs',
-          icon: 'arrow-big-up-dash',
-          to: '/actuators'
-        },
-        {
-          label: 'Audits',
-          icon: 'scroll-text',
-          to: '/companies/audits'
-        }
       ]
     }
   ]);

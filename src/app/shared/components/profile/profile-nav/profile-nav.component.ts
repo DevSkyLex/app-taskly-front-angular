@@ -1,6 +1,7 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, inject, input, InputSignal, signal, WritableSignal } from '@angular/core';
 import { User } from '@app/core/models/user.model';
+import { logout } from '@app/core/stores/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { AnimationTiming, AppAnimations } from '@shared/animations/app.animations';
 
@@ -79,7 +80,19 @@ export class ProfileNavComponent {
   //#endregion
 
   //#region Méthodes
+  /**
+   * Méthode logout
+   * 
+   * Déconnecte l'utilisateur
+   * 
+   * @access public
+   * @memberof ProfileNavComponent
+   * @since 1.0.0
+   * 
+   * @returns {void} - Ne retourne rien
+   */
   public logout(): void {
+    this.store.dispatch(logout());
   }
 
   /**

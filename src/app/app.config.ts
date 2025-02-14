@@ -23,7 +23,7 @@ import {
   withNgxWebstorageConfig,
   withSessionStorage,
 } from 'ngx-webstorage';
-import { provideStore } from '@ngrx/store';
+import { MetaReducer, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -34,6 +34,17 @@ import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 import { AuthEffects } from './core/stores/auth/auth.effects';
 import { authReducer } from './core/stores/auth/auth.reducer';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { localStorageSync } from 'ngrx-store-localstorage';
+
+export function localStorageSyncReducer(reducer: any) {
+  return localStorageSync({ 
+    keys: [{ auth: ['isAuthenticated'] }],
+    rehydrate: true,
+    checkStorageAvailability: true,
+  })(reducer);
+}
+
+const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -68,17 +79,23 @@ export const appConfig: ApplicationConfig = {
         fr: 'fr',
       }
     }),
-    provideStore({
-      auth: authReducer,
-      project: projectReducer,
-    }),
+    provideStore(
+      {
+        auth: authReducer,
+        project: projectReducer,
+      },
+      { metaReducers }
+    ),
     provideEffects([
       AuthEffects,
       ProjectEffects,
     ]),
     provideStoreDevtools({ 
       maxAge: 25, 
-      logOnly: !isDevMode() 
+      logOnly: !isDevMode(),
+      autoPause: true,
+      trace: true,
+      traceLimit: 75,
     }),
     provideEnvironmentNgxMask()
   ],

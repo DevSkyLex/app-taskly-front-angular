@@ -42,15 +42,6 @@
 
       <app-command-separator/>
 
-      <app-command-group heading="Aide">
-        <app-command-item (click)="hide()" routerLink="/contact">
-          <i-lucide name="headset" size="16" />
-          <span>Nous contacter</span>
-        </app-command-item>
-      </app-command-group>
-
-      <app-command-separator/>
-
       <app-command-group>
         <app-command-item (click)="hide(); logout()">
           <i-lucide name="log-out" size="16" />

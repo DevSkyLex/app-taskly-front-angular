@@ -33,7 +33,6 @@ export const {
   selectIds: selectProjectIds,
   selectEntities: selectProjectEntities,
   selectAll: selectAllProjects,
-  selectTotal: selectProjectTotal,
 } = projectAdapter.getSelectors(selectProjectState);
 
 /**
@@ -98,4 +97,13 @@ export const selectSuccess: MemoizedSelector<
 > = createSelector(
   selectProjectState,
   (state: ProjectState) => state.operation.success
+);
+
+export const selectProjectTotal: MemoizedSelector<
+  object,
+  number,
+  (s1: ProjectState) => number
+> = createSelector(
+  selectProjectState,
+  (state: ProjectState) => state.total
 );

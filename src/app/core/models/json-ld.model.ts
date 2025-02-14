@@ -235,7 +235,7 @@ export interface JsonLdResponse<T> {
    * 
    * @type {number} totalItems
    */
-  totalItems?: number;
+  totalItems: number;
 
   /**
    * Propriété view

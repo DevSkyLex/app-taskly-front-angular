@@ -1,3 +1,4 @@
+import { Pagination } from '@app/core/models/pagination.model';
 import { Project } from '@core/models/project.model';
 import { StoreOperation } from '@core/models/store.model';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
@@ -17,16 +18,17 @@ import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 export interface ProjectState extends EntityState<Project> {
   //#region Propriétés
   /**
-   * Propriété totalItems
+   * Propriété total
    * 
-   * Nombre total d'éléments
+   * Nombre total de projets dans la base
+   * de données
    * 
    * @memberof ProjectState
    * @since 1.0.0
    * 
-   * @type {number} totalItems
+   * @type {number} total
    */
-  totalItems: number;
+  total: number;
 
   /**
    * Propriété operation
@@ -62,7 +64,7 @@ export const projectAdapter: EntityAdapter<Project> = createEntityAdapter<Projec
  * @type {ProjectState} initialState
  */
 export const initialState: ProjectState = projectAdapter.getInitialState({
-  totalItems: 0,
+  total: 0,
   operation: {
     loading: false,
     error: null,

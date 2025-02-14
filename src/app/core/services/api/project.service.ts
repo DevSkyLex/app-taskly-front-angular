@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { JsonLdRequestOptions, JsonLdResponse } from "@app/core/models/json-ld.model";
-import { Project } from "@app/core/models/project.model";
+import { NewProjectPayload, Project } from "@app/core/models/project.model";
 import { environment } from "@env/environment";
 import { Observable } from "rxjs";
 import { JsonldService } from "./jsonld.service";
@@ -131,11 +131,11 @@ export class ProjectService {
    * @memberof ProjectService
    * @since 1.0.0
    * 
-   * @param {Partial<Project>} project Projet à créer
+   * @param {NewProjectPayload} payload Données du projet
    * 
    * @returns {Observable<Project>} Projet créé
    */
-  public create(project: Partial<Project>): Observable<Project> {
+  public create(payload: NewProjectPayload): Observable<Project> {
     /**
      * URL de la requête HTTP
      * 
@@ -143,7 +143,7 @@ export class ProjectService {
      */
     const url: string = `${ProjectService.API_URL}/projects`;
 
-    return this.httpClient.post<Project>(url, project, {
+    return this.httpClient.post<Project>(url, payload, {
       headers: { 'Content-Type': 'application/ld+json' }
     });
   }

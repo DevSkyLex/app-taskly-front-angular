@@ -1,5 +1,6 @@
+import { Pagination } from "@app/core/models/pagination.model";
 import { JsonLdRequestOptions } from "@core/models/json-ld.model";
-import { Project } from "@core/models/project.model";
+import { NewProjectPayload, Project } from "@core/models/project.model";
 import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
 
@@ -12,7 +13,7 @@ import { createAction, props } from "@ngrx/store";
  */
 export const loadProjects = createAction(
   '[Project] Load Projects',
-  props<{ options?: JsonLdRequestOptions }>()
+  (options: JsonLdRequestOptions = {}) => ({ options })
 );
 
 /**
@@ -24,7 +25,7 @@ export const loadProjects = createAction(
  */
 export const loadProjectsSuccess = createAction(
   '[Project] Load Projects Success',
-  props<{ data: Project[] }>()
+  props<{ data: Project[], total: number }>()
 );
 
 /**
@@ -84,7 +85,7 @@ export const loadProjectFailure = createAction(
  */
 export const addProject = createAction(
   '[Project] Add Project',
-  props<Partial<Project>>()
+  props<{ payload: NewProjectPayload }>()
 );
 
 /**

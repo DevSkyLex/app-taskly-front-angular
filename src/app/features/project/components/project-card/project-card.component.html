@@ -1,0 +1,25 @@
+<div class="project-card">
+  <div class="project-card__header">
+    <i-lucide class="project-card-icon" name="layers" [size]="16"/>
+
+    <div class="project-card__info">
+      <h2 class="project-card__info-title">
+        {{ project().name }}
+      </h2>
+
+      <p class="project-card__info-description">
+        {{ project().description }}
+      </p>
+    </div>
+
+    <div class="project-card__actions">
+      <app-button variant="outlined" size="icon-sm">
+        <i-lucide name="pencil" [size]="16"/>
+      </app-button>
+
+      <app-button variant="outlined" size="icon-sm">
+        <i-lucide name="trash-2" [size]="16"/>
+      </app-button>
+    </div>
+  </div>
+</div>
